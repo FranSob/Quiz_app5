@@ -8,6 +8,7 @@ import '../widgets/app_card.dart';
 import '../widgets/progress_ring.dart';
 import 'chapter_detail_screen.dart';
 import 'chapter_list_screen.dart';
+import 'flashcards_home_screen.dart';
 import 'flashcards_screen.dart';
 import 'theory_screen.dart';
 
@@ -113,17 +114,9 @@ class HomeScreen extends StatelessWidget {
               child: _ActionButton(
                 icon: Icons.style_outlined,
                 label: 'FISZKI',
-                onTap: () {
-                  final cards = state.dueFlashcards(classLevel: state.selectedClassLevel);
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => FlashcardsScreen(
-                      cards: cards.isNotEmpty
-                          ? cards
-                          : classData.chapters.expand((c) => c.allFlashcards).toList(),
-                      title: 'Fiszki — ${classData.label}',
-                    ),
-                  ));
-                },
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => const FlashcardsHomeScreen(),
+                )),
               ),
             ),
             const SizedBox(width: 10),

@@ -55,6 +55,7 @@ class AppState extends ChangeNotifier {
   final Map<String, DailyStat> dailyStats = {};
   final Set<String> unlockedBadges = {};
   final List<String> newlyUnlockedQueue = [];
+  final List<FlashcardFolder> customFolders = [];
 
   Future<void> load() async {
     _prefs = await SharedPreferences.getInstance();
@@ -87,6 +88,10 @@ class AppState extends ChangeNotifier {
         dailyJson.forEach((k, v) {
           dailyStats[k] = DailyStat.fromJson(Map<String, dynamic>.from(v));
         });
+        final foldersJson = List<dynamic>.from(j['customFolders'] ?? []);
+        customFolders.addAll(
+          foldersJson.map((f) => FlashcardFolder.fromJson(Map<String, dynamic>.from(f))),
+        );
       } catch (_) {
         // Corrupt data — start fresh.
       }
@@ -131,6 +136,7 @@ class AppState extends ChangeNotifier {
       'unlockedBadges': unlockedBadges.toList(),
       'srs': _srs.map((k, v) => MapEntry(k, v.toJson())),
       'dailyStats': dailyStats.map((k, v) => MapEntry(k, v.toJson())),
+      'customFolders': customFolders.map((f) => f.toJson()).toList(),
     };
     await _prefs!.setString(_prefsKey, jsonEncode(j));
   }
@@ -174,17 +180,103 @@ class AppState extends ChangeNotifier {
     return (mastered / topics.length) * 100;
   }
 
+  bool _isDue(String cardId, int now) {
+    final srs = _srs[cardId];
+    return srs == null || srs.dueMillis <= now;
+  }
+
   List<Flashcard> dueFlashcards({int? classLevel}) {
     final now = DateTime.now().millisecondsSinceEpoch;
     final scope = classLevel != null ? classByLevel(classLevel).chapters : allChapters;
     final cards = scope.expand((ch) => ch.allFlashcards).toList();
-    return cards.where((f) {
-      final srs = _srs[f.id];
-      return srs == null || srs.dueMillis <= now;
-    }).toList();
+    return cards.where((f) => _isDue(f.id, now)).toList();
   }
 
   int dueFlashcardsCount({int? classLevel}) => dueFlashcards(classLevel: classLevel).length;
+
+  List<Flashcard> dueCardsFrom(List<Flashcard> cards) {
+    final now = DateTime.now().millisecondsSinceEpoch;
+    return cards.where((f) => _isDue(f.id, now)).toList();
+  }
+
+  int dueCountFrom(List<Flashcard> cards) => dueCardsFrom(cards).length;
+
+  // ---- Custom flashcard folders ----
+
+  FlashcardFolder? folderById(String folderId) {
+    for (final f in customFolders) {
+      if (f.id == folderId) return f;
+    }
+    return null;
+  }
+
+  void createFolder(String name) {
+    final trimmed = name.trim();
+    if (trimmed.isEmpty) return;
+    customFolders.add(FlashcardFolder(
+      id: 'folder_${DateTime.now().microsecondsSinceEpoch}',
+      name: trimmed,
+    ));
+    _save();
+    notifyListeners();
+  }
+
+  void renameFolder(String folderId, String newName) {
+    final trimmed = newName.trim();
+    if (trimmed.isEmpty) return;
+    folderById(folderId)?.name = trimmed;
+    _save();
+    notifyListeners();
+  }
+
+  void deleteFolder(String folderId) {
+    final folder = folderById(folderId);
+    if (folder != null) {
+      for (final c in folder.cards) {
+        _srs.remove(c.id);
+      }
+    }
+    customFolders.removeWhere((f) => f.id == folderId);
+    _save();
+    notifyListeners();
+  }
+
+  void addCardToFolder(String folderId, String front, String back) {
+    final folder = folderById(folderId);
+    if (folder == null) return;
+    final trimmedFront = front.trim();
+    final trimmedBack = back.trim();
+    if (trimmedFront.isEmpty || trimmedBack.isEmpty) return;
+    folder.cards.add(Flashcard(
+      id: 'card_${DateTime.now().microsecondsSinceEpoch}',
+      front: trimmedFront,
+      back: trimmedBack,
+    ));
+    _save();
+    notifyListeners();
+  }
+
+  void updateCardInFolder(String folderId, String cardId, String front, String back) {
+    final folder = folderById(folderId);
+    if (folder == null) return;
+    final idx = folder.cards.indexWhere((c) => c.id == cardId);
+    if (idx == -1) return;
+    final trimmedFront = front.trim();
+    final trimmedBack = back.trim();
+    if (trimmedFront.isEmpty || trimmedBack.isEmpty) return;
+    folder.cards[idx] = Flashcard(id: cardId, front: trimmedFront, back: trimmedBack);
+    _save();
+    notifyListeners();
+  }
+
+  void deleteCardFromFolder(String folderId, String cardId) {
+    final folder = folderById(folderId);
+    if (folder == null) return;
+    folder.cards.removeWhere((c) => c.id == cardId);
+    _srs.remove(cardId);
+    _save();
+    notifyListeners();
+  }
 
   List<Chapter> weakestChapters({int count = 3}) {
     final chapters = allChapters.where((c) => chapterAnsweredCount(c.id) > 0).toList();

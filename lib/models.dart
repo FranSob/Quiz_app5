@@ -4,6 +4,34 @@ class Flashcard {
   final String back;
 
   const Flashcard({required this.id, required this.front, required this.back});
+
+  Map<String, dynamic> toJson() => {'id': id, 'front': front, 'back': back};
+
+  factory Flashcard.fromJson(Map<String, dynamic> j) =>
+      Flashcard(id: j['id'], front: j['front'], back: j['back']);
+}
+
+class FlashcardFolder {
+  final String id;
+  String name;
+  final List<Flashcard> cards;
+
+  FlashcardFolder({required this.id, required this.name, List<Flashcard>? cards})
+      : cards = cards ?? [];
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'cards': cards.map((c) => c.toJson()).toList(),
+      };
+
+  factory FlashcardFolder.fromJson(Map<String, dynamic> j) => FlashcardFolder(
+        id: j['id'],
+        name: j['name'],
+        cards: (j['cards'] as List<dynamic>? ?? [])
+            .map((c) => Flashcard.fromJson(Map<String, dynamic>.from(c)))
+            .toList(),
+      );
 }
 
 class QuizQuestion {
