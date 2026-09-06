@@ -80,7 +80,7 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   Text('Poziom ${state.level}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
                   const Spacer(),
-                  Text('${state.xpIntoLevel} XP do poziomu ${state.level + 1}',
+                  Text('${state.xpForNextLevel - state.xpIntoLevel} XP do poziomu ${state.level + 1}',
                       style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
                 ],
               ),

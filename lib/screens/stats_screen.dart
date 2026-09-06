@@ -34,7 +34,10 @@ class StatsScreen extends StatelessWidget {
             _StatTile(value: '${state.masteredMaterialPercent.round()}%', label: 'Opanowany materiał'),
             _StatTile(value: '${state.totalQuestionsAnswered}', label: 'Rozwiązane pytania'),
             _StatTile(value: '${state.overallAccuracy.round()}%', label: 'Średnia skuteczność'),
-            _StatTile(value: '${state.dueFlashcardsCount()}', label: 'Fiszki do powtórki'),
+            _StatTile(
+              value: '${state.dueFlashcardsCount(classLevel: state.selectedClassLevel)}',
+              label: 'Fiszki do powtórki',
+            ),
           ],
         ),
         const SizedBox(height: 16),
@@ -98,6 +101,7 @@ class StatsScreen extends StatelessWidget {
                       bottomTitles: AxisTitles(
                         sideTitles: SideTitles(
                           showTitles: true,
+                          interval: 1,
                           getTitlesWidget: (value, meta) {
                             final i = value.toInt();
                             if (i < 0 || i >= weekly.length) return const SizedBox();

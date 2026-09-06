@@ -36,7 +36,9 @@ class _RootShellState extends State<RootShell> {
           ),
         ),
       ),
-      bottomNavigationBar: Center(
+      bottomNavigationBar: Align(
+        alignment: Alignment.center,
+        heightFactor: 1,
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 430),
           child: Container(
