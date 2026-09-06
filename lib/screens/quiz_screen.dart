@@ -12,6 +12,37 @@ class QuizItem {
   QuizItem({required this.question, required this.topicId});
 }
 
+/// Pytanie z wylosowaną kolejnością odpowiedzi.
+///
+/// W bazie pytań poprawna odpowiedź stoi najczęściej na tej samej pozycji,
+/// więc bez losowania uczeń mógłby zdawać testy, zawsze wybierając drugą
+/// odpowiedź. Kolejność losujemy raz, przy wejściu w test, żeby nie zmieniała
+/// się przy każdym przebudowaniu widoku.
+class _ShuffledQuestion {
+  final QuizQuestion question;
+  final String topicId;
+  final List<String> options;
+  final int correctIndex;
+
+  _ShuffledQuestion({
+    required this.question,
+    required this.topicId,
+    required this.options,
+    required this.correctIndex,
+  });
+
+  factory _ShuffledQuestion.from(QuizItem item) {
+    final q = item.question;
+    final order = List<int>.generate(q.options.length, (i) => i)..shuffle();
+    return _ShuffledQuestion(
+      question: q,
+      topicId: item.topicId,
+      options: [for (final i in order) q.options[i]],
+      correctIndex: order.indexOf(q.correctIndex),
+    );
+  }
+}
+
 class QuizScreen extends StatefulWidget {
   final String chapterId;
   final String title;
@@ -24,7 +55,7 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
-  late final List<QuizItem> _items;
+  late final List<_ShuffledQuestion> _items;
   int _index = 0;
   int? _selected;
   bool _answered = false;
@@ -33,13 +64,13 @@ class _QuizScreenState extends State<QuizScreen> {
   @override
   void initState() {
     super.initState();
-    _items = List.of(widget.items)..shuffle();
+    _items = widget.items.map(_ShuffledQuestion.from).toList()..shuffle();
   }
 
   void _select(int optionIndex) {
     if (_answered) return;
     final item = _items[_index];
-    final isCorrect = optionIndex == item.question.correctIndex;
+    final isCorrect = optionIndex == item.correctIndex;
     setState(() {
       _selected = optionIndex;
       _answered = true;
@@ -100,13 +131,13 @@ class _QuizScreenState extends State<QuizScreen> {
             const SizedBox(height: 20),
             Expanded(
               child: ListView.separated(
-                itemCount: q.options.length,
+                itemCount: item.options.length,
                 separatorBuilder: (_, __) => const SizedBox(height: 10),
                 itemBuilder: (context, i) {
                   Color? bg;
                   Color border = AppColors.darkBorder;
                   if (_answered) {
-                    if (i == q.correctIndex) {
+                    if (i == item.correctIndex) {
                       bg = AppColors.green.withValues(alpha: 0.18);
                       border = AppColors.green;
                     } else if (i == _selected) {
@@ -118,7 +149,7 @@ class _QuizScreenState extends State<QuizScreen> {
                     color: bg,
                     borderColor: border,
                     onTap: () => _select(i),
-                    child: Text(q.options[i], style: const TextStyle(fontSize: 15)),
+                    child: Text(item.options[i], style: const TextStyle(fontSize: 15)),
                   );
                 },
               ),

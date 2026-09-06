@@ -5,6 +5,7 @@ import '../data/biology_data.dart';
 import '../state/app_state.dart';
 import '../theme.dart';
 import '../widgets/app_card.dart';
+import '../utils/plurals.dart';
 import '../widgets/progress_ring.dart';
 import 'chapter_detail_screen.dart';
 
@@ -41,7 +42,7 @@ class ChapterListScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(chapter.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                      Text('${chapter.topicCount} ${chapter.topicCount == 1 ? 'temat' : 'tematy'}',
+                      Text(topicsLabel(chapter.topicCount),
                           style: const TextStyle(color: AppColors.textMuted, fontSize: 13)),
                     ],
                   ),

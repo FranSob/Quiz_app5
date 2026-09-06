@@ -1,4 +1,5 @@
 import '../models.dart';
+import 'biology_k2.dart';
 
 final List<ClassData> biologyData = [
   ClassData(
@@ -482,6 +483,8 @@ Podstawowe rangi taksonomiczne, uporządkowane hierarchicznie od najszerszej do 
     level: 2,
     label: 'Kl. 2',
     chapters: [
+      // Działy VI-X i XII podstawy programowej — patrz biology_k2.dart
+      ...klasa2Chapters,
       Chapter(
         id: 'k2_genetyka',
         name: 'Genetyka',
