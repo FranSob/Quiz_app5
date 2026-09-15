@@ -401,6 +401,20 @@ class AppState extends ChangeNotifier {
     return newlyUnlockedQueue.removeAt(0);
   }
 
+  // Genetics spans two curriculum sections (XIII gene expression, XIV inheritance
+  // and variation), so the badge counts accuracy across all three chapters.
+  static const _geneticsChapterIds = ['k4_ekspresja', 'k4_dziedziczenie', 'k4_zmiennosc'];
+
+  int _groupAnsweredCount(List<String> chapterIds) =>
+      chapterIds.fold<int>(0, (sum, id) => sum + (_chapterAnswered[id] ?? 0));
+
+  double _groupAccuracy(List<String> chapterIds) {
+    final answered = _groupAnsweredCount(chapterIds);
+    if (answered == 0) return 0;
+    final correct = chapterIds.fold<int>(0, (sum, id) => sum + (_chapterCorrect[id] ?? 0));
+    return correct / answered * 100;
+  }
+
   void _checkBadges() {
     void unlock(String id) {
       if (unlockedBadges.add(id)) newlyUnlockedQueue.add(id);
@@ -409,7 +423,7 @@ class AppState extends ChangeNotifier {
     if (testsCompleted >= 1) unlock('first_test');
     if (flashcardReviews >= 100) unlock('flashcards_100');
     if (anyPerfectTest) unlock('perfect_test');
-    if (chapterAnsweredCount('k2_genetyka') > 0 && chapterAccuracy('k2_genetyka') >= 80) {
+    if (_groupAnsweredCount(_geneticsChapterIds) > 0 && _groupAccuracy(_geneticsChapterIds) >= 80) {
       unlock('genetics_master');
     }
     if (level >= 5) unlock('level_5');

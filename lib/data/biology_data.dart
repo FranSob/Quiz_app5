@@ -1,5 +1,7 @@
 import '../models.dart';
 import 'biology_k2.dart';
+import 'biology_k3.dart';
+import 'biology_k4.dart';
 
 final List<ClassData> biologyData = [
   ClassData(
@@ -26,6 +28,13 @@ Cząsteczka wody jest polarna, co umożliwia tworzenie wiązań wodorowych międ
             flashcards: [
               Flashcard(id: 'f_k1_1', front: 'Jaki procent masy ciała człowieka stanowi woda?', back: '60-70% masy ciała.'),
               Flashcard(id: 'f_k1_8', front: 'Dlaczego woda jest dobrym termoregulatorem?', back: 'Ma wysokie ciepło właściwe i ciepło parowania, więc stabilizuje temperaturę organizmu.'),
+              Flashcard(id: 'f_k1_nie_1', front: 'Czym różnią się makroelementy od mikroelementów?', back: 'Makroelementy występują w organizmie w większych ilościach (powyżej 0,01% masy ciała), mikroelementy — w ilościach śladowych.'),
+              Flashcard(id: 'f_k1_nie_2', front: 'Wymień pierwiastki biogenne.', back: 'C, H, O, N, P i S.'),
+              Flashcard(id: 'f_k1_nie_3', front: 'Jaką funkcję pełni wapń w organizmie człowieka?', back: 'Buduje kości i zęby, uczestniczy w krzepnięciu krwi i skurczu mięśni.'),
+              Flashcard(id: 'f_k1_nie_4', front: 'Jaką rolę pełni magnez?', back: 'Jest kofaktorem enzymów i składnikiem chlorofilu.'),
+              Flashcard(id: 'f_k1_nie_5', front: 'Jakie są skutki niedoboru żelaza i jodu?', back: 'Niedobór żelaza powoduje anemię, a jodu — wole tarczycy.'),
+              Flashcard(id: 'f_k1_nie_6', front: 'Dlaczego woda jest dobrym rozpuszczalnikiem?', back: 'Jej cząsteczki są polarne, dzięki czemu rozpuszczają substancje polarne i jonowe.'),
+              Flashcard(id: 'f_k1_nie_7', front: 'Co wynika z tworzenia wiązań wodorowych między cząsteczkami wody?', back: 'Wysokie ciepło właściwe i wysokie ciepło parowania wody.'),
             ],
             questions: [
               QuizQuestion(id: 'q_k1_1', question: 'Ile procent masy ciała człowieka stanowi woda?', options: ['20-30%', '40-50%', '60-70%', '90-95%'], correctIndex: 2, explanation: 'Woda stanowi około 60-70% masy ciała dorosłego człowieka.'),
@@ -48,22 +57,31 @@ ZNACZENIE: główne źródło energii oraz funkcja budulcowa (celuloza, chityna)
 DOŚWIADCZENIE: obecność skrobi w materiale biologicznym wykrywa się płynem Lugola (jodyna) — w obecności skrobi roztwór zmienia barwę na granatowo-czarną.
 
 LIPIDY — BUDOWA I PODZIAŁ
-Lipidy proste (tłuszcze właściwe, woski) powstają z połączenia glicerolu i kwasów tłuszczowych wiązaniami estrowymi. Lipidy złożone zawierają dodatkowo inne grupy, np. fosfolipidy (kwas fosforowy — budują błony komórkowe), glikolipidy (reszta cukrowa) czy steroidy (np. cholesterol, hormony płciowe — budowa pierścieniowa).
-WŁAŚCIWOŚCI: nierozpuszczalne w wodzie (hydrofobowe), rozpuszczalne w rozpuszczalnikach organicznych. Kwasy tłuszczowe nasycone (bez wiązań podwójnych, stałe w temp. pokojowej) i nienasycone (z wiązaniami podwójnymi, ciekłe — oleje).
+Lipidy proste to estry kwasów tłuszczowych i alkoholi, w których składniki łączą się wiązaniami estrowymi. Tłuszcze właściwe (triacyloglicerole) zbudowane są z glicerolu i trzech cząsteczek kwasów tłuszczowych, a woski — z kwasów tłuszczowych i alkoholi o długim łańcuchu węglowym; woski chronią np. liście i pióra przed utratą wody i nadmiernym zwilżaniem. Lipidy złożone zawierają oprócz kwasów tłuszczowych i alkoholu dodatkowe składniki: fosfolipidy — resztę kwasu fosforowego (budują błony komórkowe), a glikolipidy — resztę cukrową (występują w błonach i uczestniczą w rozpoznawaniu się komórek). Odrębną grupę lipidów stanowią steroidy, np. cholesterol i hormony płciowe — związki o budowie pierścieniowej, niezawierające glicerolu ani kwasów tłuszczowych.
+WŁAŚCIWOŚCI: lipidy są nierozpuszczalne w wodzie (hydrofobowe), a rozpuszczalne w rozpuszczalnikach organicznych. Tłuszcze zawierające głównie nasycone kwasy tłuszczowe (bez wiązań podwójnych) są w temperaturze pokojowej stałe (np. łój), a zawierające głównie nienasycone kwasy tłuszczowe (z wiązaniami podwójnymi) — ciekłe (oleje).
 ZNACZENIE: magazynowanie energii (2x więcej na gram niż węglowodany), budowa błon komórkowych (fosfolipidy), izolacja termiczna i mechaniczna, prekursory hormonów steroidowych.
 ''',
             flashcards: [
               Flashcard(id: 'f_k1_4', front: 'Co to jest glikogen?', back: 'Wielocukier zapasowy magazynowany w wątrobie i mięśniach zwierząt.'),
               Flashcard(id: 'f_k1_5', front: 'Która grupa związków magazynuje najwięcej energii na gram?', back: 'Tłuszcze (lipidy) — ok. 2 razy więcej niż węglowodany.'),
               Flashcard(id: 'f_k1_7', front: 'Jaką funkcję pełni celuloza u roślin?', back: 'Buduje ściany komórkowe (funkcja strukturalna).'),
+              Flashcard(id: 'f_k1_wl_1', front: 'Jakie znaczenie ma rodzaj wiązania glikozydowego w polisacharydzie?', back: 'Wiązania α występują w skrobi i glikogenie (trawionych przez człowieka), β — w celulozie i chitynie (nietrawionych, budulcowych).'),
+              Flashcard(id: 'f_k1_wl_2', front: 'Wymień ważne biologicznie monosacharydy.', back: 'Glukoza, fruktoza i galaktoza (heksozy) oraz ryboza i deoksyryboza (pentozy).'),
+              Flashcard(id: 'f_k1_wl_3', front: 'Z jakich monosacharydów zbudowane są sacharoza, laktoza i maltoza?', back: 'Sacharoza — glukoza i fruktoza, laktoza — glukoza i galaktoza, maltoza — dwie cząsteczki glukozy.'),
+              Flashcard(id: 'f_k1_wl_4', front: 'Czym różni się skrobia od glikogenu?', back: 'Skrobia jest materiałem zapasowym roślin, a glikogen — zwierząt i grzybów; glikogen jest silniej rozgałęziony.'),
+              Flashcard(id: 'f_k1_wl_5', front: 'Jak wykryć skrobię w materiale biologicznym?', back: 'Płynem Lugola — w obecności skrobi pojawia się granatowe zabarwienie.'),
+              Flashcard(id: 'f_k1_wl_6', front: 'Czym różnią się lipidy proste od złożonych?', back: 'Proste to estry kwasów tłuszczowych i alkoholi; złożone zawierają dodatkowo np. resztę fosforanową lub cukrową.'),
+              Flashcard(id: 'f_k1_wl_7', front: 'Jaką funkcję pełnią woski?', back: 'Chronią np. liście i pióra przed utratą wody i nadmiernym zwilżaniem.'),
+              Flashcard(id: 'f_k1_wl_8', front: 'Dlaczego oleje są ciekłe, a łój jest stały?', back: 'Oleje zawierają głównie nienasycone kwasy tłuszczowe, a łój — nasycone.'),
+              Flashcard(id: 'f_k1_wl_9', front: 'Czym są steroidy? Podaj przykłady.', back: 'Lipidami o budowie pierścieniowej, bez glicerolu i kwasów tłuszczowych — np. cholesterol i hormony płciowe.'),
             ],
             questions: [
               QuizQuestion(id: 'q_k1_3', question: 'Który związek pełni funkcję zapasową u zwierząt?', options: ['Celuloza', 'Skrobia', 'Glikogen', 'Chityna'], correctIndex: 2, explanation: 'Glikogen to zapasowy wielocukier magazynowany w wątrobie i mięśniach zwierząt.'),
               QuizQuestion(id: 'q_k1_4', question: 'Fosfolipidy są głównym składnikiem:', options: ['Błon komórkowych', 'Chromosomów', 'Rybosomów', 'Ściany komórkowej roślin'], correctIndex: 0, explanation: 'Dwuwarstwa fosfolipidowa buduje błony komórkowe.'),
               QuizQuestion(id: 'q_k1_16', question: 'Wiązanie α-glikozydowe występuje w:', options: ['Celulozie', 'Skrobi i glikogenie', 'Chitynie', 'DNA'], correctIndex: 1, explanation: 'Skrobia i glikogen zbudowane są z glukozy połączonej wiązaniami α-glikozydowymi.'),
-              QuizQuestion(id: 'q_k1_17', question: 'Do wykrywania obecności skrobi w materiale biologicznym stosuje się:', options: ['Wodorotlenek miedzi', 'Płyn Lugola', 'Wodę bromową', 'Sudan III'], correctIndex: 1, explanation: 'Płyn Lugola (jodyna) z skrobią daje granatowo-czarne zabarwienie.'),
-              QuizQuestion(id: 'q_k1_18', question: 'Lipidy łączą się z glicerolem wiązaniem:', options: ['Peptydowym', 'Glikozydowym', 'Estrowym', 'Wodorowym'], correctIndex: 2, explanation: 'Kwasy tłuszczowe łączą się z glicerolem wiązaniami estrowymi.'),
-              QuizQuestion(id: 'q_k1_19', question: 'Cholesterol należy do grupy:', options: ['Monosacharydów', 'Steroidów', 'Disacharydów', 'Polisacharydów'], correctIndex: 1, explanation: 'Cholesterol to lipid złożony z grupy steroidów.'),
+              QuizQuestion(id: 'q_k1_17', question: 'Do wykrywania obecności skrobi w materiale biologicznym stosuje się:', options: ['Wodorotlenek miedzi', 'Płyn Lugola', 'Wodę bromową', 'Sudan III'], correctIndex: 1, explanation: 'Płyn Lugola ze skrobią daje granatowe zabarwienie.'),
+              QuizQuestion(id: 'q_k1_18', question: 'Kwasy tłuszczowe łączą się z glicerolem wiązaniem:', options: ['Peptydowym', 'Glikozydowym', 'Estrowym', 'Wodorowym'], correctIndex: 2, explanation: 'Kwasy tłuszczowe łączą się z glicerolem wiązaniami estrowymi.'),
+              QuizQuestion(id: 'q_k1_19', question: 'Cholesterol należy do grupy:', options: ['Monosacharydów', 'Steroidów', 'Disacharydów', 'Polisacharydów'], correctIndex: 1, explanation: 'Cholesterol to lipid o budowie pierścieniowej należący do steroidów.'),
             ],
           ),
           Topic(
@@ -80,8 +98,9 @@ Struktura III-rzędowa — trójwymiarowe zwinięcie całego łańcucha, stabili
 Struktura IV-rzędowa — połączenie kilku podjednostek (łańcuchów polipeptydowych) w jeden kompleks białkowy (np. hemoglobina — 4 podjednostki).
 
 WPŁYW CZYNNIKÓW NA BIAŁKO
-Denaturacja — nieodwracalna zwykle utrata struktury przestrzennej białka pod wpływem wysokiej temperatury, skrajnego pH, metali ciężkich lub promieniowania UV — białko traci swoją funkcję biologiczną, choć sekwencja aminokwasów pozostaje niezmieniona.
-Koagulacja — łączenie się (agregacja) zdenaturowanych cząsteczek białka w większe struktury, np. ścinanie się białka jaja kurzego pod wpływem temperatury.
+Koagulacja (wysalanie) — odwracalne wytrącenie białka z roztworu koloidalnego pod wpływem soli metali lekkich, np. chlorku sodu lub siarczanu amonu. Struktura przestrzenna białka nie zostaje trwale naruszona, dlatego po dodaniu wody białko ponownie się rozpuszcza i zachowuje swoje właściwości.
+Denaturacja — zazwyczaj nieodwracalna utrata struktury przestrzennej (II-, III- i IV-rzędowej) białka pod wpływem wysokiej temperatury, stężonych kwasów i zasad, soli metali ciężkich, alkoholu lub promieniowania UV. Białko traci funkcję biologiczną, choć sekwencja aminokwasów (struktura I-rzędowa) pozostaje niezmieniona. Przykładem jest ścinanie się białka jaja kurzego podczas gotowania.
+OBSERWACJA: do probówek z roztworem białka jaja kurzego dodaje się kolejno stężony roztwór chlorku sodu, roztwór soli metalu ciężkiego (np. siarczanu miedzi(II)) i etanol, a jedną probówkę ogrzewa się. We wszystkich probówkach białko się wytrąca, ale po dodaniu wody osad rozpuszcza się ponownie tylko w probówce z chlorkiem sodu — zaszła tam koagulacja; w pozostałych zaszła nieodwracalna denaturacja.
 
 ZNACZENIE BIOLOGICZNE BIAŁEK
 Albuminy i globuliny — białka osocza krwi (transport, odporność). Histony — białka strukturalne, wokół których nawija się DNA w chromatynie. Kolagen — białko budulcowe tkanki łącznej, skóry, kości i ścięgien. Keratyna — białko budulcowe naskórka, włosów i paznokci. Hemoglobina — transport tlenu we krwi. Mioglobina — magazynowanie tlenu w mięśniach.
@@ -89,6 +108,14 @@ Albuminy i globuliny — białka osocza krwi (transport, odporność). Histony �
             flashcards: [
               Flashcard(id: 'f_k1_2', front: 'Z czego zbudowane są białka?', back: 'Z aminokwasów połączonych wiązaniami peptydowymi.'),
               Flashcard(id: 'f_k1_3', front: 'Wymień trzy funkcje białek.', back: 'Budulcowa, enzymatyczna, transportowa (także odpornościowa i regulacyjna).'),
+              Flashcard(id: 'f_k1_bia_1', front: 'Czym różni się białko proste od złożonego?', back: 'Proste zbudowane jest wyłącznie z aminokwasów (np. albuminy), złożone zawiera też część niebiałkową (np. hemoglobina z hemem).'),
+              Flashcard(id: 'f_k1_bia_2', front: 'Czym jest struktura I-rzędowa białka?', back: 'Kolejnością (sekwencją) aminokwasów w łańcuchu polipeptydowym.'),
+              Flashcard(id: 'f_k1_bia_3', front: 'Jakie wiązania stabilizują strukturę II-rzędową białka?', back: 'Wiązania wodorowe — tworzą α-helisę i harmonijkę β.'),
+              Flashcard(id: 'f_k1_bia_4', front: 'Czym różni się koagulacja od denaturacji?', back: 'Koagulacja (np. pod wpływem NaCl) jest odwracalna; denaturacja (temperatura, metale ciężkie, alkohol) jest zazwyczaj nieodwracalna.'),
+              Flashcard(id: 'f_k1_bia_5', front: 'Które struktury białka niszczy denaturacja?', back: 'II-, III- i IV-rzędową; struktura I-rzędowa pozostaje nienaruszona.'),
+              Flashcard(id: 'f_k1_bia_6', front: 'Jak doświadczalnie odróżnić koagulację od denaturacji?', back: 'Po dodaniu wody osad powstały w koagulacji się rozpuszcza, a po denaturacji — nie.'),
+              Flashcard(id: 'f_k1_bia_7', front: 'Czym różni się hemoglobina od mioglobiny?', back: 'Hemoglobina transportuje tlen we krwi i ma cztery podjednostki; mioglobina magazynuje tlen w mięśniach.'),
+              Flashcard(id: 'f_k1_bia_8', front: 'Gdzie występują kolagen i keratyna?', back: 'Kolagen — w tkance łącznej, kościach i ścięgnach; keratyna — w naskórku, włosach i paznokciach.'),
             ],
             questions: [
               QuizQuestion(id: 'q_k1_2', question: 'Monomerem białek jest:', options: ['Glukoza', 'Aminokwas', 'Nukleotyd', 'Kwas tłuszczowy'], correctIndex: 1, explanation: 'Białka zbudowane są z aminokwasów połączonych wiązaniami peptydowymi.'),
@@ -117,6 +144,13 @@ Kwasy nukleinowe warunkują przechowywanie, powielanie (replikacja) i ekspresję
 ''',
             flashcards: [
               Flashcard(id: 'f_k1_6', front: 'Z czego zbudowany jest nukleotyd?', back: 'Z cukru, reszty fosforanowej i zasady azotowej.'),
+              Flashcard(id: 'f_k1_kn_1', front: 'Jakim wiązaniem łączą się nukleotydy w łańcuchu?', back: 'Wiązaniem fosfodiestrowym.'),
+              Flashcard(id: 'f_k1_kn_2', front: 'Czym różni się budowa DNA od RNA?', back: 'DNA zawiera deoksyrybozę i tyminę i zwykle ma dwie nici; RNA zawiera rybozę i uracyl i zwykle ma jedną nić.'),
+              Flashcard(id: 'f_k1_kn_3', front: 'Na czym polega komplementarność zasad azotowych?', back: 'Adenina łączy się z tyminą (w RNA z uracylem) dwoma wiązaniami wodorowymi, a guanina z cytozyną — trzema.'),
+              Flashcard(id: 'f_k1_kn_4', front: 'Co oznacza, że nici DNA są antyrównoległe?', back: 'Biegną w przeciwnych kierunkach.'),
+              Flashcard(id: 'f_k1_kn_5', front: 'Jaką funkcję pełni mRNA?', back: 'Przenosi informację genetyczną z DNA do rybosomu.'),
+              Flashcard(id: 'f_k1_kn_6', front: 'Jaką funkcję pełni tRNA?', back: 'Dostarcza aminokwasy do rybosomu podczas translacji.'),
+              Flashcard(id: 'f_k1_kn_7', front: 'Jaką funkcję pełni rRNA?', back: 'Buduje rybosomy.'),
             ],
             questions: [
               QuizQuestion(id: 'q_k1_5', question: 'Kwasy nukleinowe pełnią funkcję:', options: ['Energetyczną', 'Przechowywania informacji genetycznej', 'Termoregulacyjną', 'Strukturalną w ścianach komórkowych'], correctIndex: 1, explanation: 'DNA i RNA przechowują i przekazują informację genetyczną.'),
@@ -152,6 +186,15 @@ DOŚWIADCZENIE: zjawisko osmozy obserwuje się, umieszczając tkankę roślinną
 ''',
             flashcards: [
               Flashcard(id: 'f_k1_13', front: 'Z czego zbudowana jest błona komórkowa?', back: 'Z dwuwarstwy fosfolipidowej z białkami.'),
+              Flashcard(id: 'f_k1_bl_1', front: 'Jaką funkcję pełni cholesterol w błonie komórkowej?', back: 'Stabilizuje jej płynność.'),
+              Flashcard(id: 'f_k1_bl_2', front: 'Jaką rolę pełnią glikoproteiny i glikolipidy błony komórkowej?', back: 'Uczestniczą w rozpoznawaniu się komórek i pełnią funkcję receptorów.'),
+              Flashcard(id: 'f_k1_bl_3', front: 'Co opisuje model płynnej mozaiki?', back: 'Błonę jako dynamiczną dwuwarstwę lipidową, w której mogą przemieszczać się białka i lipidy.'),
+              Flashcard(id: 'f_k1_bl_4', front: 'Czym różni się dyfuzja prosta od dyfuzji wspomaganej?', back: 'Obie są bierne i zachodzą zgodnie z gradientem stężeń, ale wspomagana wymaga białek transportowych.'),
+              Flashcard(id: 'f_k1_bl_5', front: 'Czym jest transport aktywny? Podaj przykład.', back: 'Transportem wbrew gradientowi stężeń z nakładem ATP — np. pompa sodowo-potasowa.'),
+              Flashcard(id: 'f_k1_bl_6', front: 'Czym różni się fagocytoza od pinocytozy?', back: 'Fagocytoza to pobieranie cząstek stałych, a pinocytoza — płynów.'),
+              Flashcard(id: 'f_k1_bl_7', front: 'Czym jest osmoza?', back: 'Przenikaniem wody przez błonę półprzepuszczalną z roztworu o niższym do roztworu o wyższym stężeniu substancji rozpuszczonej.'),
+              Flashcard(id: 'f_k1_bl_8', front: 'Co dzieje się z komórką roślinną w roztworze hipertonicznym?', back: 'Traci wodę i ulega plazmolizie.'),
+              Flashcard(id: 'f_k1_bl_9', front: 'Dlaczego komórka zwierzęca w roztworze hipotonicznym może pęknąć?', back: 'Pobiera wodę, a nie ma ściany komórkowej, która chroniłaby ją przed nadmiernym pęcznieniem.'),
             ],
             questions: [
               QuizQuestion(id: 'q_k1_28', question: 'Transport przez błonę wymagający nakładu energii ATP to:', options: ['Dyfuzja prosta', 'Dyfuzja wspomagana', 'Transport aktywny', 'Osmoza'], correctIndex: 2, explanation: 'Transport aktywny przenosi substancje wbrew gradientowi stężeń kosztem ATP.'),
@@ -171,7 +214,17 @@ Otoczone otoczką jądrową (dwie błony z porami jądrowymi umożliwiającymi t
 RYBOSOMY
 Zbudowane z dwóch podjednostek (małej i dużej), złożonych z rRNA i białek. Powstają w jąderku, a następnie są transportowane do cytoplazmy przez pory jądrowe. Pełnią funkcję miejsca syntezy białek (translacji). Występują swobodnie w cytoplazmie lub związane z błonami retikulum endoplazmatycznego szorstkiego. Występują też w mitochondriach i chloroplastach (własne rybosomy, mniejsze, podobne do bakteryjnych — argument za endosymbiozą).
 ''',
-            flashcards: [],
+            flashcards: [
+              Flashcard(id: 'f_k1_jad_1', front: 'Z czego zbudowana jest otoczka jądrowa?', back: 'Z dwóch błon z porami jądrowymi.'),
+              Flashcard(id: 'f_k1_jad_2', front: 'Jaką funkcję pełnią pory jądrowe?', back: 'Umożliwiają transport substancji między jądrem a cytoplazmą, np. mRNA i podjednostek rybosomów.'),
+              Flashcard(id: 'f_k1_jad_3', front: 'Czym jest chromatyna?', back: 'Kompleksem DNA i białek histonowych.'),
+              Flashcard(id: 'f_k1_jad_4', front: 'Jaką funkcję pełni jąderko?', back: 'Syntetyzuje rRNA i składa podjednostki rybosomów.'),
+              Flashcard(id: 'f_k1_jad_5', front: 'Jakie funkcje pełni jądro komórkowe?', back: 'Przechowuje i powiela materiał genetyczny oraz kieruje czynnościami komórki przez regulację ekspresji genów.'),
+              Flashcard(id: 'f_k1_jad_6', front: 'Z czego zbudowany jest rybosom?', back: 'Z dwóch podjednostek — małej i dużej — złożonych z rRNA i białek.'),
+              Flashcard(id: 'f_k1_jad_7', front: 'Gdzie w komórce występują rybosomy?', back: 'Swobodnie w cytoplazmie, na siateczce śródplazmatycznej szorstkiej oraz w mitochondriach i chloroplastach.'),
+              Flashcard(id: 'f_k1_jad_8', front: 'Jaką funkcję pełnią rybosomy?', back: 'Są miejscem syntezy białek (translacji).'),
+              Flashcard(id: 'f_k1_jad_9', front: 'Dlaczego rybosomy mitochondriów i chloroplastów są argumentem za endosymbiozą?', back: 'Są mniejsze niż rybosomy cytoplazmatyczne i podobne do bakteryjnych (70S).'),
+            ],
             questions: [
               QuizQuestion(id: 'q_k1_33', question: 'Jąderko jest miejscem:', options: ['Produkcji ATP', 'Składania podjednostek rybosomów', 'Syntezy lipidów', 'Replikacji DNA'], correctIndex: 1, explanation: 'W jąderku syntetyzowane jest rRNA i składane są podjednostki rybosomów.'),
               QuizQuestion(id: 'q_k1_34', question: 'Rybosomy zbudowane są z:', options: ['DNA i białek', 'rRNA i białek', 'Fosfolipidów', 'mRNA i DNA'], correctIndex: 1, explanation: 'Rybosomy składają się z rRNA i białek.'),
@@ -191,6 +244,13 @@ Wszystkie te struktury tworzą zintegrowany system błon wewnątrzkomórkowych �
 ''',
             flashcards: [
               Flashcard(id: 'f_k1_12', front: 'Jaką funkcję pełnią lizosomy?', back: 'Trawią zużyte organelle i materiał wchłonięty przez komórkę (enzymy trawienne).'),
+              Flashcard(id: 'f_k1_sb_1', front: 'Jaką funkcję pełni retikulum endoplazmatyczne szorstkie?', back: 'Syntetyzuje białka przeznaczone do wydzielania, wbudowania w błony lub transportu.'),
+              Flashcard(id: 'f_k1_sb_2', front: 'Jaką funkcję pełni retikulum endoplazmatyczne gładkie?', back: 'Syntetyzuje lipidy, uczestniczy w przemianach węglowodanów i unieszkodliwia toksyny.'),
+              Flashcard(id: 'f_k1_sb_3', front: 'Jaką funkcję pełni aparat Golgiego?', back: 'Modyfikuje, sortuje i pakuje białka oraz lipidy do transportu.'),
+              Flashcard(id: 'f_k1_sb_4', front: 'Jak powstają lizosomy?', back: 'Z pęcherzyków odczłonkowanych od aparatu Golgiego.'),
+              Flashcard(id: 'f_k1_sb_5', front: 'Czym jest autofagia?', back: 'Trawieniem przez lizosomy zbędnych lub uszkodzonych organelli komórki.'),
+              Flashcard(id: 'f_k1_sb_6', front: 'Jak materiał przemieszcza się między elementami systemu błon wewnątrzkomórkowych?', back: 'W pęcherzykach transportowych.'),
+              Flashcard(id: 'f_k1_sb_7', front: 'Jakie znaczenie ma kompartmentacja komórki?', back: 'Umożliwia jednoczesne zachodzenie różnych, czasem przeciwstawnych procesów w odrębnych przedziałach.'),
             ],
             questions: [
               QuizQuestion(id: 'q_k1_10', question: 'Za modyfikację i pakowanie białek odpowiada:', options: ['Aparat Golgiego', 'Lizosom', 'Rybosom', 'Wakuola'], correctIndex: 0, explanation: 'Aparat Golgiego modyfikuje, sortuje i pakuje białka do transportu.'),
@@ -208,6 +268,10 @@ Otoczone dwiema błonami: zewnętrzną (gładką) i wewnętrzną (silnie pofałd
 
 BUDOWA PLASTYDÓW (chloroplasty)
 Chloroplasty otoczone są dwiema błonami, wewnątrz znajduje się stroma (faza niezależna od światła) oraz system błon tylakoidów (ułożonych w grana), zawierających chlorofil — tu zachodzi faza zależna od światła. Chloroplasty posiadają własne DNA i rybosomy. Inne plastydy: chromoplasty (barwniki, np. w owocach), leukoplasty (bezbarwne, magazynowanie skrobi — amyloplasty).
+Plastydy mogą przekształcać się w siebie nawzajem — np. podczas dojrzewania owoców pomidora chloroplasty przekształcają się w chromoplasty, a bulwy ziemniaka wystawione na światło zielenieją, bo w ich leukoplastach powstaje chlorofil.
+
+OBSERWACJA PLASTYDÓW
+Chloroplasty obserwuje się w preparacie z liścia moczarki kanadyjskiej lub mchu, umieszczonego w kropli wody — widoczne są jako liczne zielone ziarna, często przemieszczające się wraz z cytoplazmą. Chromoplasty obserwuje się w preparacie z miąższu dojrzałego owocu pomidora, papryki lub dzikiej róży albo z korzenia marchwi — mają barwę pomarańczową, żółtą lub czerwoną i różne kształty. Leukoplasty zawierające skrobię (amyloplasty) obserwuje się w preparacie z bulwy ziemniaka — po dodaniu płynu Lugola ziarna skrobi barwią się na granatowo.
 
 TEORIA ENDOSYMBIOZY
 Mitochondria i chloroplasty prawdopodobnie powstały z wolno żyjących bakterii, wchłoniętych przez większą komórkę prekursorową i przetrwałych jako endosymbionty. Argumenty: własne, koliste DNA, własne rybosomy typu 70S, podwójna błona, zdolność do samodzielnego podziału, podobna wielkość do bakterii.
@@ -215,6 +279,13 @@ Mitochondria i chloroplasty prawdopodobnie powstały z wolno żyjących bakterii
             flashcards: [
               Flashcard(id: 'f_k1_10', front: 'Jaka jest funkcja mitochondrium?', back: 'Produkcja ATP w procesie oddychania komórkowego.'),
               Flashcard(id: 'f_k1_11', front: 'Co znajduje się w chloroplastach?', back: 'Chlorofil i własne DNA — miejsce zachodzenia fotosyntezy.'),
+              Flashcard(id: 'f_k1_mp_1', front: 'Jak zbudowane jest mitochondrium?', back: 'Z błony zewnętrznej, pofałdowanej błony wewnętrznej tworzącej grzebienie i matriks z DNA, rybosomami i enzymami.'),
+              Flashcard(id: 'f_k1_mp_2', front: 'Gdzie w chloroplaście zachodzą fazy fotosyntezy?', back: 'Faza zależna od światła — w błonach tylakoidów; faza niezależna od światła — w stromie.'),
+              Flashcard(id: 'f_k1_mp_3', front: 'Czym różnią się chloroplasty, chromoplasty i leukoplasty?', back: 'Chloroplasty zawierają chlorofil, chromoplasty — barwniki karotenoidowe, leukoplasty są bezbarwne i magazynują substancje.'),
+              Flashcard(id: 'f_k1_mp_4', front: 'Wymień argumenty za endosymbiotycznym pochodzeniem mitochondriów i chloroplastów.', back: 'Własne koliste DNA, rybosomy 70S, dwie błony, samodzielne podziały, wielkość zbliżona do bakterii.'),
+              Flashcard(id: 'f_k1_mp_5', front: 'W jakim materiale obserwuje się chromoplasty?', back: 'W miąższu dojrzałego pomidora, papryki lub dzikiej róży albo w korzeniu marchwi.'),
+              Flashcard(id: 'f_k1_mp_6', front: 'Jak uwidocznić amyloplasty w bulwie ziemniaka?', back: 'Dodać płyn Lugola — ziarna skrobi barwią się na granatowo.'),
+              Flashcard(id: 'f_k1_mp_7', front: 'Podaj przykład przekształcania się plastydów.', back: 'Chloroplasty dojrzewającego pomidora zmieniają się w chromoplasty; leukoplasty bulwy ziemniaka na świetle w chloroplasty.'),
             ],
             questions: [
               QuizQuestion(id: 'q_k1_7', question: 'Które organellum jest nazywane "elektrownią komórki"?', options: ['Jądro', 'Mitochondrium', 'Aparat Golgiego', 'Lizosom'], correctIndex: 1, explanation: 'Mitochondrium produkuje ATP w procesie oddychania komórkowego.'),
@@ -238,7 +309,17 @@ CYTOSZKIELET
 Sieć białkowych włókien w cytoplazmie: mikrofilamenty (aktynowe — ruch komórki, skurcz), mikrotubule (najgrubsze — wrzeciono podziałowe, rzęski i wici, transport wewnątrzkomórkowy) oraz filamenty pośrednie (stabilizacja mechaniczna). Cytoszkielet odpowiada za kształt komórki, jej ruch, transport wewnątrzkomórkowy organelli oraz rozdział chromosomów podczas podziału.
 OBSERWACJA: ruchy cytoplazmy (cyklozę) można zaobserwować pod mikroskopem np. w komórkach liścia moczarki kanadyjskiej.
 ''',
-            flashcards: [],
+            flashcards: [
+              Flashcard(id: 'f_k1_sci_1', front: 'Jakie funkcje pełni ściana komórkowa?', back: 'Nadaje komórce kształt oraz chroni ją przed uszkodzeniami mechanicznymi i nadmiernym pęcznieniem.'),
+              Flashcard(id: 'f_k1_sci_2', front: 'Z czego zbudowana jest ściana komórkowa roślin, grzybów i bakterii?', back: 'Roślin — z celulozy, grzybów — z chityny, bakterii — z mureiny.'),
+              Flashcard(id: 'f_k1_sci_3', front: 'Czym jest tonoplast?', back: 'Błoną otaczającą wakuolę.'),
+              Flashcard(id: 'f_k1_sci_4', front: 'Jakie funkcje pełni wakuola?', back: 'Magazynuje wodę, jony, barwniki i produkty przemiany materii oraz utrzymuje turgor komórki.'),
+              Flashcard(id: 'f_k1_sci_5', front: 'Z jakich elementów składa się cytoszkielet?', back: 'Z mikrofilamentów, mikrotubul i filamentów pośrednich.'),
+              Flashcard(id: 'f_k1_sci_6', front: 'Jaką funkcję pełnią mikrotubule?', back: 'Budują wrzeciono podziałowe, rzęski i wici oraz uczestniczą w transporcie wewnątrzkomórkowym.'),
+              Flashcard(id: 'f_k1_sci_7', front: 'Z jakiego białka zbudowane są mikrofilamenty i w czym uczestniczą?', back: 'Z aktyny — uczestniczą w ruchu komórki i skurczu.'),
+              Flashcard(id: 'f_k1_sci_8', front: 'Jaką funkcję pełnią filamenty pośrednie?', back: 'Zapewniają komórce wytrzymałość mechaniczną.'),
+              Flashcard(id: 'f_k1_sci_9', front: 'Czym jest cykloza i gdzie można ją zaobserwować?', back: 'Ruchem cytoplazmy — np. w komórkach liścia moczarki kanadyjskiej.'),
+            ],
             questions: [
               QuizQuestion(id: 'q_k1_42', question: 'Główny składnik ściany komórkowej grzybów to:', options: ['Celuloza', 'Chityna', 'Mureina', 'Keratyna'], correctIndex: 1, explanation: 'Ściana komórkowa grzybów zbudowana jest z chityny.'),
               QuizQuestion(id: 'q_k1_43', question: 'Wakuola u dojrzałej komórki roślinnej odpowiada głównie za:', options: ['Fotosyntezę', 'Utrzymanie turgoru komórki', 'Produkcję ATP', 'Syntezę białek'], correctIndex: 1, explanation: 'Wakuola magazynuje wodę i utrzymuje ciśnienie turgorowe.'),
@@ -261,6 +342,12 @@ Komórka zwierzęca: brak ściany komórkowej, małe, liczne wakuole lub ich bra
 ''',
             flashcards: [
               Flashcard(id: 'f_k1_9', front: 'Czym różni się komórka prokariotyczna od eukariotycznej?', back: 'Prokariotyczna nie ma jądra komórkowego otoczonego błoną ani organelli błoniastych.'),
+              Flashcard(id: 'f_k1_pe_1', front: 'Gdzie znajduje się materiał genetyczny komórki prokariotycznej?', back: 'W nukleoidzie, nieoddzielonym błoną od cytoplazmy.'),
+              Flashcard(id: 'f_k1_pe_2', front: 'Czym różnią się rybosomy komórek prokariotycznych i eukariotycznych?', back: 'Prokariotyczne są mniejsze (70S), eukariotyczne — większe (80S).'),
+              Flashcard(id: 'f_k1_pe_3', front: 'Które organizmy zbudowane są z komórek eukariotycznych?', back: 'Rośliny, zwierzęta, grzyby i protisty.'),
+              Flashcard(id: 'f_k1_pe_4', front: 'Jakie struktury odróżniają komórkę roślinną od zwierzęcej?', back: 'Ściana komórkowa z celulozy, duża centralna wakuola i chloroplasty; komórka zwierzęca ma centriole.'),
+              Flashcard(id: 'f_k1_pe_5', front: 'Czym różni się komórka grzybowa od roślinnej?', back: 'Ma ścianę komórkową z chityny, nie ma chloroplastów, a materiałem zapasowym jest glikogen, a nie skrobia.'),
+              Flashcard(id: 'f_k1_pe_6', front: 'Jaki węglowodan zapasowy gromadzą rośliny, grzyby i zwierzęta?', back: 'Rośliny — skrobię, grzyby i zwierzęta — glikogen.'),
             ],
             questions: [
               QuizQuestion(id: 'q_k1_8', question: 'Komórka prokariotyczna NIE posiada:', options: ['Rybosomów', 'Błony komórkowej', 'Jądra komórkowego', 'Cytoplazmy'], correctIndex: 2, explanation: 'Prokariota nie mają jądra otoczonego błoną — materiał genetyczny jest w nukleoidzie.'),
@@ -289,7 +376,17 @@ PRZENOŚNIKI ENERGII ORAZ PROTONÓW I ELEKTRONÓW
 ATP (adenozynotrifosforan) zbudowany jest z adeniny, rybozy i trzech reszt fosforanowych połączonych wiązaniami wysokoenergetycznymi. Hydroliza końcowego wiązania fosforanowego (do ADP + Pi) uwalnia energię wykorzystywaną w reakcjach komórkowych.
 NAD+, FAD i NADP+ to przenośniki elektronów i protonów, biorące udział w reakcjach utleniania i redukcji. Przyjmując elektrony i protony, przechodzą w formę zredukowaną (NADH, FADH2, NADPH), która przekazuje je dalej, magazynując energię chemiczną.
 ''',
-            flashcards: [],
+            flashcards: [
+              Flashcard(id: 'f_k1_met_1', front: 'Czym jest metabolizm?', back: 'Ogółem reakcji chemicznych zachodzących w komórce, zorganizowanych w szlaki i cykle metaboliczne.'),
+              Flashcard(id: 'f_k1_met_2', front: 'Czym różni się katabolizm od anabolizmu?', back: 'Katabolizm to rozkład związków złożonych z uwolnieniem energii; anabolizm — synteza związków złożonych z wykorzystaniem energii.'),
+              Flashcard(id: 'f_k1_met_3', front: 'Podaj przykłady procesów katabolicznych i anabolicznych.', back: 'Kataboliczne: oddychanie komórkowe. Anaboliczne: fotosynteza, synteza białek.'),
+              Flashcard(id: 'f_k1_met_4', front: 'Czym różni się cykl metaboliczny od szlaku liniowego?', back: 'W cyklu produkt ostatniej reakcji odtwarza substrat pierwszej, np. w cyklu Krebsa.'),
+              Flashcard(id: 'f_k1_met_5', front: 'Jak powiązane są katabolizm i anabolizm?', back: 'Energia uwolniona w katabolizmie, zmagazynowana w ATP, napędza reakcje anaboliczne.'),
+              Flashcard(id: 'f_k1_met_6', front: 'Z czego zbudowany jest ATP?', back: 'Z adeniny, rybozy i trzech reszt fosforanowych.'),
+              Flashcard(id: 'f_k1_met_7', front: 'Jak ATP uwalnia energię?', back: 'Przez hydrolizę końcowego wiązania fosforanowego do ADP i fosforanu.'),
+              Flashcard(id: 'f_k1_met_8', front: 'Jaką funkcję pełnią NAD+, FAD i NADP+?', back: 'Są przenośnikami elektronów i protonów w reakcjach utleniania i redukcji.'),
+              Flashcard(id: 'f_k1_met_9', front: 'Jak nazywają się zredukowane formy NAD+, FAD i NADP+?', back: 'NADH, FADH2 i NADPH.'),
+            ],
             questions: [
               QuizQuestion(id: 'q_k1_49', question: 'Katabolizm to procesy:', options: ['Syntezy złożonych związków', 'Rozkładu związków z uwolnieniem energii', 'Wyłącznie zachodzące w chloroplastach', 'Niezwiązane z ATP'], correctIndex: 1, explanation: 'Katabolizm rozkłada złożone związki, uwalniając energię.'),
               QuizQuestion(id: 'q_k1_50', question: 'ATP zbudowany jest z adeniny, rybozy i:', options: ['Jednej reszty fosforanowej', 'Dwóch reszt fosforanowych', 'Trzech reszt fosforanowych', 'Czterech reszt fosforanowych'], correctIndex: 2, explanation: 'ATP zawiera trzy reszty fosforanowe połączone wiązaniami wysokoenergetycznymi.'),
@@ -301,8 +398,11 @@ NAD+, FAD i NADP+ to przenośniki elektronów i protonów, biorące udział w re
             id: 'k1_metabolizm_enzymy',
             name: 'Enzymy',
             theory: '''
-BUDOWA I DZIAŁANIE ENZYMÓW
-Enzymy to białkowe biokatalizatory przyspieszające reakcje chemiczne poprzez obniżenie energii aktywacji. Posiadają centrum aktywne — miejsce o specyficznym kształcie, do którego dopasowuje się substrat. Ta komplementarność kształtu odpowiada za swoistość substratową enzymu.
+BUDOWA ENZYMÓW
+Enzymy to biokatalizatory — przyspieszają reakcje chemiczne, obniżając ich energię aktywacji, i nie zużywają się w reakcji. Większość enzymów to białka, ale niektóre reakcje katalizują cząsteczki RNA, zwane rybozymami (np. rRNA tworzący wiązania peptydowe w rybosomie). Enzymy proste zbudowane są wyłącznie z białka. Enzymy złożone (holoenzymy) składają się z części białkowej — apoenzymu, który decyduje o swoistości — oraz części niebiałkowej, czyli kofaktora, bez którego enzym nie działa. Kofaktorem mogą być jony metali (np. Mg2+, Zn2+, Fe2+) albo związki organiczne: koenzymy, związane z apoenzymem luźno i odwracalnie (np. NAD+, koenzym A — często pochodne witamin), oraz grupy prostetyczne, związane z nim trwale (np. FAD, hem).
+
+DZIAŁANIE ENZYMÓW
+Enzym ma centrum aktywne — fragment o specyficznym kształcie i właściwościach chemicznych, do którego przyłącza się substrat. Komplementarność centrum aktywnego i substratu odpowiada za swoistość substratową enzymu: dany enzym katalizuje reakcje tylko określonego substratu lub grupy podobnych substratów. Po przyłączeniu substratu powstaje kompleks enzym–substrat, a centrum aktywne dopasowuje się przy tym do kształtu substratu (model indukowanego dopasowania). Enzym ułatwia przebieg reakcji, np. ustawiając substraty w odpowiednim położeniu lub osłabiając ich wiązania, po czym uwalnia produkty i może katalizować kolejne reakcje.
 
 REGULACJA AKTYWNOŚCI ENZYMÓW
 Aktywacja — zwiększenie aktywności enzymu przez aktywator. Inhibicja — zmniejszenie aktywności enzymu: kompetycyjna (inhibitor rywalizuje o centrum aktywne) oraz niekompetycyjna (inhibitor wiąże się w innym miejscu, zmieniając kształt centrum aktywnego).
@@ -312,9 +412,20 @@ WPŁYW CZYNNIKÓW FIZYKOCHEMICZNYCH NA KATALIZĘ ENZYMATYCZNĄ
 Temperatura — aktywność rośnie do optimum, powyżej którego enzym ulega denaturacji.
 pH — każdy enzym ma optymalne pH (np. pepsyna działa w kwaśnym środowisku żołądka, trypsyna w zasadowym środowisku jelita).
 Stężenie substratu — wzrost stężenia zwiększa szybkość reakcji do wysycenia enzymu.
-DOŚWIADCZENIE: aktywność katalazy (rozkładającej nadtlenek wodoru) bada się, obserwując intensywność pienienia w różnych warunkach; podobnie bada się aktywność proteinazy, obserwując tempo trawienia białka.
+DOŚWIADCZENIE: katalaza zawarta w bulwie ziemniaka rozkłada nadtlenek wodoru do wody i tlenu, co widać jako pienienie. Do probówek z nadtlenkiem wodoru dodaje się jednakowe kawałki surowego ziemniaka (próba badawcza) i ziemniaka ugotowanego, w którym enzym uległ denaturacji (próba kontrolna); tak samo można badać wpływ temperatury lub pH na aktywność katalazy. Aktywność proteinazy, np. pepsyny, bada się, obserwując tempo trawienia białka, np. ściętego białka jaja, w różnych warunkach pH i temperatury.
 ''',
-            flashcards: [],
+            flashcards: [
+              Flashcard(id: 'f_k1_enz_1', front: 'Jak enzymy wpływają na energię aktywacji reakcji?', back: 'Obniżają ją, dzięki czemu reakcja przebiega szybciej.'),
+              Flashcard(id: 'f_k1_enz_2', front: 'Z czego zbudowany jest enzym złożony (holoenzym)?', back: 'Z części białkowej (apoenzymu) i niebiałkowej (kofaktora).'),
+              Flashcard(id: 'f_k1_enz_3', front: 'Czym różni się koenzym od grupy prostetycznej?', back: 'Koenzym jest związany z apoenzymem luźno i odwracalnie (np. NAD+), grupa prostetyczna — trwale (np. FAD, hem).'),
+              Flashcard(id: 'f_k1_enz_4', front: 'Czym są rybozymy?', back: 'Cząsteczkami RNA o właściwościach katalitycznych.'),
+              Flashcard(id: 'f_k1_enz_5', front: 'Na czym polega swoistość substratowa enzymu?', back: 'Enzym katalizuje reakcje tylko określonego substratu, do którego pasuje jego centrum aktywne.'),
+              Flashcard(id: 'f_k1_enz_6', front: 'Czym jest kompleks enzym–substrat?', back: 'Połączeniem substratu z centrum aktywnym enzymu, poprzedzającym powstanie produktów.'),
+              Flashcard(id: 'f_k1_enz_7', front: 'Czym różni się inhibicja kompetycyjna od niekompetycyjnej?', back: 'Inhibitor kompetycyjny konkuruje z substratem o centrum aktywne; niekompetycyjny wiąże się w innym miejscu i zmienia kształt centrum aktywnego.'),
+              Flashcard(id: 'f_k1_enz_8', front: 'Jak można osłabić działanie inhibitora kompetycyjnego?', back: 'Zwiększając stężenie substratu.'),
+              Flashcard(id: 'f_k1_enz_9', front: 'Dlaczego powyżej temperatury optymalnej aktywność enzymu gwałtownie spada?', back: 'Enzym ulega denaturacji.'),
+              Flashcard(id: 'f_k1_enz_10', front: 'Jak wykazać obecność katalazy w ziemniaku?', back: 'Surowy ziemniak w nadtlenku wodoru powoduje pienienie, a ugotowany (próba kontrolna) — nie.'),
+            ],
             questions: [
               QuizQuestion(id: 'q_k1_53', question: 'Miejsce enzymu, do którego dopasowuje się substrat, nazywamy:', options: ['Centrum aktywnym', 'Rdzeniem katalitycznym', 'Mostkiem disiarczkowym', 'Centrum regulatorowym'], correctIndex: 0, explanation: 'Centrum aktywne to miejsce wiązania substratu.'),
               QuizQuestion(id: 'q_k1_54', question: 'Inhibicja kompetycyjna polega na tym, że inhibitor:', options: ['Wiąże się z produktem reakcji', 'Rywalizuje z substratem o centrum aktywne', 'Zwiększa temperaturę reakcji', 'Jest identyczny z enzymem'], correctIndex: 1, explanation: 'Inhibitor kompetycyjny przypomina substrat i konkuruje o centrum aktywne.'),
@@ -336,16 +447,27 @@ Chlorofil a i b oraz karotenoidy pochłaniają energię światła o różnych d�
 FAZA ZALEŻNA OD ŚWIATŁA (faza jasna)
 Zachodzi w błonach tylakoidów. W fotosystemie II energia świetlna wybija elektrony z chlorofilu, a fotoliza wody uzupełnia ich ubytek, uwalniając tlen. Elektrony przemieszczają się łańcuchem przenośników (fotofosforylacja niecykliczna), tworząc gradient protonowy wykorzystywany do syntezy ATP w procesie chemiosmozy. Elektrony trafiają do fotosystemu I, skąd redukują NADP+ do NADPH. Produkty: ATP, NADPH i tlen.
 
-FAZA NIEZALEŻNA OD ŚWIATŁA (cykl Calvina)
-Zachodzi w stromie. Wykorzystuje ATP i NADPH (siłę asymilacyjną) z fazy jasnej do związania CO2 i przekształcenia go w glukozę.
+CHEMIOSMOZA W CHLOROPLAŚCIE
+Podczas przepływu elektronów przez łańcuch przenośników w błonie tylakoidu protony są przepompowywane ze stromy do wnętrza tylakoidu, a kolejne protony uwalniają się tam podczas fotolizy wody. Powstaje różnica stężeń protonów (gradient protonowy) między wnętrzem tylakoidu a stromą. Protony wracają do stromy przez kanał w enzymie — syntazie ATP — a energia tego przepływu zostaje wykorzystana do syntezy ATP z ADP i reszty fosforanowej. Ponieważ proces ten napędza energia światła, nazywamy go fotofosforylacją.
+
+FAZA NIEZALEŻNA OD ŚWIATŁA (CYKL CALVINA)
+Zachodzi w stromie chloroplastu i wykorzystuje siłę asymilacyjną, czyli ATP i NADPH wytworzone w fazie zależnej od światła. Przebiega w trzech etapach. Karboksylacja: enzym RuBisCO przyłącza CO2 do pięciowęglowego związku — rybulozo-1,5-bisfosforanu (RuBP); powstały nietrwały związek rozpada się na dwie cząsteczki trójwęglowego kwasu 3-fosfoglicerynowego. Redukcja: z wykorzystaniem ATP i NADPH kwas 3-fosfoglicerynowy zostaje zredukowany do aldehydu 3-fosfoglicerynowego — cukru trójwęglowego, będącego bezpośrednim produktem fotosyntezy. Regeneracja: większość cząsteczek aldehydu 3-fosfoglicerynowego, przy nakładzie ATP, zostaje przekształcona z powrotem w RuBP, dzięki czemu cykl może trwać; pozostałe służą do syntezy glukozy, sacharozy, skrobi i innych związków organicznych. Do wytworzenia jednej cząsteczki glukozy potrzeba sześciu obrotów cyklu, czyli związania sześciu cząsteczek CO2.
 
 RÓWNANIE SUMARYCZNE FOTOSYNTEZY
 6CO2 + 6H2O + energia świetlna → C6H12O6 + 6O2
 ''',
             flashcards: [
               Flashcard(id: 'f_k1_17', front: 'Jakie produkty daje faza jasna fotosyntezy?', back: 'ATP, NADPH i tlen (z rozkładu wody).'),
-              Flashcard(id: 'f_k1_18', front: 'Gdzie zachodzi cykl Calvina?', back: 'W stromie chloroplastu (faza ciemna fotosyntezy).'),
+              Flashcard(id: 'f_k1_18', front: 'Gdzie zachodzi cykl Calvina?', back: 'W stromie chloroplastu (faza niezależna od światła).'),
               Flashcard(id: 'f_k1_19', front: 'Podaj sumaryczne równanie fotosyntezy.', back: '6CO2 + 6H2O + energia świetlna → C6H12O6 + 6O2'),
+              Flashcard(id: 'f_k1_fot_1', front: 'Jaką rolę pełnią fotosystemy?', back: 'Wychwytują energię świetlną i przekazują ją do centrum reakcji, z którego wybijane są elektrony.'),
+              Flashcard(id: 'f_k1_fot_2', front: 'Jak powstaje gradient protonowy w chloroplaście?', back: 'Protony są przepompowywane ze stromy do wnętrza tylakoidu podczas transportu elektronów, a dodatkowe uwalniają się przy fotolizie wody.'),
+              Flashcard(id: 'f_k1_fot_3', front: 'Jak powstaje ATP w chloroplaście?', back: 'Protony wracają z wnętrza tylakoidu do stromy przez syntazę ATP, a energia tego przepływu napędza syntezę ATP.'),
+              Flashcard(id: 'f_k1_fot_4', front: 'Wymień etapy cyklu Calvina.', back: 'Karboksylacja, redukcja i regeneracja RuBP.'),
+              Flashcard(id: 'f_k1_fot_5', front: 'Jaką reakcję katalizuje enzym RuBisCO?', back: 'Przyłączenie CO2 do rybulozo-1,5-bisfosforanu (RuBP).'),
+              Flashcard(id: 'f_k1_fot_6', front: 'Co jest bezpośrednim produktem cyklu Calvina?', back: 'Aldehyd 3-fosfoglicerynowy — cukier trójwęglowy, z którego powstaje m.in. glukoza.'),
+              Flashcard(id: 'f_k1_fot_7', front: 'Do czego w cyklu Calvina zużywane są ATP i NADPH?', back: 'Do redukcji kwasu 3-fosfoglicerynowego; ATP także do regeneracji RuBP.'),
+              Flashcard(id: 'f_k1_fot_8', front: 'Ile obrotów cyklu Calvina potrzeba do wytworzenia jednej cząsteczki glukozy?', back: 'Sześć — tyle, ile wiązanych cząsteczek CO2.'),
             ],
             questions: [
               QuizQuestion(id: 'q_k1_58', question: 'Faza jasna fotosyntezy zachodzi w:', options: ['Stromie chloroplastu', 'Błonach tylakoidów', 'Mitochondrium', 'Cytoplazmie'], correctIndex: 1, explanation: 'Reakcje fazy jasnej zachodzą w błonach tylakoidów.'),
@@ -377,6 +499,14 @@ Glukoneogeneza — synteza glukozy z substratów niecukrowych (mleczan, aminokwa
               Flashcard(id: 'f_k1_15', front: 'Gdzie zachodzi cykl Krebsa?', back: 'W matriks mitochondrium.'),
               Flashcard(id: 'f_k1_16', front: 'Jaki jest produkt fermentacji mleczanowej?', back: 'Kwas mlekowy.'),
               Flashcard(id: 'f_k1_20', front: 'Ile ATP powstaje łącznie w pełnym oddychaniu tlenowym glukozy?', back: 'Ok. 36-38 ATP.'),
+              Flashcard(id: 'f_k1_odd_1', front: 'Jakie są etapy oddychania tlenowego i gdzie zachodzą?', back: 'Glikoliza — w cytoplazmie; reakcja pomostowa i cykl Krebsa — w matriks mitochondrium; łańcuch oddechowy — na błonie wewnętrznej mitochondrium.'),
+              Flashcard(id: 'f_k1_odd_2', front: 'Co powstaje w reakcji pomostowej?', back: 'Acetylo-CoA, CO2 i NADH.'),
+              Flashcard(id: 'f_k1_odd_3', front: 'Czym jest fosforylacja substratowa?', back: 'Wytworzeniem ATP przez bezpośrednie przeniesienie grupy fosforanowej na ADP — zachodzi w glikolizie i cyklu Krebsa.'),
+              Flashcard(id: 'f_k1_odd_4', front: 'Jaką rolę pełni tlen w oddychaniu komórkowym?', back: 'Jest końcowym akceptorem elektronów w łańcuchu oddechowym.'),
+              Flashcard(id: 'f_k1_odd_5', front: 'Na czym polega chemiosmoza w mitochondrium?', back: 'Protony przepompowane do przestrzeni międzybłonowej wracają do matriks przez syntazę ATP, napędzając syntezę ATP.'),
+              Flashcard(id: 'f_k1_odd_6', front: 'Jakie znaczenie ma fermentacja dla komórki?', back: 'Regeneruje NAD+, dzięki czemu glikoliza może zachodzić bez tlenu.'),
+              Flashcard(id: 'f_k1_odd_7', front: 'Czym różni się fermentacja alkoholowa od mleczanowej?', back: 'Alkoholowa (drożdże) daje etanol i CO2, a mleczanowa (mięśnie, bakterie) — kwas mlekowy.'),
+              Flashcard(id: 'f_k1_odd_8', front: 'Czym różni się glukoneogeneza od glikogenolizy?', back: 'Glukoneogeneza to synteza glukozy z substratów niecukrowych, a glikogenoliza — rozkład glikogenu do glukozy.'),
             ],
             questions: [
               QuizQuestion(id: 'q_k1_63', question: 'Glikoliza zachodzi w:', options: ['Mitochondrium', 'Cytoplazmie', 'Chloroplaście', 'Jądrze komórkowym'], correctIndex: 1, explanation: 'Glikoliza to proces cytoplazmatyczny, niewymagający tlenu.'),
@@ -404,10 +534,21 @@ REPLIKACJA DNA
 Replikacja to powielanie DNA, zachodzące w fazie S cyklu komórkowego. Helikaza rozplata podwójną helisę, rozrywając wiązania wodorowe między niciami; prymaza syntetyzuje starter RNA; polimeraza DNA dobudowuje nową nić komplementarną do nici matrycowej; ligaza łączy fragmenty Okazaki na nici opóźnionej w ciągłą nić. Replikacja jest semikonserwatywna — każda z dwóch powstałych cząsteczek DNA zawiera jedną nić starą i jedną nowo zsyntetyzowaną.
 
 CYKL KOMÓRKOWY
-Interfaza: faza G1 (wzrost komórki, ilość DNA = 2n), faza S (replikacja DNA, ilość DNA rośnie do 4n), faza G2 (przygotowanie do podziału, ilość DNA nadal 4n). Faza M (mitotyczna): podział jądra i cytoplazmy, po którym ilość DNA w komórkach potomnych wraca do 2n.
+Liczbę zestawów chromosomów oznacza się literą n, a ilość DNA literą c — komórka diploidalna przed replikacją ma zapis 2n 2c. Interfaza: faza G1 (wzrost komórki i synteza białek, 2n 2c), faza S (replikacja DNA — ilość DNA podwaja się, a każdy chromosom składa się teraz z dwóch chromatyd siostrzanych; liczba chromosomów się nie zmienia, więc zapis to 2n 4c), faza G2 (przygotowanie do podziału, 2n 4c). Faza M (mitotyczna): podział jądra (kariokineza) i cytoplazmy (cytokineza), po którym każda komórka potomna ma ponownie 2n 2c.
 Replikacja DNA musi poprzedzać podział komórki, ponieważ tylko wtedy każda komórka potomna może otrzymać pełny, identyczny zestaw materiału genetycznego.
 ''',
-            flashcards: [],
+            flashcards: [
+              Flashcard(id: 'f_k1_dna_1', front: 'Czym jest nukleosom?', back: 'Odcinkiem DNA nawiniętym na rdzeń z ośmiu cząsteczek histonów — podstawową jednostką chromatyny.'),
+              Flashcard(id: 'f_k1_dna_2', front: 'Jaką rolę w replikacji pełni helikaza?', back: 'Rozplata podwójną helisę DNA, rozrywając wiązania wodorowe między niciami.'),
+              Flashcard(id: 'f_k1_dna_3', front: 'Jaką rolę w replikacji pełni prymaza?', back: 'Syntetyzuje krótki starter RNA, od którego polimeraza DNA rozpoczyna syntezę.'),
+              Flashcard(id: 'f_k1_dna_4', front: 'Jaką rolę w replikacji pełni polimeraza DNA?', back: 'Dobudowuje nową nić DNA komplementarną do nici matrycowej.'),
+              Flashcard(id: 'f_k1_dna_5', front: 'Jaką rolę w replikacji pełni ligaza?', back: 'Łączy fragmenty Okazaki w ciągłą nić.'),
+              Flashcard(id: 'f_k1_dna_6', front: 'Co oznacza, że replikacja DNA jest semikonserwatywna?', back: 'Każda cząsteczka potomna zawiera jedną nić starą i jedną nowo zsyntetyzowaną.'),
+              Flashcard(id: 'f_k1_dna_7', front: 'Co oznaczają symbole n i c?', back: 'n — liczbę zestawów chromosomów, c — ilość DNA w komórce.'),
+              Flashcard(id: 'f_k1_dna_8', front: 'Jak zmienia się ilość DNA w cyklu komórkowym komórki diploidalnej?', back: 'W G1 jest 2n 2c, po fazie S i w G2 — 2n 4c, a po podziale każda komórka potomna ma znowu 2n 2c.'),
+              Flashcard(id: 'f_k1_dna_9', front: 'W której fazie cyklu komórkowego zachodzi replikacja DNA?', back: 'W fazie S interfazy.'),
+              Flashcard(id: 'f_k1_dna_10', front: 'Dlaczego replikacja musi poprzedzać podział komórki?', back: 'Aby każda komórka potomna otrzymała pełny, identyczny zestaw materiału genetycznego.'),
+            ],
             questions: [
               QuizQuestion(id: 'q_k1_69', question: 'Enzym rozplatający podwójną helisę DNA podczas replikacji to:', options: ['Polimeraza DNA', 'Helikaza', 'Ligaza', 'Prymaza'], correctIndex: 1, explanation: 'Helikaza rozrywa wiązania wodorowe między niciami DNA.'),
               QuizQuestion(id: 'q_k1_70', question: 'Fragmenty Okazaki są łączone przez:', options: ['Helikazę', 'Prymazę', 'Ligazę', 'Polimerazę RNA'], correctIndex: 2, explanation: 'Ligaza zszywa fragmenty Okazaki w ciągłą nić.'),
@@ -424,7 +565,10 @@ MITOZA
 Podział jądra prowadzący do powstania dwóch identycznych komórek potomnych (2n → 2n). Etapy: profaza (kondensacja chromosomów, zanik otoczki jądrowej, formowanie wrzeciona), metafaza (chromosomy w płaszczyźnie równikowej), anafaza (chromatydy siostrzane rozchodzą się do biegunów), telofaza (dekondensacja, odtworzenie otoczek jądrowych, cytokineza). Znaczenie: wzrost i regeneracja tkanek, rozmnażanie bezpłciowe, zachowanie liczby chromosomów w komórkach somatycznych.
 
 MEJOZA
-Podział redukcyjny prowadzący do powstania czterech komórek z połową liczby chromosomów (2n → n) — podstawa produkcji gamet. Mejoza I — podział redukcyjny, rozdzielenie chromosomów homologicznych, w profazie I zachodzi crossing-over. Mejoza II — podział ekwacyjny (jak mitoza), rozdzielenie chromatyd siostrzanych. Znaczenie: utrzymanie stałej liczby chromosomów gatunku oraz generowanie zmienności genetycznej.
+Mejoza to podział redukcyjny, w wyniku którego z jednej komórki diploidalnej powstają cztery komórki haploidalne (2n → n), różniące się genetycznie. U zwierząt prowadzi do powstania gamet, a u roślin — zarodników. Poprzedza ją replikacja DNA, a składa się z dwóch następujących po sobie podziałów.
+Mejoza I (podział redukcyjny): w profazie I chromosomy kondensują się, chromosomy homologiczne łączą się w pary (biwalenty) i zachodzi między nimi crossing-over, zanika otoczka jądrowa i tworzy się wrzeciono podziałowe. W metafazie I pary chromosomów homologicznych ustawiają się w płaszczyźnie równikowej komórki. W anafazie I do przeciwległych biegunów rozchodzą się całe chromosomy homologiczne, z których każdy nadal składa się z dwóch chromatyd — o tym, który chromosom z pary trafi do którego bieguna, decyduje przypadek. W telofazie I powstają dwie komórki o haploidalnej liczbie chromosomów (n 2c).
+Mejoza II (podział ekwacyjny, przebiegający podobnie jak mitoza, lecz bez wcześniejszej replikacji DNA): w profazie II ponownie tworzy się wrzeciono, w metafazie II chromosomy ustawiają się w płaszczyźnie równikowej, w anafazie II do biegunów rozchodzą się chromatydy siostrzane, a w telofazie II powstają cztery komórki haploidalne (n c).
+Znaczenie mejozy: zapewnia stałą liczbę chromosomów w kolejnych pokoleniach organizmów rozmnażających się płciowo (haploidalne gamety łączą się w diploidalną zygotę) i jest źródłem zmienności genetycznej.
 
 ŹRÓDŁA ZMIENNOŚCI REKOMBINACYJNEJ
 Crossing-over — wymiana odcinków chromatyd między chromosomami homologicznymi w profazie I mejozy.
@@ -434,7 +578,20 @@ Oba mechanizmy są głównym źródłem zmienności rekombinacyjnej, zwiększaj�
 APOPTOZA
 Zaprogramowana, kontrolowana śmierć komórki, przebiegająca bez uszkadzania sąsiednich komórek. Warunkuje prawidłowy rozwój (np. zanik błon międzypalcowych) i funkcjonowanie organizmów wielokomórkowych (eliminacja komórek zainfekowanych lub nowotworowych).
 ''',
-            flashcards: [],
+            flashcards: [
+              Flashcard(id: 'f_k1_mit_1', front: 'Wymień kolejne etapy mitozy.', back: 'Profaza, metafaza, anafaza i telofaza.'),
+              Flashcard(id: 'f_k1_mit_2', front: 'Co dzieje się w metafazie mitozy?', back: 'Chromosomy ustawiają się w płaszczyźnie równikowej komórki.'),
+              Flashcard(id: 'f_k1_mit_3', front: 'Co rozchodzi się do biegunów komórki w anafazie mitozy?', back: 'Chromatydy siostrzane.'),
+              Flashcard(id: 'f_k1_mit_4', front: 'Jakie znaczenie ma mitoza?', back: 'Umożliwia wzrost i regenerację tkanek, rozmnażanie bezpłciowe i zachowanie liczby chromosomów w komórkach somatycznych.'),
+              Flashcard(id: 'f_k1_mit_5', front: 'Ile komórek i o jakiej ploidalności powstaje w mejozie?', back: 'Cztery komórki haploidalne, różniące się genetycznie.'),
+              Flashcard(id: 'f_k1_mit_6', front: 'Co dzieje się w profazie I mejozy?', back: 'Chromosomy homologiczne łączą się w pary i zachodzi między nimi crossing-over.'),
+              Flashcard(id: 'f_k1_mit_7', front: 'Czym różni się anafaza I mejozy od anafazy mitozy?', back: 'W anafazie I rozchodzą się chromosomy homologiczne, a w anafazie mitozy — chromatydy siostrzane.'),
+              Flashcard(id: 'f_k1_mit_8', front: 'Jaki jest zapis liczby chromosomów i ilości DNA po mejozie I i po mejozie II?', back: 'Po mejozie I: n 2c; po mejozie II: n c.'),
+              Flashcard(id: 'f_k1_mit_9', front: 'Dlaczego mejozę I nazywa się podziałem redukcyjnym?', back: 'Liczba chromosomów zmniejsza się w niej z 2n do n.'),
+              Flashcard(id: 'f_k1_mit_10', front: 'Czym jest crossing-over i kiedy zachodzi?', back: 'Wymianą odcinków chromatyd między chromosomami homologicznymi w profazie I mejozy.'),
+              Flashcard(id: 'f_k1_mit_11', front: 'Na czym polega niezależna segregacja chromosomów?', back: 'Na losowym rozchodzeniu się chromosomów homologicznych do biegunów komórki w mejozie I.'),
+              Flashcard(id: 'f_k1_mit_12', front: 'Czym jest apoptoza i jakie ma znaczenie?', back: 'Zaprogramowaną śmiercią komórki — umożliwia np. zanik błon międzypalcowych w rozwoju i usuwanie komórek nowotworowych.'),
+            ],
             questions: [
               QuizQuestion(id: 'q_k1_74', question: 'W wyniku mitozy powstają komórki:', options: ['Haploidalne, różne genetycznie', 'Diploidalne, identyczne genetycznie', '4 komórki haploidalne', 'Wyłącznie gamety'], correctIndex: 1, explanation: 'Mitoza daje dwie identyczne genetycznie komórki diploidalne.'),
               QuizQuestion(id: 'q_k1_75', question: 'Crossing-over zachodzi w:', options: ['Profazie mitozy', 'Profazie I mejozy', 'Telofazie mitozy', 'Anafazie II mejozy'], correctIndex: 1, explanation: 'Crossing-over zachodzi między chromosomami homologicznymi w profazie I mejozy.'),
@@ -466,7 +623,15 @@ Współczesna klasyfikacja dąży do wyodrębniania wyłącznie grup monofiletyc
 HIERARCHIA RANG TAKSONOMICZNYCH
 Podstawowe rangi taksonomiczne, uporządkowane hierarchicznie od najszerszej do najwęższej: domena → królestwo → typ → gromada/klasa → rząd → rodzina → rodzaj → gatunek.
 ''',
-            flashcards: [],
+            flashcards: [
+              Flashcard(id: 'f_k1_kla_1', front: 'Czym jest kladogram?', back: 'Drzewiastym schematem pokrewieństwa ewolucyjnego, w którym węzły reprezentują wspólnych przodków.'),
+              Flashcard(id: 'f_k1_kla_2', front: 'Jak na kladogramie odczytać, które grupy są bliżej spokrewnione?', back: 'Po tym, jak blisko znajduje się ich wspólny węzeł — nie po kolejności gatunków na końcach gałęzi.'),
+              Flashcard(id: 'f_k1_kla_3', front: 'Czym jest grupa monofiletyczna (klad)?', back: 'Grupą obejmującą wspólnego przodka i wszystkich jego potomków.'),
+              Flashcard(id: 'f_k1_kla_4', front: 'Czym jest grupa parafiletyczna? Podaj przykład.', back: 'Grupą obejmującą przodka i tylko część jego potomków — np. tradycyjne gady bez ptaków.'),
+              Flashcard(id: 'f_k1_kla_5', front: 'Czym jest grupa polifiletyczna?', back: 'Grupą organizmów o podobnych cechach wynikających ze zbieżnej ewolucji, bez wspólnego przodka należącego do tej grupy.'),
+              Flashcard(id: 'f_k1_kla_6', front: 'Dlaczego współczesna klasyfikacja wyróżnia tylko grupy monofiletyczne?', back: 'Tylko one rzetelnie odzwierciedlają filogenezę organizmów.'),
+              Flashcard(id: 'f_k1_kla_7', front: 'Wymień rangi taksonomiczne od najszerszej do najwęższej.', back: 'Domena, królestwo, typ, gromada (klasa), rząd, rodzina, rodzaj, gatunek.'),
+            ],
             questions: [
               QuizQuestion(id: 'q_k1_80', question: 'Grupa monofiletyczna obejmuje:', options: ['Tylko część potomków wspólnego przodka', 'Wspólnego przodka i wszystkich jego potomków', 'Organizmy o podobnych cechach bez wspólnego przodka', 'Wyłącznie gatunki wymarłe'], correctIndex: 1, explanation: 'Grupa monofiletyczna to przodek wraz ze wszystkimi jego potomkami.'),
               QuizQuestion(id: 'q_k1_81', question: 'Tradycyjne "gady" (bez ptaków) są przykładem grupy:', options: ['Monofiletycznej', 'Parafiletycznej', 'Polifiletycznej', 'Niehierarchicznej'], correctIndex: 1, explanation: 'Wykluczenie ptaków (potomków gadów) z grupy czyni ją parafiletyczną.'),
@@ -485,302 +650,22 @@ Podstawowe rangi taksonomiczne, uporządkowane hierarchicznie od najszerszej do 
     chapters: [
       // Działy VI-X i XII podstawy programowej — patrz biology_k2.dart
       ...klasa2Chapters,
-      Chapter(
-        id: 'k2_genetyka',
-        name: 'Genetyka',
-        topics: [
-          Topic(
-            id: 'k2_genetyka_podstawy',
-            name: 'Podstawy genetyki klasycznej',
-            theory: '''
-Genetyka bada dziedziczenie cech.
-
-PODSTAWOWE POJĘCIA
-Gen — odcinek DNA kodujący cechę. Allel — wariant genu. Genotyp — zestaw alleli organizmu. Fenotyp — zewnętrzny, obserwowalny wyraz genotypu. Homozygota ma identyczne allele danego genu, heterozygota — różne.
-
-I PRAWO MENDLA (zasada czystości gamet)
-Każdy organizm posiada parę alleli danej cechy, a gamety otrzymują tylko jeden allel z pary. Krzyżówka jednogenowa Aa x Aa daje w F2 rozszczepienie fenotypowe 3:1 przy pełnej dominacji.
-
-II PRAWO MENDLA (zasada niezależnej segregacji)
-Allele różnych genów (na różnych chromosomach) dziedziczą się niezależnie od siebie. Krzyżówka dwugenowa AaBb x AaBb daje rozszczepienie fenotypowe 9:3:3:1.
-
-DOMINACJA NIEPEŁNA I KODOMINACJA
-Przy dominacji niepełnej heterozygota ma fenotyp pośredni (np. kwiaty różowe z czerwonych i białych). Przy kodominacji oba allele ujawniają się jednocześnie (np. grupy krwi AB0 — allel IA i IB są kodominujące wobec siebie, a i0 recesywny).
-
-DZIEDZICZENIE SPRZĘŻONE Z PŁCIĄ
-Geny na chromosomie X (np. daltonizm, hemofilia) dziedziczą się inaczej u obu płci — mężczyźni (XY) ujawniają cechę recesywną przy jednej kopii allelu.
-
-MUTACJE
-Zmiany w materiale genetycznym. Mogą być genowe (punktowe), chromosomowe (zmiana struktury chromosomu) lub genomowe (zmiana liczby chromosomów, np. trisomia 21 — zespół Downa).
-''',
-            flashcards: [
-              Flashcard(id: 'f_k2_1', front: 'Co to jest genotyp?', back: 'Zestaw wszystkich alleli danego organizmu.'),
-              Flashcard(id: 'f_k2_2', front: 'Jakie jest rozszczepienie fenotypowe w F2 dla krzyżówki Aa x Aa?', back: '3:1 przy pełnej dominacji.'),
-              Flashcard(id: 'f_k2_3', front: 'Jakie rozszczepienie fenotypowe daje krzyżówka AaBb x AaBb?', back: '9:3:3:1 (II prawo Mendla).'),
-              Flashcard(id: 'f_k2_4', front: 'Czym jest kodominacja?', back: 'Zjawiskiem, gdy oba allele ujawniają się jednocześnie w fenotypie (np. grupa krwi AB).'),
-              Flashcard(id: 'f_k2_5', front: 'Dlaczego mężczyźni częściej chorują na daltonizm?', back: 'Gen jest na chromosomie X, a mężczyźni mają tylko jedną kopię (XY), więc allel recesywny się ujawnia.'),
-              Flashcard(id: 'f_k2_6', front: 'Co to jest trisomia 21?', back: 'Mutacja genomowa — obecność dodatkowego chromosomu 21, powodująca zespół Downa.'),
-              Flashcard(id: 'f_k2_7', front: 'Czym różni się homozygota od heterozygoty?', back: 'Homozygota ma dwa identyczne allele danego genu, heterozygota — dwa różne.'),
-              Flashcard(id: 'f_k2_8', front: 'Na czym polega dominacja niepełna?', back: 'Heterozygota ma fenotyp pośredni między dwoma homozygotami.'),
-            ],
-            questions: [
-              QuizQuestion(id: 'q_k2_1', question: 'Krzyżówka Aa x Aa (pełna dominacja) daje w F2 rozszczepienie fenotypowe:', options: ['1:1', '3:1', '9:3:3:1', '1:2:1'], correctIndex: 1, explanation: 'Zgodnie z I prawem Mendla otrzymujemy 3:1.'),
-              QuizQuestion(id: 'q_k2_2', question: 'Grupy krwi AB0 są przykładem:', options: ['Dominacji niepełnej', 'Kodominacji', 'Sprzężenia z płcią', 'Mutacji genomowej'], correctIndex: 1, explanation: 'Allele IA i IB są względem siebie kodominujące.'),
-              QuizQuestion(id: 'q_k2_3', question: 'Zespół Downa jest wynikiem:', options: ['Mutacji genowej', 'Mutacji chromosomowej strukturalnej', 'Mutacji genomowej (trisomia 21)', 'Dziedziczenia sprzężonego z płcią'], correctIndex: 2, explanation: 'To dodatkowy chromosom 21 — mutacja genomowa liczbowa.'),
-              QuizQuestion(id: 'q_k2_4', question: 'II prawo Mendla dotyczy:', options: ['Czystości gamet', 'Niezależnej segregacji genów', 'Sprzężenia genów', 'Kodominacji'], correctIndex: 1, explanation: 'Mówi o niezależnym dziedziczeniu alleli różnych genów.'),
-              QuizQuestion(id: 'q_k2_5', question: 'Daltonizm jest cechą:', options: ['Autosomalną dominującą', 'Sprzężoną z chromosomem X, recesywną', 'Mitochondrialną', 'Kodominującą'], correctIndex: 1, explanation: 'Gen daltonizmu leży na chromosomie X i jest recesywny.'),
-              QuizQuestion(id: 'q_k2_6', question: 'Allel to:', options: ['Odcinek DNA kodujący białko', 'Wariant genu', 'Para chromosomów', 'Zestaw genotypów populacji'], correctIndex: 1, explanation: 'Allel to jeden z wariantów danego genu.'),
-            ],
-          ),
-        ],
-      ),
     ],
   ),
   ClassData(
     level: 3,
     label: 'Kl. 3',
     chapters: [
-      Chapter(
-        id: 'k3_fizjologia',
-        name: 'Fizjologia człowieka',
-        topics: [
-          Topic(
-            id: 'k3_fizjologia_krazenie',
-            name: 'Układ krążenia i odpornościowy',
-            theory: '''
-UKŁAD KRĄŻENIA
-Serce człowieka ma 4 jamy (2 przedsionki, 2 komory) i pracuje jako podwójna pompa: krążenie płucne (małe) — krew z prawej komory do płuc po natlenienie, oraz krążenie duże (ustrojowe) — krew z lewej komory do całego ciała.
-
-NACZYNIA KRWIONOŚNE
-Tętnice prowadzą krew od serca (grube, elastyczne ściany, wysokie ciśnienie), żyły prowadzą krew do serca (mają zastawki zapobiegające cofaniu krwi), naczynia włosowate umożliwiają wymianę gazową i substancji odżywczych z tkankami.
-
-SKŁAD KRWI
-Osocze (ok. 55%) transportuje składniki odżywcze, hormony i produkty przemiany materii. Erytrocyty (krwinki czerwone) transportują tlen dzięki hemoglobinie. Leukocyty (krwinki białe) odpowiadają za odporność. Trombocyty (płytki krwi) uczestniczą w krzepnięciu.
-
-UKŁAD ODPORNOŚCIOWY
-Odporność nieswoista (wrodzona) — pierwsza linia obrony: skóra, śluzówki, fagocyty, gorączka, stan zapalny. Działa szybko i niespecyficznie.
-
-Odporność swoista (nabyta) — limfocyty B produkują przeciwciała (odporność humoralna), limfocyty T niszczą komórki zakażone lub nowotworowe (odporność komórkowa). Powstają komórki pamięci immunologicznej, dzięki którym organizm szybciej reaguje na powtórny kontakt z patogenem.
-
-SZCZEPIONKI
-Zawierają antygeny osłabionego/zabitego patogenu, pobudzają wytworzenie odporności czynnej i komórek pamięci bez wywoływania choroby.
-''',
-            flashcards: [
-              Flashcard(id: 'f_k3_1', front: 'Ile jam ma serce człowieka?', back: '4 jamy — 2 przedsionki i 2 komory.'),
-              Flashcard(id: 'f_k3_2', front: 'Czym różnią się tętnice od żył?', back: 'Tętnice prowadzą krew od serca (grube ściany, wysokie ciśnienie), żyły do serca (mają zastawki).'),
-              Flashcard(id: 'f_k3_3', front: 'Jaka jest funkcja erytrocytów?', back: 'Transport tlenu dzięki hemoglobinie.'),
-              Flashcard(id: 'f_k3_4', front: 'Co produkują limfocyty B?', back: 'Przeciwciała (odporność humoralna).'),
-              Flashcard(id: 'f_k3_5', front: 'Jaka jest rola limfocytów T?', back: 'Niszczą komórki zakażone lub nowotworowe (odporność komórkowa).'),
-              Flashcard(id: 'f_k3_6', front: 'Co to jest odporność nieswoista?', back: 'Wrodzona, pierwsza linia obrony — skóra, śluzówki, fagocyty, stan zapalny — działa szybko i niespecyficznie.'),
-              Flashcard(id: 'f_k3_7', front: 'Jak działają szczepionki?', back: 'Zawierają antygeny osłabionego/zabitego patogenu i pobudzają wytworzenie komórek pamięci bez wywołania choroby.'),
-            ],
-            questions: [
-              QuizQuestion(id: 'q_k3_1', question: 'Krążenie płucne (małe) prowadzi krew z:', options: ['Lewej komory do ciała', 'Prawej komory do płuc', 'Prawego przedsionka do lewego', 'Płuc do lewej komory'], correctIndex: 1, explanation: 'Krążenie małe biegnie z prawej komory przez płuca, gdzie krew się natlenia.'),
-              QuizQuestion(id: 'q_k3_2', question: 'Za krzepnięcie krwi odpowiadają:', options: ['Erytrocyty', 'Leukocyty', 'Trombocyty', 'Osocze'], correctIndex: 2, explanation: 'Trombocyty (płytki krwi) uczestniczą w procesie krzepnięcia.'),
-              QuizQuestion(id: 'q_k3_3', question: 'Odporność humoralna polega na działaniu:', options: ['Fagocytów', 'Przeciwciał produkowanych przez limfocyty B', 'Limfocytów T cytotoksycznych', 'Skóry i śluzówek'], correctIndex: 1, explanation: 'Odporność humoralna opiera się na przeciwciałach produkowanych przez limfocyty B.'),
-              QuizQuestion(id: 'q_k3_4', question: 'Zastawki żylne zapobiegają:', options: ['Krzepnięciu krwi', 'Cofaniu się krwi', 'Wymianie gazowej', 'Produkcji hemoglobiny'], correctIndex: 1, explanation: 'Zastawki w żyłach zapobiegają cofaniu się krwi, zwłaszcza w kończynach.'),
-              QuizQuestion(id: 'q_k3_5', question: 'Komórki pamięci immunologicznej powstają w wyniku:', options: ['Odporności nieswoistej', 'Odporności swoistej', 'Krzepnięcia krwi', 'Fagocytozy'], correctIndex: 1, explanation: 'To efekt odporności swoistej (nabytej) — umożliwiają szybszą reakcję przy ponownym kontakcie z patogenem.'),
-            ],
-          ),
-        ],
-      ),
-      Chapter(
-        id: 'k3_ewolucja',
-        name: 'Ewolucjonizm',
-        topics: [
-          Topic(
-            id: 'k3_ewolucja_dowody',
-            name: 'Dowody i mechanizmy ewolucji',
-            theory: '''
-TEORIA DOBORU NATURALNEGO (Darwin)
-Osobniki lepiej przystosowane do środowiska mają większe szanse przeżycia i wydania potomstwa (dobór naturalny). Zmienność w populacji jest surowcem, na którym działa dobór.
-
-ŹRÓDŁA ZMIENNOŚCI GENETYCZNEJ
-Mutacje, rekombinacja genetyczna podczas mejozy (crossing-over, niezależna segregacja chromosomów) oraz przepływ genów między populacjami.
-
-DOWODY EWOLUCJI
-- Anatomiczne: narządy homologiczne (ten sam plan budowy, różna funkcja, np. kończyna przednia kręgowców) i analogiczne (podobna funkcja, różne pochodzenie, np. skrzydło ptaka i owada); narządy szczątkowe (wyrostek robaczkowy).
-- Embriologiczne: podobieństwo zarodków kręgowców na wczesnych etapach rozwoju.
-- Paleontologiczne: skamieniałości i formy przejściowe (np. Archaeopteryx).
-- Biochemiczne i molekularne: podobieństwo sekwencji DNA i białek między gatunkami spokrewnionymi.
-
-MECHANIZMY MIKROEWOLUCJI
-Dryf genetyczny — losowe zmiany częstości alleli, silniejszy w małych populacjach (efekt założyciela, efekt wąskiego gardła). Dobór naturalny — kierunkowy, stabilizujący lub różnicujący.
-
-SPECJACJA
-Powstawanie nowych gatunków, najczęściej w wyniku izolacji geograficznej (specjacja allopatryczna) prowadzącej do izolacji rozrodczej.
-''',
-            flashcards: [
-              Flashcard(id: 'f_k3_8', front: 'Na czym polega dobór naturalny?', back: 'Osobniki lepiej przystosowane mają większe szanse przeżycia i wydania potomstwa.'),
-              Flashcard(id: 'f_k3_9', front: 'Podaj przykład narządów homologicznych.', back: 'Kończyna przednia kręgowców — ten sam plan budowy, różne funkcje.'),
-              Flashcard(id: 'f_k3_10', front: 'Czym są narządy analogiczne?', back: 'Narządy o podobnej funkcji, ale różnym pochodzeniu ewolucyjnym, np. skrzydło ptaka i owada.'),
-              Flashcard(id: 'f_k3_11', front: 'Co to jest dryf genetyczny?', back: 'Losowe zmiany częstości alleli w populacji, silniejsze w małych populacjach.'),
-              Flashcard(id: 'f_k3_12', front: 'Co to jest specjacja allopatryczna?', back: 'Powstawanie nowego gatunku w wyniku izolacji geograficznej.'),
-              Flashcard(id: 'f_k3_13', front: 'Podaj przykład formy przejściowej znanej z zapisu kopalnego.', back: 'Archaeopteryx — forma przejściowa między gadami a ptakami.'),
-            ],
-            questions: [
-              QuizQuestion(id: 'q_k3_6', question: 'Kończyna przednia człowieka i płetwa wieloryba to narządy:', options: ['Analogiczne', 'Homologiczne', 'Szczątkowe', 'Konwergentne'], correctIndex: 1, explanation: 'Mają ten sam plan budowy odziedziczony po wspólnym przodku — są homologiczne.'),
-              QuizQuestion(id: 'q_k3_7', question: 'Głównym źródłem nowej zmienności genetycznej są:', options: ['Mutacje', 'Dobór naturalny', 'Dryf genetyczny', 'Izolacja geograficzna'], correctIndex: 0, explanation: 'Mutacje są pierwotnym źródłem nowych alleli w populacji.'),
-              QuizQuestion(id: 'q_k3_8', question: 'Efekt wąskiego gardła jest przykładem:', options: ['Doboru naturalnego', 'Dryfu genetycznego', 'Specjacji sympatrycznej', 'Konwergencji'], correctIndex: 1, explanation: 'To losowa zmiana puli genowej po drastycznym zmniejszeniu liczebności populacji — forma dryfu genetycznego.'),
-              QuizQuestion(id: 'q_k3_9', question: 'Podobieństwo zarodków różnych kręgowców to dowód ewolucji typu:', options: ['Anatomicznego', 'Embriologicznego', 'Paleontologicznego', 'Biochemicznego'], correctIndex: 1, explanation: 'To dowód embriologiczny wskazujący na wspólne pochodzenie kręgowców.'),
-              QuizQuestion(id: 'q_k3_10', question: 'Specjacja allopatryczna zachodzi w wyniku:', options: ['Izolacji geograficznej', 'Krzyżowania w obrębie tej samej populacji', 'Mutacji punktowej', 'Konwergencji cech'], correctIndex: 0, explanation: 'Izolacja geograficzna prowadzi do niezależnej ewolucji i w konsekwencji do izolacji rozrodczej.'),
-            ],
-          ),
-        ],
-      ),
+      // Dział XI podstawy programowej — patrz biology_k3.dart
+      ...klasa3Chapters,
     ],
   ),
   ClassData(
     level: 4,
     label: 'Kl. 4',
     chapters: [
-      Chapter(
-        id: 'k4_ekologia',
-        name: 'Ekologia',
-        topics: [
-          Topic(
-            id: 'k4_ekologia_populacja',
-            name: 'Populacja i ekosystem',
-            theory: '''
-POPULACJA
-Zbiór osobników jednego gatunku żyjących na danym terenie w tym samym czasie i mogących się swobodnie krzyżować. Cechy populacji: liczebność, zagęszczenie, rozrodczość, śmiertelność, struktura wiekowa i przestrzenna (skupiskowa, równomierna, losowa).
-
-KRZYWE WZROSTU POPULACJI
-Wzrost wykładniczy (J-kształtny) — nieograniczone zasoby, brak czynników ograniczających. Wzrost logistyczny (S-kształtny) — populacja rośnie aż osiąga pojemność środowiska (K), przy której tempo wzrostu spada do zera.
-
-CZYNNIKI OGRANICZAJĄCE
-Zależne od zagęszczenia (konkurencja, drapieżnictwo, choroby, dostępność pokarmu) i niezależne od zagęszczenia (klimat, katastrofy naturalne).
-
-BIOCENOZA I EKOSYSTEM
-Biocenoza to wszystkie populacje różnych gatunków zamieszkujące dany obszar (biotop). Ekosystem = biocenoza + biotop (środowisko nieożywione) wraz z zachodzącymi między nimi zależnościami.
-
-ODDZIAŁYWANIA MIĘDZYGATUNKOWE
-Konkurencja (-,-), drapieżnictwo i pasożytnictwo (+,-), mutualizm/symbioza (+,+), komensalizm (+,0), amensalizm (-,0).
-
-NISZA EKOLOGICZNA
-Rola gatunku w ekosystemie — sposób wykorzystania zasobów środowiska (pokarm, przestrzeń, czas aktywności). Zasada Gausego mówi, że dwa gatunki o identycznej niszy nie mogą trwale współistnieć — dochodzi do wykluczenia konkurencyjnego.
-
-SUKCESJA EKOLOGICZNA
-Pierwotna — zaczyna się na terenie wcześniej niezasiedlonym (np. skała, wydma). Wtórna — zachodzi na terenie, gdzie biocenoza już istniała, ale została zniszczona (np. po pożarze). Prowadzi do stadium klimaksu — stabilnej zbiorowiska końcowego.
-''',
-            flashcards: [
-              Flashcard(id: 'f_k4_1', front: 'Co to jest populacja?', back: 'Zbiór osobników jednego gatunku żyjących na danym terenie i mogących się swobodnie krzyżować.'),
-              Flashcard(id: 'f_k4_2', front: 'Czym różni się wzrost wykładniczy od logistycznego?', back: 'Wykładniczy (J) zachodzi przy nieograniczonych zasobach, logistyczny (S) uwzględnia pojemność środowiska K.'),
-              Flashcard(id: 'f_k4_3', front: 'Co oznacza pojemność środowiska (K)?', back: 'Maksymalną liczebność populacji, jaką dane środowisko jest w stanie utrzymać.'),
-              Flashcard(id: 'f_k4_4', front: 'Czym jest ekosystem?', back: 'Biocenoza wraz z biotopem (środowiskiem nieożywionym) i zachodzącymi między nimi zależnościami.'),
-              Flashcard(id: 'f_k4_5', front: 'Podaj przykład oddziaływania +,+ między gatunkami.', back: 'Mutualizm (symbioza), np. mikoryza — grzyb i korzenie rośliny.'),
-              Flashcard(id: 'f_k4_6', front: 'Co mówi zasada Gausego?', back: 'Dwa gatunki o identycznej niszy ekologicznej nie mogą trwale współistnieć — jeden wypiera drugi.'),
-              Flashcard(id: 'f_k4_7', front: 'Czym różni się sukcesja pierwotna od wtórnej?', back: 'Pierwotna zaczyna się na terenie niezasiedlonym wcześniej, wtórna — tam gdzie biocenoza istniała, ale została zniszczona.'),
-              Flashcard(id: 'f_k4_8', front: 'Co to jest stadium klimaksu?', back: 'Stabilne, końcowe stadium sukcesji ekologicznej.'),
-            ],
-            questions: [
-              QuizQuestion(id: 'q_k4_1', question: 'Wzrost populacji ograniczony pojemnością środowiska nazywamy wzrostem:', options: ['Wykładniczym', 'Logistycznym', 'Liniowym', 'Losowym'], correctIndex: 1, explanation: 'Wzrost logistyczny (krzywa S) uwzględnia ograniczenia środowiska (K).'),
-              QuizQuestion(id: 'q_k4_2', question: 'Biocenoza wraz z biotopem tworzy:', options: ['Populację', 'Niszę ekologiczną', 'Ekosystem', 'Sukcesję'], correctIndex: 2, explanation: 'Ekosystem to biocenoza i biotop wraz z ich wzajemnymi zależnościami.'),
-              QuizQuestion(id: 'q_k4_3', question: 'Drapieżnictwo jest przykładem oddziaływania:', options: ['(+,+)', '(+,-)', '(0,0)', '(-,-)'], correctIndex: 1, explanation: 'Drapieżnik korzysta (+), ofiara traci (-).'),
-              QuizQuestion(id: 'q_k4_4', question: 'Sukcesja rozpoczynająca się na jałowej skale to sukcesja:', options: ['Wtórna', 'Pierwotna', 'Klimaksowa', 'Losowa'], correctIndex: 1, explanation: 'Sukcesja pierwotna zaczyna się na terenie wcześniej niezasiedlonym.'),
-              QuizQuestion(id: 'q_k4_5', question: 'Zasada Gausego dotyczy:', options: ['Wykluczenia konkurencyjnego', 'Mutualizmu', 'Komensalizmu', 'Sukcesji wtórnej'], correctIndex: 0, explanation: 'Mówi, że dwa gatunki o tej samej niszy nie mogą trwale współistnieć.'),
-              QuizQuestion(id: 'q_k4_6', question: 'Struktura przestrzenna populacji NIE może być:', options: ['Skupiskowa', 'Równomierna', 'Losowa', 'Logistyczna'], correctIndex: 3, explanation: '"Logistyczna" opisuje typ wzrostu, nie strukturę przestrzenną populacji.'),
-              QuizQuestion(id: 'q_k4_7', question: 'Konkurencja międzygatunkowa to oddziaływanie typu:', options: ['(+,+)', '(-,-)', '(+,0)', '(+,-)'], correctIndex: 1, explanation: 'Obie konkurujące populacje ponoszą koszty — (-,-).'),
-            ],
-          ),
-          Topic(
-            id: 'k4_ekologia_przeplyw',
-            name: 'Przepływ energii i krążenie materii',
-            theory: '''
-POZIOMY TROFICZNE
-Producenci (organizmy samożywne, np. rośliny — fotosynteza) → konsumenci I rzędu (roślinożercy) → konsumenci II rzędu (drapieżcy) → konsumenci wyższych rzędów. Reducenci (bakterie, grzyby) rozkładają materię organiczną do nieorganicznej.
-
-ŁAŃCUCH I SIEĆ POKARMOWA
-Łańcuch pokarmowy to liniowa sekwencja przepływu energii i materii. W naturze łańcuchy krzyżują się, tworząc sieci troficzne — bardziej stabilne niż pojedyncze łańcuchy.
-
-PRZEPŁYW ENERGII
-Energia przepływa przez ekosystem jednokierunkowo (od Słońca, przez producentów, do kolejnych konsumentów) i jest tracona głównie jako ciepło (oddychanie). Reguła 10% (piramida energii) — na kolejny poziom troficzny przechodzi średnio tylko ok. 10% energii z poziomu poprzedniego.
-
-PIRAMIDY EKOLOGICZNE
-Piramida liczebności, biomasy i energii — obrazują odpowiednio liczbę osobników, masę materii organicznej i ilość energii na kolejnych poziomach troficznych. Piramida energii zawsze zwężająca się ku górze.
-
-KRĄŻENIE MATERII (obiegi biogeochemiczne)
-W przeciwieństwie do energii, materia krąży w przyrodzie w obiegu zamkniętym.
-- Obieg węgla: fotosynteza wiąże CO2, oddychanie i spalanie paliw kopalnych je uwalniają.
-- Obieg azotu: wiązanie N2 przez bakterie symbiotyczne i wolno żyjące, nitryfikacja, denitryfikacja, asymilacja przez rośliny.
-- Obieg wody: parowanie, kondensacja, opady, spływ powierzchniowy.
-
-PRODUKCJA PIERWOTNA
-Produkcja pierwotna brutto (PPB) to całkowita ilość materii organicznej wytworzonej przez producentów. Produkcja pierwotna netto (PPN) = PPB minus energia zużyta przez producentów na oddychanie. To właśnie PPN jest dostępna dla konsumentów.
-''',
-            flashcards: [
-              Flashcard(id: 'f_k4_9', front: 'Kim są reducenci i jaka jest ich rola?', back: 'Bakterie i grzyby rozkładające materię organiczną do nieorganicznej.'),
-              Flashcard(id: 'f_k4_10', front: 'Jaka jest reguła 10% w piramidzie energii?', back: 'Na kolejny poziom troficzny przechodzi średnio tylko ok. 10% energii z poziomu poprzedniego.'),
-              Flashcard(id: 'f_k4_11', front: 'Czym różni się łańcuch od sieci pokarmowej?', back: 'Łańcuch to liniowa sekwencja, sieć to zbiór krzyżujących się łańcuchów — jest bardziej stabilna.'),
-              Flashcard(id: 'f_k4_12', front: 'Czy energia krąży w ekosystemie w obiegu zamkniętym?', back: 'Nie — energia przepływa jednokierunkowo i jest tracona jako ciepło; to materia krąży w obiegu zamkniętym.'),
-              Flashcard(id: 'f_k4_13', front: 'Co to jest produkcja pierwotna netto (PPN)?', back: 'Produkcja pierwotna brutto minus energia zużyta przez producentów na oddychanie — dostępna dla konsumentów.'),
-              Flashcard(id: 'f_k4_14', front: 'Wymień etapy obiegu wody.', back: 'Parowanie, kondensacja, opady, spływ powierzchniowy.'),
-              Flashcard(id: 'f_k4_15', front: 'Jaki proces wiąże wolny azot atmosferyczny?', back: 'Wiązanie azotu przez bakterie symbiotyczne i wolno żyjące (azotobakterie, bakterie brodawkowe).'),
-              Flashcard(id: 'f_k4_16', front: 'Który poziom troficzny zajmują producenci?', back: 'Pierwszy — organizmy samożywne, np. rośliny prowadzące fotosyntezę.'),
-            ],
-            questions: [
-              QuizQuestion(id: 'q_k4_8', question: 'Zgodnie z regułą 10%, ile energii przechodzi średnio na kolejny poziom troficzny?', options: ['1%', '10%', '50%', '90%'], correctIndex: 1, explanation: 'Średnio tylko ok. 10% energii przechodzi na kolejny poziom troficzny, reszta jest tracona jako ciepło.'),
-              QuizQuestion(id: 'q_k4_9', question: 'Materia w ekosystemie krąży:', options: ['W obiegu otwartym, jak energia', 'W obiegu zamkniętym', 'Tylko w jedną stronę', 'Nie krąży wcale'], correctIndex: 1, explanation: 'W przeciwieństwie do energii, materia krąży w obiegu zamkniętym (obiegi biogeochemiczne).'),
-              QuizQuestion(id: 'q_k4_10', question: 'Reducentami w ekosystemie są zazwyczaj:', options: ['Rośliny', 'Roślinożercy', 'Bakterie i grzyby', 'Drapieżcy'], correctIndex: 2, explanation: 'Bakterie i grzyby rozkładają materię organiczną do form nieorganicznych.'),
-              QuizQuestion(id: 'q_k4_11', question: 'Produkcja pierwotna netto to:', options: ['Cała energia wytworzona przez producentów', 'PPB minus energia zużyta na oddychanie producentów', 'Energia zużyta przez konsumentów II rzędu', 'Suma energii wszystkich poziomów troficznych'], correctIndex: 1, explanation: 'PPN = PPB - R (oddychanie producentów); to ta część jest dostępna dla konsumentów.'),
-              QuizQuestion(id: 'q_k4_12', question: 'Piramida energii w ekosystemie:', options: ['Zawsze się zwęża ku górze', 'Zawsze się rozszerza ku górze', 'Jest zawsze prostokątna', 'Nie istnieje w przyrodzie'], correctIndex: 0, explanation: 'Ze względu na straty energii na każdym poziomie, piramida energii zawsze zwęża się ku górze.'),
-              QuizQuestion(id: 'q_k4_13', question: 'Sieć pokarmowa w porównaniu do pojedynczego łańcucha pokarmowego jest:', options: ['Mniej stabilna', 'Bardziej stabilna', 'Identyczna pod względem stabilności', 'Nie zawiera reducentów'], correctIndex: 1, explanation: 'Sieć pokarmowa, dzięki wielu powiązaniom, jest bardziej odporna na zaburzenia niż pojedynczy łańcuch.'),
-            ],
-          ),
-        ],
-      ),
-      Chapter(
-        id: 'k4_ochrona',
-        name: 'Ochrona środowiska',
-        topics: [
-          Topic(
-            id: 'k4_ochrona_zagrozenia',
-            name: 'Zagrożenia i ochrona środowiska',
-            theory: '''
-GŁÓWNE ZAGROŻENIA ŚRODOWISKA
-
-EFEKT CIEPLARNIANY I ZMIANY KLIMATU
-Wzrost stężenia gazów cieplarnianych (CO2, metan, podtlenek azotu) w atmosferze zatrzymuje promieniowanie cieplne Ziemi, powodując globalne ocieplenie, topnienie lodowców, wzrost poziomu mórz i zmiany rozkładu opadów.
-
-DZIURA OZONOWA
-Freony (CFC) rozkładają ozon w stratosferze, zmniejszając ochronę przed promieniowaniem UV, co zwiększa ryzyko nowotworów skóry i uszkodzeń wzroku.
-
-ZANIECZYSZCZENIE WÓD I EUTROFIZACJA
-Nadmiar związków azotu i fosforu (nawozy, ścieki) prowadzi do przeżyźnienia wód (eutrofizacji), masowego rozwoju glonów (zakwity), a następnie deficytu tlenu i śnięcia organizmów wodnych.
-
-KWAŚNE OPADY
-Tlenki siarki i azotu, emitowane głównie przez przemysł i transport, reagują z wodą w atmosferze, tworząc kwasy, które zakwaszają gleby i wody, niszcząc lasy i budowle.
-
-UTRATA RÓŻNORODNOŚCI BIOLOGICZNEJ
-Wylesianie, fragmentacja siedlisk, gatunki inwazyjne, nadmierna eksploatacja zasobów i zanieczyszczenia prowadzą do wymierania gatunków i spadku bioróżnorodności.
-
-FORMY OCHRONY PRZYRODY W POLSCE
-Parki narodowe (najwyższa forma ochrony, np. Białowieski PN), parki krajobrazowe, rezerwaty przyrody, obszary Natura 2000, pomniki przyrody, ochrona gatunkowa (ścisła i częściowa).
-
-ZRÓWNOWAŻONY ROZWÓJ
-Zaspokajanie potrzeb obecnego pokolenia bez ograniczania możliwości zaspokajania potrzeb przyszłych pokoleń — łączy rozwój gospodarczy z ochroną środowiska. Obejmuje m.in. odnawialne źródła energii, recykling i racjonalne gospodarowanie zasobami.
-''',
-            flashcards: [
-              Flashcard(id: 'f_k4_17', front: 'Które gazy są głównymi gazami cieplarnianymi?', back: 'CO2, metan (CH4) i podtlenek azotu (N2O).'),
-              Flashcard(id: 'f_k4_18', front: 'Co powoduje powstawanie dziury ozonowej?', back: 'Freony (CFC) rozkładające ozon w stratosferze.'),
-              Flashcard(id: 'f_k4_19', front: 'Co to jest eutrofizacja?', back: 'Przeżyźnienie wód związkami azotu i fosforu, prowadzące do zakwitów glonów i deficytu tlenu.'),
-              Flashcard(id: 'f_k4_20', front: 'Co powoduje kwaśne opady?', back: 'Tlenki siarki i azotu reagujące z wodą w atmosferze, emitowane głównie przez przemysł i transport.'),
-              Flashcard(id: 'f_k4_21', front: 'Jaka jest najwyższa forma ochrony przyrody w Polsce?', back: 'Park narodowy.'),
-              Flashcard(id: 'f_k4_22', front: 'Co to jest sieć Natura 2000?', back: 'Europejski system obszarów chronionych utworzony w celu ochrony najcenniejszych siedlisk i gatunków.'),
-              Flashcard(id: 'f_k4_23', front: 'Na czym polega zrównoważony rozwój?', back: 'Zaspokajanie potrzeb obecnego pokolenia bez ograniczania możliwości zaspokajania potrzeb przyszłych pokoleń.'),
-              Flashcard(id: 'f_k4_24', front: 'Wymień skutek utraty różnorodności biologicznej.', back: 'Wymieranie gatunków, zubożenie ekosystemów, spadek ich odporności na zaburzenia.'),
-            ],
-            questions: [
-              QuizQuestion(id: 'q_k4_14', question: 'Freony przyczyniają się do:', options: ['Efektu cieplarnianego', 'Powstawania dziury ozonowej', 'Eutrofizacji wód', 'Kwaśnych opadów'], correctIndex: 1, explanation: 'Freony (CFC) rozkładają cząsteczki ozonu w stratosferze.'),
-              QuizQuestion(id: 'q_k4_15', question: 'Eutrofizacja wód jest spowodowana głównie nadmiarem:', options: ['Tlenków siarki', 'Związków azotu i fosforu', 'Metali ciężkich', 'Freonów'], correctIndex: 1, explanation: 'Nawozy i ścieki dostarczają nadmiar azotu i fosforu, powodując przeżyźnienie wód.'),
-              QuizQuestion(id: 'q_k4_16', question: 'Najwyższą rangą formą ochrony przyrody w Polsce jest:', options: ['Rezerwat przyrody', 'Park krajobrazowy', 'Park narodowy', 'Pomnik przyrody'], correctIndex: 2, explanation: 'Park narodowy to najwyższa forma ochrony obszarowej w Polsce.'),
-              QuizQuestion(id: 'q_k4_17', question: 'Kwaśne opady powstają w wyniku emisji:', options: ['CO2 i metanu', 'Tlenków siarki i azotu', 'Freonów', 'Pyłów zawieszonych'], correctIndex: 1, explanation: 'Tlenki siarki (SOx) i azotu (NOx) reagują z wodą, tworząc kwasy.'),
-              QuizQuestion(id: 'q_k4_18', question: 'Zrównoważony rozwój oznacza:', options: ['Maksymalizację produkcji bez ograniczeń', 'Rozwój gospodarczy przy zachowaniu zasobów dla przyszłych pokoleń', 'Całkowite zaprzestanie rozwoju gospodarczego', 'Wykorzystywanie wyłącznie paliw kopalnych'], correctIndex: 1, explanation: 'Łączy rozwój gospodarczy z ochroną zasobów środowiska dla przyszłych pokoleń.'),
-              QuizQuestion(id: 'q_k4_19', question: 'Obszary Natura 2000 to:', options: ['Polska forma ochrony gatunkowej roślin', 'Europejski system obszarów chronionych', 'Rodzaj rezerwatu ścisłego', 'Krajowy program recyklingu'], correctIndex: 1, explanation: 'Natura 2000 to unijna sieć obszarów chroniących cenne siedliska i gatunki.'),
-            ],
-          ),
-        ],
-      ),
+      // Działy XIII-XVIII podstawy programowej — patrz biology_k4.dart
+      ...klasa4Chapters,
       Chapter(
         id: 'k4_powtorka',
         name: 'Powtórka maturalna',
