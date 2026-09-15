@@ -5,10 +5,10 @@ import '../models.dart';
 /// Pokrywa dział XI podstawy programowej (nowelizacja 2024):
 /// Funkcjonowanie zwierząt, wraz z budową i fizjologią człowieka.
 /// Podział na rozdziały odpowiada częściom działu XI; część
-/// „Wymiana gazowa i krążenie" rozdzielono na dwa rozdziały.
+/// „Wymiana gazowa i krążenie” rozdzielono na dwa rozdziały.
 final List<Chapter> klasa3Chapters = [
   // ===========================================================================
-  // XI.1 PODSTAWOWE ZASADY BUDOWY I FUNKCJONOWANIA ORGANIZMU ZWIERZĘCEGO
+  // PODSTAWOWE ZASADY BUDOWY I FUNKCJONOWANIA ORGANIZMU ZWIERZĘCEGO
   // ===========================================================================
   Chapter(
     id: 'k3_zasady',
@@ -54,7 +54,7 @@ Połączenia ścisłe (zamykające) uszczelniają przestrzeń między komórkami
           QuizQuestion(id: 'q_k3_zas_4', question: 'Włókna wielojądrowe z jądrami położonymi na obwodzie są cechą tkanki mięśniowej:', options: ['Gładkiej', 'Poprzecznie prążkowanej szkieletowej', 'Poprzecznie prążkowanej serca', 'Wszystkich rodzajów'], correctIndex: 1, explanation: 'Mięsień sercowy ma komórki z jądrami położonymi centralnie, a gładki — jednojądrowe komórki wrzecionowate.'),
           QuizQuestion(id: 'q_k3_zas_5', question: 'Dendryty przewodzą impuls nerwowy:', options: ['Od ciała komórki', 'Do ciała komórki', 'Wyłącznie w osłonce mielinowej', 'Między komórkami glejowymi'], correctIndex: 1, explanation: 'Akson przewodzi impuls od ciała komórki, a dendryty — do niego.'),
           QuizQuestion(id: 'q_k3_zas_6', question: 'Połączenia związane z filamentami pośrednimi, nadające tkance wytrzymałość mechaniczną, to:', options: ['Połączenia szczelinowe', 'Desmosomy', 'Połączenia ścisłe', 'Synapsy chemiczne'], correctIndex: 1, explanation: 'Desmosomy są liczne w tkankach narażonych na rozciąganie, np. w naskórku.'),
-          QuizQuestion(id: 'q_k3_zas_7', question: 'Wstawki łączące komórki mięśnia sercowego zawierają połączenia szczelinowe, co umożliwia:', options: ['Skurcz zależny od woli', 'Szybkie przekazanie pobudzenia i zsynchronizowany skurcz', 'Magazynowanie wapnia', 'Wytwarzanie mieliny'], correctIndex: 1, explanation: 'Jony przepływają bezpośrednio między komórkami, więc pobudzenie szybko się rozprzestrzenia.'),
+          QuizQuestion(id: 'q_k3_zas_7', question: 'Wstawki łączące komórki mięśnia sercowego zawierają połączenia szczelinowe, co umożliwia:', options: ['Skurcz zależny od woli i szybkie męczenie się', 'Szybkie przekazanie pobudzenia i zsynchronizowany skurcz', 'Magazynowanie jonów wapnia poza komórkami', 'Wytwarzanie osłonek mielinowych wokół włókien'], correctIndex: 1, explanation: 'Jony przepływają bezpośrednio między komórkami, więc pobudzenie szybko się rozprzestrzenia.'),
           QuizQuestion(id: 'q_k3_zas_8', question: 'Szpik czerwony znajduje się w kości:', options: ['Zbitej, w osteonach', 'Gąbczastej, między beleczkami', 'Wyłącznie w chrząstce', 'W okostnej'], correctIndex: 1, explanation: 'Przestrzenie między beleczkami kości gąbczastej wypełnia szpik czerwony.'),
         ],
       ),
@@ -103,7 +103,7 @@ Podstawowa przemiana materii to minimalna ilość energii potrzebna do podtrzyma
   ),
 
   // ===========================================================================
-  // XI.2 ODŻYWIANIE SIĘ
+  // ODŻYWIANIE SIĘ
   // ===========================================================================
   Chapter(
     id: 'k3_odzywianie',
@@ -158,7 +158,7 @@ WĘGLOWODANY I BŁONNIK
 Węglowodany są głównym źródłem energii, a podstawowym paliwem komórek jest glukoza. Błonnik pokarmowy, w tym celuloza, nie jest trawiony przez enzymy człowieka, ale pełni ważne funkcje: pobudza ruchy perystaltyczne jelit i zapobiega zaparciom, zwiększa uczucie sytości, spowalnia wchłanianie glukozy, obniża stężenie cholesterolu i stanowi pożywkę dla bakterii jelitowych. Jego źródłem są produkty pełnoziarniste, warzywa i owoce.
 
 TŁUSZCZE I NNKT
-Tłuszcze dostarczają ponad dwukrotnie więcej energii z grama niż białka i węglowodany, budują błony komórkowe i umożliwiają wchłanianie witamin A, D, E i K. Niezbędne nienasycone kwasy tłuszczowe (NNKT), czyli kwasy z rodzin omega-3 i omega-6, nie są syntetyzowane przez organizm człowieka. Są potrzebne do budowy błon komórkowych, rozwoju mózgu i siatkówki oka, powstawania hormonów tkankowych oraz obniżają stężenie „złego" cholesterolu LDL. Ich źródłem są oleje roślinne, ryby morskie i orzechy. Nadmiar kwasów nasyconych i tłuszczów trans sprzyja rozwojowi miażdżycy.
+Tłuszcze dostarczają ponad dwukrotnie więcej energii z grama niż białka i węglowodany, budują błony komórkowe i umożliwiają wchłanianie witamin A, D, E i K. Niezbędne nienasycone kwasy tłuszczowe (NNKT), czyli kwasy z rodzin omega-3 i omega-6, nie są syntetyzowane przez organizm człowieka. Są potrzebne do budowy błon komórkowych, rozwoju mózgu i siatkówki oka, powstawania hormonów tkankowych oraz obniżają stężenie „złego” cholesterolu LDL. Ich źródłem są oleje roślinne, ryby morskie i orzechy. Nadmiar kwasów nasyconych i tłuszczów trans sprzyja rozwojowi miażdżycy.
 
 WITAMINY
 Witaminy nie są źródłem energii ani budulcem, lecz regulują przemiany metaboliczne, często jako składniki koenzymów. Witaminy rozpuszczalne w tłuszczach (A, D, E, K) są magazynowane w organizmie, dlatego możliwe jest ich przedawkowanie. Witaminy rozpuszczalne w wodzie (C i z grupy B) są łatwo wydalane i trzeba je dostarczać regularnie. Witamina A jest niezbędna do widzenia i prawidłowego stanu nabłonków; jej niedobór powoduje kurzą ślepotę. Witamina D umożliwia wchłanianie wapnia i mineralizację kości; jej niedobór wywołuje krzywicę u dzieci i osteomalację u dorosłych. Witamina E jest przeciwutleniaczem chroniącym błony komórkowe. Witamina K jest potrzebna do wytwarzania czynników krzepnięcia krwi, a jej niedobór zwiększa skłonność do krwawień. Witamina C uczestniczy w syntezie kolagenu i ułatwia wchłanianie żelaza; jej niedobór powoduje szkorbut z krwawieniem dziąseł. Witamina B1 bierze udział w przemianach węglowodanów, a jej niedobór wywołuje chorobę beri-beri. Witamina B12 jest niezbędna do wytwarzania erytrocytów i pracy układu nerwowego; występuje wyłącznie w produktach zwierzęcych, a jej niedobór prowadzi do niedokrwistości złośliwej. Kwas foliowy jest potrzebny do podziałów komórek, a jego niedobór w ciąży zwiększa ryzyko wad cewy nerwowej płodu.
@@ -199,8 +199,8 @@ Główną przyczyną otyłości jest dodatni bilans energetyczny — spożywanie
           QuizQuestion(id: 'q_k3_odz_10', question: 'Witaminy, które mogą gromadzić się w organizmie i których przedawkowanie jest możliwe, to:', options: ['C i B1', 'A i D', 'B12 i kwas foliowy', 'Wszystkie witaminy z grupy B'], correctIndex: 1, explanation: 'Witaminy rozpuszczalne w tłuszczach są magazynowane, np. w wątrobie.'),
           QuizQuestion(id: 'q_k3_odz_11', question: 'Błonnik pokarmowy:', options: ['Jest trawiony przez amylazę trzustkową', 'Nie jest trawiony, ale pobudza perystaltykę jelit', 'Jest głównym źródłem energii', 'Hamuje rozwój bakterii jelitowych'], correctIndex: 1, explanation: 'Człowiek nie ma enzymów rozkładających celulozę, a błonnik reguluje pracę jelit.'),
           QuizQuestion(id: 'q_k3_odz_12', question: 'Źródłem kwasów tłuszczowych omega-3 są przede wszystkim:', options: ['Słodycze', 'Ryby morskie', 'Pieczywo białe', 'Tłuszcze trans'], correctIndex: 1, explanation: 'Ryby morskie, oleje roślinne i orzechy dostarczają NNKT.'),
-          QuizQuestion(id: 'q_k3_odz_13', question: 'Uczucie sytości wywołuje:', options: ['Wydzielanie greliny', 'Rozciągnięcie ścian żołądka i wzrost stężenia glukozy', 'Spadek stężenia insuliny', 'Pusty żołądek'], correctIndex: 1, explanation: 'Grelina i pusty żołądek wywołują głód, a nie sytość.'),
-          QuizQuestion(id: 'q_k3_odz_14', question: 'Charakterystycznym skutkiem bulimii jest:', options: ['Uszkodzenie szkliwa zębów przez kwas żołądkowy', 'Nadmiar potasu we krwi', 'Krzywica', 'Nadczynność tarczycy'], correctIndex: 0, explanation: 'Prowokowane wymioty sprawiają, że kwas żołądkowy niszczy szkliwo i przełyk.'),
+          QuizQuestion(id: 'q_k3_odz_13', question: 'Uczucie sytości wywołuje:', options: ['Wydzielanie greliny przez ściany pustego żołądka', 'Rozciągnięcie ścian żołądka i wzrost stężenia glukozy', 'Spadek stężenia insuliny i glukozy we krwi', 'Opróżnienie żołądka i spadek stężenia leptyny'], correctIndex: 1, explanation: 'Grelina i pusty żołądek wywołują głód, a nie sytość.'),
+          QuizQuestion(id: 'q_k3_odz_14', question: 'Charakterystycznym skutkiem bulimii jest:', options: ['Uszkodzenie szkliwa zębów przez kwas żołądkowy', 'Nadmiar jonów potasu we krwi i obrzęki', 'Krzywica wynikająca z niedoboru witaminy D', 'Nadczynność tarczycy i wytrzeszcz oczu'], correctIndex: 0, explanation: 'Prowokowane wymioty sprawiają, że kwas żołądkowy niszczy szkliwo i przełyk.'),
           QuizQuestion(id: 'q_k3_odz_15', question: 'Główną przyczyną otyłości jest:', options: ['Ujemny bilans energetyczny', 'Dodatni bilans energetyczny', 'Niedobór witaminy K', 'Nadmiar błonnika w diecie'], correctIndex: 1, explanation: 'Spożywanie więcej energii, niż się zużywa, prowadzi do odkładania tkanki tłuszczowej.'),
         ],
       ),
@@ -261,7 +261,7 @@ Gastroskopia to badanie przełyku, żołądka i dwunastnicy za pomocą giętkieg
           QuizQuestion(id: 'q_k3_odz_19', question: 'W doświadczeniu z trawieniem skrobi próbą kontrolną jest probówka z kleikiem i:', options: ['Śliną w 37°C', 'Wodą w 37°C', 'Śliną przegotowaną', 'Śliną z kwasem solnym'], correctIndex: 1, explanation: 'Próba kontrolna różni się od badawczej tylko brakiem badanego czynnika — enzymu.'),
           QuizQuestion(id: 'q_k3_odz_20', question: 'Glukoza wchłania się w jelicie cienkim na drodze:', options: ['Osmozy', 'Transportu aktywnego', 'Pinocytozy do naczyń chłonnych', 'Dyfuzji przez błonę śluzową żołądka'], correctIndex: 1, explanation: 'Glukoza i galaktoza są pobierane aktywnie przez komórki nabłonka jelita.'),
           QuizQuestion(id: 'q_k3_odz_21', question: 'Żyła wrotna prowadzi krew:', options: ['Z wątroby do serca', 'Z jelit do wątroby', 'Z płuc do serca', 'Z nerek do wątroby'], correctIndex: 1, explanation: 'Dzięki temu wątroba jako pierwsza przetwarza substancje wchłonięte w jelitach.'),
-          QuizQuestion(id: 'q_k3_odz_22', question: 'Witamina B12 wchłania się w:', options: ['Żołądku', 'Jelicie krętym z udziałem czynnika wewnętrznego', 'Jelicie grubym', 'Jamie ustnej'], correctIndex: 1, explanation: 'Czynnik wewnętrzny wydzielany w żołądku umożliwia jej wchłonięcie w jelicie krętym.'),
+          QuizQuestion(id: 'q_k3_odz_22', question: 'Witamina B12 wchłania się w:', options: ['Żołądku z udziałem kwasu solnego', 'Jelicie krętym z udziałem czynnika wewnętrznego', 'Jelicie grubym z udziałem bakterii jelitowych', 'Jamie ustnej z udziałem amylazy ślinowej'], correctIndex: 1, explanation: 'Czynnik wewnętrzny wydzielany w żołądku umożliwia jej wchłonięcie w jelicie krętym.'),
           QuizQuestion(id: 'q_k3_odz_23', question: 'Trypsynogen uaktywnia się w:', options: ['Trzustce', 'Dwunastnicy', 'Żołądku', 'Wątrobie'], correctIndex: 1, explanation: 'Enzymy trawiące białka są nieaktywne w trzustce, co chroni ją przed samostrawieniem.'),
           QuizQuestion(id: 'q_k3_odz_24', question: 'Wykrycie zakażenia Helicobacter pylori umożliwia:', options: ['Kolonoskopia', 'Gastroskopia', 'Spirometria', 'EKG'], correctIndex: 1, explanation: 'Gastroskopia pozwala obejrzeć żołądek i pobrać wycinek błony śluzowej.'),
         ],
@@ -270,7 +270,7 @@ Gastroskopia to badanie przełyku, żołądka i dwunastnicy za pomocą giętkieg
   ),
 
   // ===========================================================================
-  // XI.3 ODPORNOŚĆ
+  // ODPORNOŚĆ
   // ===========================================================================
   Chapter(
     id: 'k3_odpornosc',
@@ -320,15 +320,15 @@ Cytokiny to białka sygnałowe wydzielane przez komórki odpornościowe, m.in. i
         ],
         questions: [
           QuizQuestion(id: 'q_k3_odp_1', question: 'Limfocyty T dojrzewają w:', options: ['Szpiku kostnym', 'Grasicy', 'Śledzionie', 'Węzłach chłonnych'], correctIndex: 1, explanation: 'Grasica jest pierwotnym narządem limfatycznym, w którym dojrzewają limfocyty T.'),
-          QuizQuestion(id: 'q_k3_odp_2', question: 'Do mechanizmów odporności wrodzonej NIE należy:', options: ['Fagocytoza', 'Lizozym w ślinie', 'Wytwarzanie przeciwciał przez plazmocyty', 'Stan zapalny'], correctIndex: 2, explanation: 'Przeciwciała to element odporności swoistej.'),
+          QuizQuestion(id: 'q_k3_odp_2', question: 'Do mechanizmów odporności wrodzonej NIE należy:', options: ['Fagocytoza drobnoustrojów', 'Lizozym obecny w ślinie i łzach', 'Wytwarzanie przeciwciał przez plazmocyty', 'Stan zapalny w miejscu zakażenia'], correctIndex: 2, explanation: 'Przeciwciała to element odporności swoistej.'),
           QuizQuestion(id: 'q_k3_odp_3', question: 'Przeciwciała wytwarzają:', options: ['Limfocyty T cytotoksyczne', 'Plazmocyty powstałe z limfocytów B', 'Neutrofile', 'Erytrocyty'], correctIndex: 1, explanation: 'Aktywowany limfocyt B przekształca się w plazmocyty.'),
-          QuizQuestion(id: 'q_k3_odp_4', question: 'Komórki zakażone wirusem niszczą przede wszystkim:', options: ['Limfocyty T cytotoksyczne i komórki NK', 'Erytrocyty', 'Plazmocyty', 'Trombocyty'], correctIndex: 0, explanation: 'Przeciwciała nie docierają do wirusów ukrytych we wnętrzu komórek.'),
+          QuizQuestion(id: 'q_k3_odp_4', question: 'Komórki zakażone wirusem niszczą przede wszystkim:', options: ['Limfocyty T cytotoksyczne i komórki NK', 'Erytrocyty i płytki krwi', 'Plazmocyty i przeciwciała w osoczu', 'Trombocyty i komórki tuczne'], correctIndex: 0, explanation: 'Przeciwciała nie docierają do wirusów ukrytych we wnętrzu komórek.'),
           QuizQuestion(id: 'q_k3_odp_5', question: 'Szczepienie wywołuje odporność:', options: ['Naturalną bierną', 'Sztuczną czynną', 'Sztuczną bierną', 'Naturalną czynną'], correctIndex: 1, explanation: 'Organizm sam wytwarza przeciwciała i komórki pamięci po kontakcie z antygenem ze szczepionki.'),
           QuizQuestion(id: 'q_k3_odp_6', question: 'Podanie surowicy z gotowymi przeciwciałami po ukąszeniu żmii to przykład odporności:', options: ['Sztucznej biernej', 'Sztucznej czynnej', 'Naturalnej czynnej', 'Wrodzonej'], correctIndex: 0, explanation: 'Organizm otrzymuje gotowe przeciwciała.'),
           QuizQuestion(id: 'q_k3_odp_7', question: 'Odporność bierna, w odróżnieniu od czynnej:', options: ['Trwa całe życie', 'Działa natychmiast, ale krótko', 'Tworzy komórki pamięci', 'Wymaga kontaktu z antygenem'], correctIndex: 1, explanation: 'Podane przeciwciała są stopniowo rozkładane, a pamięć nie powstaje.'),
           QuizQuestion(id: 'q_k3_odp_8', question: 'Białko C-reaktywne (CRP) wytwarzane jest w:', options: ['Szpiku kostnym', 'Wątrobie', 'Grasicy', 'Nerkach'], correctIndex: 1, explanation: 'CRP to białko ostrej fazy produkowane przez wątrobę.'),
           QuizQuestion(id: 'q_k3_odp_9', question: 'Wtórna odpowiedź immunologiczna jest silniejsza od pierwotnej dzięki:', options: ['Interferonom', 'Komórkom pamięci', 'Lizozymowi', 'Gorączce'], correctIndex: 1, explanation: 'Komórki pamięci szybko rozpoznają znany antygen.'),
-          QuizQuestion(id: 'q_k3_odp_10', question: 'Antygeny limfocytom T prezentują m.in.:', options: ['Erytrocyty', 'Komórki dendrytyczne i makrofagi', 'Trombocyty', 'Neurony'], correctIndex: 1, explanation: 'To tzw. komórki prezentujące antygen.'),
+          QuizQuestion(id: 'q_k3_odp_10', question: 'Antygeny limfocytom T prezentują m.in.:', options: ['Erytrocyty i trombocyty', 'Komórki dendrytyczne i makrofagi', 'Plazmocyty i komórki tuczne', 'Neurony i komórki glejowe'], correctIndex: 1, explanation: 'To tzw. komórki prezentujące antygen.'),
         ],
       ),
       Topic(
@@ -384,7 +384,7 @@ Immunosupresja to celowe osłabienie odpowiedzi odpornościowej za pomocą lekó
   ),
 
   // ===========================================================================
-  // XI.3 WYMIANA GAZOWA (część a–k)
+  // WYMIANA GAZOWA
   // ===========================================================================
   Chapter(
     id: 'k3_oddychanie',
@@ -436,7 +436,7 @@ Płazy nie mają żeber ani przepony i wentylują płuca za pomocą pompy ustnej
           QuizQuestion(id: 'q_k3_odd_6', question: 'Najmniejszą powierzchnię wymiany gazowej w płucach mają:', options: ['Ssaki', 'Ptaki', 'Gady', 'Płazy'], correctIndex: 3, explanation: 'Workowate płuca płazów są słabo pofałdowane.'),
           QuizQuestion(id: 'q_k3_odd_7', question: 'Płucotchawki występują u:', options: ['Pajęczaków', 'Owadów', 'Skorupiaków', 'Pierścienic'], correctIndex: 0, explanation: 'Owady mają tchawki, a skorupiaki skrzela.'),
           QuizQuestion(id: 'q_k3_odd_8', question: 'Ryby muszą przepuszczać przez skrzela dużo wody, ponieważ:', options: ['Woda zawiera wielokrotnie mniej tlenu niż powietrze', 'Skrzela nie mają naczyń krwionośnych', 'Woda jest mniej gęsta od powietrza', 'Ryby nie mają hemoglobiny'], correctIndex: 0, explanation: 'Mała zawartość tlenu w wodzie wymaga intensywnej wentylacji.'),
-          QuizQuestion(id: 'q_k3_odd_9', question: 'Dżdżownica wymienia gazy przez:', options: ['Skrzela', 'Tchawki', 'Wilgotną, unaczynioną skórę', 'Płuca'], correctIndex: 2, explanation: 'Dlatego dżdżownica ginie po wyschnięciu skóry.'),
+          QuizQuestion(id: 'q_k3_odd_9', question: 'Dżdżownica wymienia gazy przez:', options: ['Skrzela zewnętrzne', 'Tchawki z przetchlinkami', 'Wilgotną, unaczynioną skórę', 'Workowate płuca'], correctIndex: 2, explanation: 'Dlatego dżdżownica ginie po wyschnięciu skóry.'),
         ],
       ),
       Topic(
@@ -501,7 +501,7 @@ Zdjęcie rentgenowskie (RTG) klatki piersiowej pozwala wykryć zapalenie płuc, 
   ),
 
   // ===========================================================================
-  // XI.3 KRĄŻENIE (część l–s)
+  // KRĄŻENIE
   // ===========================================================================
   Chapter(
     id: 'k3_krazenie',
@@ -579,7 +579,7 @@ Część osocza przesącza się przez ściany naczyń włosowatych i tworzy pły
         questions: [
           QuizQuestion(id: 'q_k3_kr_8', question: 'Białkiem przekształcanym podczas krzepnięcia w nierozpuszczalne nici jest:', options: ['Albumina', 'Fibrynogen', 'Hemoglobina', 'Kolagen'], correctIndex: 1, explanation: 'Trombina przekształca fibrynogen w fibrynę.'),
           QuizQuestion(id: 'q_k3_kr_9', question: 'Zastawki zapobiegające cofaniu się krwi występują w:', options: ['Tętnicach', 'Żyłach', 'Naczyniach włosowatych', 'Aorcie na całej jej długości'], correctIndex: 1, explanation: 'Krew płynie w żyłach pod niskim ciśnieniem.'),
-          QuizQuestion(id: 'q_k3_kr_10', question: 'Wymiana substancji między krwią a tkankami zachodzi w:', options: ['Tętnicach', 'Żyłach', 'Naczyniach włosowatych', 'Aorcie'], correctIndex: 2, explanation: 'Tylko ich cienka ściana umożliwia wymianę substancji.'),
+          QuizQuestion(id: 'q_k3_kr_10', question: 'Wymiana substancji między krwią a tkankami zachodzi w:', options: ['Tętnicach', 'Żyłach', 'Naczyniach włosowatych', 'Naczyniach limfatycznych'], correctIndex: 2, explanation: 'Tylko ich cienka ściana umożliwia wymianę substancji.'),
           QuizQuestion(id: 'q_k3_kr_11', question: 'Niedobór witaminy K powoduje:', options: ['Nadmierne krzepnięcie krwi', 'Skłonność do krwawień', 'Niedokrwistość złośliwą', 'Obrzęki limfatyczne'], correctIndex: 1, explanation: 'Witamina K jest potrzebna do wytwarzania czynników krzepnięcia.'),
           QuizQuestion(id: 'q_k3_kr_12', question: 'Erytrocyty człowieka powstają w:', options: ['Śledzionie', 'Szpiku kostnym czerwonym', 'Węzłach chłonnych', 'Grasicy'], correctIndex: 1, explanation: 'Śledziona i wątroba je rozkładają.'),
           QuizQuestion(id: 'q_k3_kr_13', question: 'Naczynia limfatyczne uchodzą do:', options: ['Tętnic płucnych', 'Dużych żył w pobliżu serca', 'Naczyń włosowatych płuc', 'Aorty brzusznej'], correctIndex: 1, explanation: 'Dzięki temu limfa wraca do krwi.'),
@@ -642,7 +642,7 @@ Regularny pomiar ciśnienia tętniczego pozwala wcześnie wykryć nadciśnienie.
   ),
 
   // ===========================================================================
-  // XI.4 WYDALANIE I OSMOREGULACJA
+  // WYDALANIE I OSMOREGULACJA
   // ===========================================================================
   Chapter(
     id: 'k3_wydalanie',
@@ -682,7 +682,7 @@ Płazińce mają protonefrydia — kanaliki zakończone komórkami płomykowymi,
           QuizQuestion(id: 'q_k3_wyd_2', question: 'Najbardziej toksycznym azotowym produktem przemiany materii jest:', options: ['Mocznik', 'Kwas moczowy', 'Amoniak', 'Kreatynina'], correctIndex: 2, explanation: 'Dlatego wydalają go głównie zwierzęta wodne.'),
           QuizQuestion(id: 'q_k3_wyd_3', question: 'Ryby słodkowodne:', options: ['Piją dużo wody', 'Wydalają duże ilości rozcieńczonego moczu', 'Usuwają nadmiar soli przez skrzela', 'Wydalają kwas moczowy'], correctIndex: 1, explanation: 'Woda stale wnika do ich organizmu ze środowiska hipotonicznego.'),
           QuizQuestion(id: 'q_k3_wyd_4', question: 'Metanefrydia występują u:', options: ['Płazińców', 'Pierścienic', 'Owadów', 'Ryb'], correctIndex: 1, explanation: 'Płazińce mają protonefrydia, a owady cewki Malpighiego.'),
-          QuizQuestion(id: 'q_k3_wyd_5', question: 'Cewki Malpighiego uchodzą do:', options: ['Jamy ciała', 'Przewodu pokarmowego', 'Tchawek', 'Serca'], correctIndex: 1, explanation: 'Produkty przemiany materii są usuwane wraz z resztkami pokarmu.'),
+          QuizQuestion(id: 'q_k3_wyd_5', question: 'Cewki Malpighiego uchodzą do:', options: ['Jamy ciała', 'Przewodu pokarmowego', 'Układu tchawkowego', 'Naczynia grzbietowego'], correctIndex: 1, explanation: 'Produkty przemiany materii są usuwane wraz z resztkami pokarmu.'),
           QuizQuestion(id: 'q_k3_wyd_6', question: 'Wydalanie kwasu moczowego jest przystosowaniem do:', options: ['Życia w wodzie słodkiej', 'Oszczędzania wody na lądzie', 'Szybkiego wzrostu', 'Oddychania skrzelami'], correctIndex: 1, explanation: 'Kwas moczowy usuwa się przy minimalnej utracie wody.'),
           QuizQuestion(id: 'q_k3_wyd_7', question: 'Funkcji wydalniczej NIE pełni:', options: ['Nerka', 'Płuco', 'Skóra', 'Śledziona'], correctIndex: 3, explanation: 'Śledziona jest narządem limfatycznym.'),
         ],
@@ -736,7 +736,7 @@ Przy ciężkiej niewydolności nerek w organizmie gromadzą się mocznik, woda i
   ),
 
   // ===========================================================================
-  // XI.5 REGULACJA HORMONALNA
+  // REGULACJA HORMONALNA
   // ===========================================================================
   Chapter(
     id: 'k3_hormony',
@@ -841,7 +841,7 @@ Niedoczynność tarczycy spowalnia przemianę materii: powoduje przyrost masy ci
   ),
 
   // ===========================================================================
-  // XI.6 REGULACJA NERWOWA
+  // REGULACJA NERWOWA
   // ===========================================================================
   Chapter(
     id: 'k3_nerwowy',
@@ -855,7 +855,7 @@ POTENCJAŁ SPOCZYNKOWY
 Neuron odbiera pobudzenie dendrytami i ciałem komórki, a przewodzi impuls wzdłuż aksonu do jego zakończeń. W stanie spoczynku wnętrze neuronu ma ładunek ujemny względem otoczenia — różnica potencjałów wynosi około −70 mV. Wynika to z nierównomiernego rozmieszczenia jonów: pompa sodowo-potasowa, zużywając ATP, wypompowuje z komórki trzy jony sodu, a wprowadza dwa jony potasu, więc na zewnątrz komórki jest więcej jonów Na+, a wewnątrz K+. Błona w spoczynku jest ponadto bardziej przepuszczalna dla jonów potasu, które wypływają z komórki, pozostawiając wewnątrz nadmiar ładunków ujemnych.
 
 POTENCJAŁ CZYNNOŚCIOWY
-Bodziec o sile co najmniej progowej powoduje otwarcie kanałów sodowych. Jony Na+ gwałtownie napływają do neuronu, a jego wnętrze staje się dodatnie — to depolaryzacja. Następnie kanały sodowe zamykają się, a otwierają kanały potasowe; jony K+ wypływają z komórki i przywracają ujemny ładunek wnętrza — to repolaryzacja. Pompa sodowo-potasowa odtwarza wyjściowe rozmieszczenie jonów. Tuż po pobudzeniu fragment błony przez chwilę nie reaguje na bodźce (okres refrakcji), dzięki czemu impuls biegnie wzdłuż aksonu tylko w jedną stronę. Pobudzenie podlega zasadzie „wszystko albo nic": bodziec podprogowy nie wywołuje impulsu, a każdy bodziec progowy lub silniejszy wywołuje impuls o tej samej wielkości — o sile bodźca informuje częstość impulsów.
+Bodziec o sile co najmniej progowej powoduje otwarcie kanałów sodowych. Jony Na+ gwałtownie napływają do neuronu, a jego wnętrze staje się dodatnie — to depolaryzacja. Następnie kanały sodowe zamykają się, a otwierają kanały potasowe; jony K+ wypływają z komórki i przywracają ujemny ładunek wnętrza — to repolaryzacja. Pompa sodowo-potasowa odtwarza wyjściowe rozmieszczenie jonów. Tuż po pobudzeniu fragment błony przez chwilę nie reaguje na bodźce (okres refrakcji), dzięki czemu impuls biegnie wzdłuż aksonu tylko w jedną stronę. Pobudzenie podlega zasadzie „wszystko albo nic”: bodziec podprogowy nie wywołuje impulsu, a każdy bodziec progowy lub silniejszy wywołuje impuls o tej samej wielkości — o sile bodźca informuje częstość impulsów.
 
 PRZEWODZENIE IMPULSU A BUDOWA NEURONU
 Potencjał czynnościowy powstały w jednym miejscu błony depolaryzuje sąsiedni jej fragment, więc impuls przesuwa się wzdłuż aksonu. W aksonach bez osłonki mielinowej przewodzenie jest ciągłe i stosunkowo wolne. Osłonka mielinowa izoluje akson i jest przerywana w przewężeniach Ranviera — depolaryzacja zachodzi tylko w nich, a impuls przeskakuje od przewężenia do przewężenia. Takie przewodzenie skokowe jest wielokrotnie szybsze i zużywa mniej energii. Szybkość przewodzenia rośnie także wraz ze średnicą aksonu.
@@ -874,7 +874,7 @@ Odruchy bezwarunkowe są wrodzone, wspólne dla wszystkich osobników gatunku, t
           Flashcard(id: 'f_k3_ner_2', front: 'Jak działa pompa sodowo-potasowa?', back: 'Kosztem ATP wypompowuje z komórki trzy jony Na+ i wprowadza dwa jony K+.'),
           Flashcard(id: 'f_k3_ner_3', front: 'Na czym polega depolaryzacja?', back: 'Po otwarciu kanałów sodowych jony Na+ napływają do neuronu, a jego wnętrze staje się dodatnie.'),
           Flashcard(id: 'f_k3_ner_4', front: 'Na czym polega repolaryzacja?', back: 'Jony K+ wypływają z komórki i przywracają ujemny ładunek jej wnętrza.'),
-          Flashcard(id: 'f_k3_ner_5', front: 'Co oznacza zasada „wszystko albo nic"?', back: 'Bodziec podprogowy nie wywołuje impulsu, a każdy bodziec progowy lub silniejszy — impuls o tej samej wielkości.'),
+          Flashcard(id: 'f_k3_ner_5', front: 'Co oznacza zasada „wszystko albo nic”?', back: 'Bodziec podprogowy nie wywołuje impulsu, a każdy bodziec progowy lub silniejszy — impuls o tej samej wielkości.'),
           Flashcard(id: 'f_k3_ner_6', front: 'W jaki sposób neuron przekazuje informację o sile bodźca?', back: 'Częstością impulsów.'),
           Flashcard(id: 'f_k3_ner_7', front: 'Dlaczego przewodzenie skokowe jest szybsze?', back: 'Depolaryzacja zachodzi tylko w przewężeniach Ranviera, a impuls przeskakuje między nimi.'),
           Flashcard(id: 'f_k3_ner_8', front: 'Jaką rolę w synapsie pełnią jony wapnia?', back: 'Napływają do zakończenia aksonu i wywołują uwolnienie neuroprzekaźnika z pęcherzyków synaptycznych.'),
@@ -891,10 +891,10 @@ Odruchy bezwarunkowe są wrodzone, wspólne dla wszystkich osobników gatunku, t
           QuizQuestion(id: 'q_k3_ner_2', question: 'Depolaryzację błony neuronu wywołuje:', options: ['Wypływ jonów K+ z komórki', 'Napływ jonów Na+ do komórki', 'Wypływ jonów Cl− z komórki', 'Praca pompy sodowo-potasowej'], correctIndex: 1, explanation: 'Po otwarciu kanałów sodowych wnętrze staje się dodatnie.'),
           QuizQuestion(id: 'q_k3_ner_3', question: 'Przewodzenie skokowe zachodzi w aksonach:', options: ['Pozbawionych osłonki mielinowej', 'Otoczonych osłonką mielinową', 'Wyłącznie w dendrytach', 'Tylko u bezkręgowców'], correctIndex: 1, explanation: 'Impuls przeskakuje między przewężeniami Ranviera.'),
           QuizQuestion(id: 'q_k3_ner_4', question: 'Uwolnienie neuroprzekaźnika do szczeliny synaptycznej wywołuje napływ do zakończenia aksonu jonów:', options: ['Sodu', 'Potasu', 'Wapnia', 'Chloru'], correctIndex: 2, explanation: 'Jony Ca2+ powodują zlewanie się pęcherzyków synaptycznych z błoną.'),
-          QuizQuestion(id: 'q_k3_ner_5', question: 'Enzymem rozkładającym acetylocholinę w szczelinie synaptycznej jest:', options: ['Amylaza', 'Acetylocholinoesteraza', 'Pepsyna', 'Ligaza'], correctIndex: 1, explanation: 'Rozkład neuroprzekaźnika kończy przekazywanie sygnału.'),
+          QuizQuestion(id: 'q_k3_ner_5', question: 'Enzymem rozkładającym acetylocholinę w szczelinie synaptycznej jest:', options: ['Anhydraza węglanowa', 'Acetylocholinoesteraza', 'Amylaza ślinowa', 'Polimeraza RNA'], correctIndex: 1, explanation: 'Rozkład neuroprzekaźnika kończy przekazywanie sygnału.'),
           QuizQuestion(id: 'q_k3_ner_6', question: 'Efektorem w łuku odruchowym jest:', options: ['Receptor w skórze', 'Mięsień lub gruczoł', 'Rdzeń kręgowy', 'Neuron czuciowy'], correctIndex: 1, explanation: 'To efektor wykonuje reakcję na bodziec.'),
           QuizQuestion(id: 'q_k3_ner_7', question: 'Odruchem warunkowym jest:', options: ['Odruch kolanowy', 'Wydzielanie śliny na widok ulubionej potrawy', 'Odruch ssania u noworodka', 'Zwężenie źrenicy w jasnym świetle'], correctIndex: 1, explanation: 'To reakcja nabyta w wyniku doświadczenia.'),
-          QuizQuestion(id: 'q_k3_ner_8', question: 'Zgodnie z zasadą „wszystko albo nic" bodziec silniejszy od progowego wywołuje:', options: ['Większy impuls', 'Impuls tej samej wielkości', 'Brak impulsu', 'Impuls biegnący w przeciwnym kierunku'], correctIndex: 1, explanation: 'Silniejszy bodziec zwiększa częstość impulsów, a nie ich wielkość.'),
+          QuizQuestion(id: 'q_k3_ner_8', question: 'Zgodnie z zasadą „wszystko albo nic” bodziec silniejszy od progowego wywołuje:', options: ['Większy impuls', 'Impuls tej samej wielkości', 'Brak impulsu', 'Impuls biegnący w przeciwnym kierunku'], correctIndex: 1, explanation: 'Silniejszy bodziec zwiększa częstość impulsów, a nie ich wielkość.'),
           QuizQuestion(id: 'q_k3_ner_9', question: 'Głównym neuroprzekaźnikiem hamującym w mózgu jest:', options: ['Acetylocholina', 'GABA', 'Dopamina', 'Noradrenalina'], correctIndex: 1, explanation: 'GABA utrudnia powstawanie impulsów w neuronach.'),
         ],
       ),
@@ -946,12 +946,12 @@ Depresja to choroba, w której przez długi czas utrzymują się obniżony nastr
         ],
         questions: [
           QuizQuestion(id: 'q_k3_ner_10', question: 'Ośrodek termoregulacji znajduje się w:', options: ['Móżdżku', 'Podwzgórzu', 'Rdzeniu kręgowym', 'Płacie potylicznym'], correctIndex: 1, explanation: 'Podwzgórze reguluje także głód, sytość i pragnienie.'),
-          QuizQuestion(id: 'q_k3_ner_11', question: 'Uszkodzenie móżdżku powoduje przede wszystkim:', options: ['Utratę wzroku', 'Zaburzenia koordynacji ruchów i równowagi', 'Zatrzymanie oddychania', 'Utratę słuchu'], correctIndex: 1, explanation: 'Móżdżek koordynuje ruchy i utrzymuje równowagę.'),
+          QuizQuestion(id: 'q_k3_ner_11', question: 'Uszkodzenie móżdżku powoduje przede wszystkim:', options: ['Utratę wzroku w jednym oku', 'Zaburzenia koordynacji ruchów i równowagi', 'Zatrzymanie oddychania i pracy serca', 'Utratę słuchu i zmysłu węchu'], correctIndex: 1, explanation: 'Móżdżek koordynuje ruchy i utrzymuje równowagę.'),
           QuizQuestion(id: 'q_k3_ner_12', question: 'Ośrodek wzroku znajduje się w płacie:', options: ['Czołowym', 'Ciemieniowym', 'Skroniowym', 'Potylicznym'], correctIndex: 3, explanation: 'Do płata potylicznego trafiają impulsy z nerwów wzrokowych.'),
           QuizQuestion(id: 'q_k3_ner_13', question: 'Pobudzenie części współczulnej układu autonomicznego powoduje:', options: ['Zwężenie źrenic', 'Przyspieszenie pracy serca', 'Pobudzenie trawienia', 'Zwężenie oskrzeli'], correctIndex: 1, explanation: 'Część współczulna przygotowuje organizm do wysiłku.'),
           QuizQuestion(id: 'q_k3_ner_14', question: 'Korzeń brzuszny nerwu rdzeniowego zawiera włókna:', options: ['Czuciowe', 'Ruchowe', 'Węchowe', 'Wzrokowe'], correctIndex: 1, explanation: 'Włókna czuciowe biegną w korzeniu grzbietowym.'),
           QuizQuestion(id: 'q_k3_ner_15', question: 'Chorobę Parkinsona wywołuje obumieranie neuronów wytwarzających:', options: ['Serotoninę', 'Dopaminę', 'Acetylocholinę', 'Melatoninę'], correctIndex: 1, explanation: 'Niedobór dopaminy zaburza kontrolę ruchów.'),
-          QuizQuestion(id: 'q_k3_ner_16', question: 'Uszkodzenie rdzenia przedłużonego jest zwykle śmiertelne, ponieważ znajdują się tam ośrodki:', options: ['Mowy', 'Oddychania i pracy serca', 'Wzroku', 'Pamięci'], correctIndex: 1, explanation: 'Bez nich nie są możliwe podstawowe czynności życiowe.'),
+          QuizQuestion(id: 'q_k3_ner_16', question: 'Uszkodzenie rdzenia przedłużonego jest zwykle śmiertelne, ponieważ znajdują się tam ośrodki:', options: ['Mowy i pisania', 'Oddychania i pracy serca', 'Wzroku i słuchu', 'Pamięci i uczenia się'], correctIndex: 1, explanation: 'Bez nich nie są możliwe podstawowe czynności życiowe.'),
           QuizQuestion(id: 'q_k3_ner_17', question: 'Melatonina wydzielana jest przez:', options: ['Przysadkę', 'Szyszynkę', 'Tarczycę', 'Podwzgórze'], correctIndex: 1, explanation: 'Jej wydzielanie rośnie w ciemności.'),
           QuizQuestion(id: 'q_k3_ner_18', question: 'Omamy i urojenia są charakterystycznymi objawami:', options: ['Choroby Parkinsona', 'Schizofrenii', 'Niedoczynności tarczycy', 'Stwardnienia rozsianego'], correctIndex: 1, explanation: 'Schizofrenia to przewlekła choroba psychiczna.'),
         ],
@@ -1014,7 +1014,7 @@ Receptory smaku to chemoreceptory skupione w kubkach smakowych, leżących głó
   ),
 
   // ===========================================================================
-  // XI.7 PORUSZANIE SIĘ
+  // PORUSZANIE SIĘ
   // ===========================================================================
   Chapter(
     id: 'k3_ruch',
@@ -1113,7 +1113,7 @@ Doping to stosowanie niedozwolonych substancji lub metod w celu zwiększenia wyd
           QuizQuestion(id: 'q_k3_ruch_7', question: 'Kręgosłup człowieka zawiera kręgów piersiowych:', options: ['7', '12', '5', '4'], correctIndex: 1, explanation: 'Łączą się z nimi żebra.'),
           QuizQuestion(id: 'q_k3_ruch_8', question: 'Staw biodrowy jest stawem:', options: ['Zawiasowym', 'Kulistym', 'Siodełkowym', 'Nieruchomym'], correctIndex: 1, explanation: 'Umożliwia ruchy w wielu kierunkach.'),
           QuizQuestion(id: 'q_k3_ruch_9', question: 'Przedramię w stawie łokciowym prostuje:', options: ['Mięsień dwugłowy ramienia', 'Mięsień trójgłowy ramienia', 'Przepona', 'Mięsień czworogłowy uda'], correctIndex: 1, explanation: 'Mięsień dwugłowy działa antagonistycznie — zgina przedramię.'),
-          QuizQuestion(id: 'q_k3_ruch_10', question: 'Maź stawową wytwarza:', options: ['Chrząstka stawowa', 'Błona wewnętrzna torebki stawowej', 'Więzadło', 'Szpik kostny'], correctIndex: 1, explanation: 'Maź zmniejsza tarcie w stawie.'),
+          QuizQuestion(id: 'q_k3_ruch_10', question: 'Maź stawową wytwarza:', options: ['Chrząstka szklista stawu', 'Błona wewnętrzna torebki stawowej', 'Więzadło wzmacniające staw', 'Szpik czerwony kości gąbczastej'], correctIndex: 1, explanation: 'Maź zmniejsza tarcie w stawie.'),
           QuizQuestion(id: 'q_k3_ruch_11', question: 'Podczas skurczu mięśnia skracają się:', options: ['Filamenty aktynowe', 'Filamenty miozynowe', 'Sarkomery', 'Wszystkie filamenty'], correctIndex: 2, explanation: 'Filamenty nie zmieniają długości, tylko przesuwają się względem siebie.'),
           QuizQuestion(id: 'q_k3_ruch_12', question: 'ATP jest potrzebny w skurczu mięśnia m.in. do:', options: ['Wytwarzania mazi stawowej', 'Odłączenia główek miozyny od aktyny', 'Syntezy kolagenu', 'Wytwarzania wapnia'], correctIndex: 1, explanation: 'Bez ATP mostki poprzeczne nie mogą się rozłączyć.'),
           QuizQuestion(id: 'q_k3_ruch_13', question: 'W pierwszych sekundach intensywnego wysiłku ATP odtwarzany jest głównie z:', options: ['Kwasów tłuszczowych', 'Fosfokreatyny', 'Białek', 'Mleczanu'], correctIndex: 1, explanation: 'Fosfokreatyna szybko przekazuje grupę fosforanową na ADP.'),
@@ -1125,7 +1125,7 @@ Doping to stosowanie niedozwolonych substancji lub metod w celu zwiększenia wyd
   ),
 
   // ===========================================================================
-  // XI.8 POKRYCIE CIAŁA I TERMOREGULACJA
+  // POKRYCIE CIAŁA I TERMOREGULACJA
   // ===========================================================================
   Chapter(
     id: 'k3_pokrycie',
@@ -1148,7 +1148,7 @@ TERMOREGULACJA U ZWIERZĄT EKTOTERMICZNYCH
 Bezkręgowce, ryby, płazy i gady czerpią ciepło głównie z otoczenia, a ich temperatura ciała zależy od temperatury środowiska. Regulują ją przede wszystkim zachowaniem: jaszczurki wygrzewają się na słońcu, ustawiając ciało tak, by pochłaniało jak najwięcej promieni, a w upale chowają się w cieniu lub w norach; wiele zwierząt zmienia aktywność w ciągu doby i roku, a w chłodnej porze zapada w odrętwienie. Niektóre gady zmieniają ubarwienie — ciemniejsza skóra pochłania więcej ciepła — a owady przed lotem rozgrzewają mięśnie drżeniem skrzydeł. Ektotermia wymaga znacznie mniej pokarmu niż endotermia, ale aktywność zwierząt zależy od temperatury otoczenia.
 
 SYNTEZA PROWITAMINY D A PROMIENIOWANIE UV
-Pod wpływem promieniowania UVB w skórze z pochodnej cholesterolu powstaje prowitamina D, przekształcana następnie w wątrobie i nerkach w aktywną witaminę D, niezbędną do wchłaniania wapnia i mineralizacji kości. Wystarcza do tego krótka, kilkunastominutowa ekspozycja odsłoniętej skóry na słońce, ale w Polsce jesienią i zimą nasłonecznienie jest zbyt słabe, dlatego zaleca się wtedy suplementację. Nadmierna ekspozycja na promieniowanie UV — na słońcu i w solarium — przyspiesza starzenie się skóry, niszcząc włókna kolagenowe i sprężyste, co powoduje zmarszczki, utratę elastyczności i przebarwienia. Uszkadza też DNA komórek skóry, wywołując mutacje zwiększające ryzyko nowotworów, w tym najgroźniejszego czerniaka złośliwego oraz raka podstawnokomórkowego, a także powoduje oparzenia słoneczne, sprzyja zaćmie i osłabia odporność. Chronią przed tym kremy z filtrem UV, odzież i nakrycie głowy, okulary przeciwsłoneczne, unikanie słońca w godzinach południowych i rezygnacja z solarium. Należy też obserwować znamiona na skórze i zgłaszać lekarzowi te, które zmieniają kształt, barwę lub wielkość.
+Pod wpływem promieniowania UVB w skórze z pochodnej cholesterolu powstaje nieaktywna postać witaminy D (cholekalcyferol), nazywana często prowitaminą D, która w wątrobie i nerkach przekształcana jest w aktywną witaminę D, niezbędną do wchłaniania wapnia i mineralizacji kości. Wystarcza do tego krótka, kilkunastominutowa ekspozycja odsłoniętej skóry na słońce, ale w Polsce jesienią i zimą nasłonecznienie jest zbyt słabe, dlatego zaleca się wtedy suplementację. Nadmierna ekspozycja na promieniowanie UV — na słońcu i w solarium — przyspiesza starzenie się skóry, niszcząc włókna kolagenowe i sprężyste, co powoduje zmarszczki, utratę elastyczności i przebarwienia. Uszkadza też DNA komórek skóry, wywołując mutacje zwiększające ryzyko nowotworów, w tym najgroźniejszego czerniaka złośliwego oraz raka podstawnokomórkowego, a także powoduje oparzenia słoneczne, sprzyja zaćmie i osłabia odporność. Chronią przed tym kremy z filtrem UV, odzież i nakrycie głowy, okulary przeciwsłoneczne, unikanie słońca w godzinach południowych i rezygnacja z solarium. Należy też obserwować znamiona na skórze i zgłaszać lekarzowi te, które zmieniają kształt, barwę lub wielkość.
 ''',
         flashcards: [
           Flashcard(id: 'f_k3_skor_1', front: 'Jakie funkcje pełni pokrycie ciała zwierząt?', back: 'Chroni przed urazami, drobnoustrojami i utratą wody, a także uczestniczy w wymianie gazowej, wydalaniu, odbiorze bodźców i termoregulacji.'),
@@ -1159,7 +1159,7 @@ Pod wpływem promieniowania UVB w skórze z pochodnej cholesterolu powstaje prow
           Flashcard(id: 'f_k3_skor_6', front: 'Jak zwierzęta endotermiczne ograniczają utratę ciepła?', back: 'Izolacją (pióra, sierść, tkanka tłuszczowa), zwężeniem naczyń skóry, drżeniem mięśni i zwiększeniem tempa metabolizmu.'),
           Flashcard(id: 'f_k3_skor_7', front: 'Jak zwierzęta endotermiczne pozbywają się nadmiaru ciepła?', back: 'Rozszerzając naczynia krwionośne skóry, pocąc się lub ziając.'),
           Flashcard(id: 'f_k3_skor_8', front: 'Jak regulują temperaturę ciała zwierzęta ektotermiczne?', back: 'Głównie zachowaniem — wygrzewaniem się na słońcu, chowaniem w cieniu, zmianą aktywności.'),
-          Flashcard(id: 'f_k3_skor_9', front: 'Jak powstaje aktywna witamina D?', back: 'Pod wpływem UVB w skórze powstaje prowitamina D, przekształcana w wątrobie i nerkach w aktywną witaminę D.'),
+          Flashcard(id: 'f_k3_skor_9', front: 'Jak powstaje aktywna witamina D?', back: 'Pod wpływem UVB w skórze z pochodnej cholesterolu powstaje nieaktywna prowitamina D, przekształcana w wątrobie i nerkach w aktywną witaminę D.'),
           Flashcard(id: 'f_k3_skor_10', front: 'Dlaczego w Polsce zaleca się suplementację witaminy D jesienią i zimą?', back: 'Nasłonecznienie jest wtedy zbyt słabe do jej wytworzenia w skórze.'),
           Flashcard(id: 'f_k3_skor_11', front: 'Jakie są skutki nadmiernej ekspozycji na promieniowanie UV?', back: 'Przyspieszone starzenie skóry, oparzenia, mutacje i nowotwory skóry, np. czerniak.'),
           Flashcard(id: 'f_k3_skor_12', front: 'Jak chronić się przed szkodliwym działaniem UV?', back: 'Stosować kremy z filtrem, odzież i nakrycie głowy, okulary, unikać słońca w południe i solarium.'),
@@ -1179,7 +1179,7 @@ Pod wpływem promieniowania UVB w skórze z pochodnej cholesterolu powstaje prow
   ),
 
   // ===========================================================================
-  // XI.9 ROZMNAŻANIE I ROZWÓJ
+  // ROZMNAŻANIE I ROZWÓJ
   // ===========================================================================
   Chapter(
     id: 'k3_rozmnazanie',
@@ -1196,7 +1196,7 @@ ROZMNAŻANIE PŁCIOWE
 W rozmnażaniu płciowym potomstwo powstaje w wyniku połączenia gamet, zwykle pochodzących od dwóch osobników. Dzięki crossing-over i niezależnej segregacji chromosomów w mejozie oraz losowemu łączeniu się gamet potomstwo jest zróżnicowane genetycznie, co zwiększa szanse przetrwania populacji w zmiennym środowisku. Rozmnażanie płciowe wymaga jednak znalezienia partnera i większych nakładów energii. Większość zwierząt jest rozdzielnopłciowa, ale niektóre, np. dżdżownice, ślimaki winniczki i tasiemce, są obojnakami, które wytwarzają oba rodzaje gamet. Obojnaki zwykle unikają samozapłodnienia, zapładniając się krzyżowo, ale obojnactwo ułatwia rozmnażanie zwierzętom, które rzadko spotykają partnera, np. pasożytom. Szczególną formą rozmnażania płciowego jest partenogeneza — rozwój nowego osobnika z niezapłodnionej komórki jajowej, występujący np. u mszyc, wioślarek i pszczół, u których z niezapłodnionych jaj rozwijają się samce, czyli trutnie.
 
 ZAPŁODNIENIE ZEWNĘTRZNE I WEWNĘTRZNE
-Zapłodnienie zewnętrzne zachodzi w wodzie, poza organizmem samicy — występuje u większości ryb i u płazów. Gamety są narażone na zjedzenie i rozproszenie, dlatego zwierzęta te wytwarzają ich bardzo dużo, a synchronizacji uwolnienia gamet służą gody. Zapłodnienie wewnętrzne zachodzi w drogach rodnych samicy — występuje u owadów, gadów, ptaków i ssaków. Uniezależnia rozmnażanie od wody, zwiększa prawdopodobieństwo zapłodnienia i umożliwia ochronę zarodka, dlatego wystarcza mniejsza liczba gamet. Ze względu na sposób rozwoju zarodka zwierzęta dzieli się na jajorodne, składające jaja, w których zarodek rozwija się poza organizmem matki (ptaki, większość gadów); jajożyworodne, u których zarodek rozwija się w jaju pozostającym w drogach rodnych samicy, korzystając z substancji zapasowych jaja (np. żmija zygzakowata); oraz żyworodne, u których zarodek odżywia się kosztem organizmu matki (ssaki łożyskowe).
+Zapłodnienie zewnętrzne zachodzi w wodzie, poza organizmem samicy — występuje u większości ryb i płazów. Gamety są narażone na zjedzenie i rozproszenie, dlatego zwierzęta te wytwarzają ich bardzo dużo, a synchronizacji uwolnienia gamet służą gody. Zapłodnienie wewnętrzne zachodzi w drogach rodnych samicy — występuje u owadów, gadów, ptaków i ssaków. Uniezależnia rozmnażanie od wody, zwiększa prawdopodobieństwo zapłodnienia i umożliwia ochronę zarodka, dlatego wystarcza mniejsza liczba gamet. Ze względu na sposób rozwoju zarodka zwierzęta dzieli się na jajorodne, składające jaja, w których zarodek rozwija się poza organizmem matki (ptaki, większość gadów); jajożyworodne, u których zarodek rozwija się w jaju pozostającym w drogach rodnych samicy, korzystając z substancji zapasowych jaja (np. żmija zygzakowata); oraz żyworodne, u których zarodek odżywia się kosztem organizmu matki (ssaki łożyskowe).
 
 BUDOWA JAJA PTAKA
 Jajo ptaka jest przystosowaniem do rozwoju zarodka na lądzie. Wapienna skorupka chroni zarodek przed uszkodzeniami, a jej pory umożliwiają wymianę gazową. Pod skorupką leżą dwie błony, które na tępym końcu jaja rozchodzą się, tworząc komorę powietrzną. Białko stanowi zapas wody i białek oraz chroni przed wstrząsami i drobnoustrojami. Żółtko jest głównym materiałem zapasowym, a na jego powierzchni leży tarczka zarodkowa, z której rozwija się zarodek. Skręcone pasma białka, czyli chalazy, utrzymują żółtko w środku jaja tak, że tarczka zarodkowa zawsze znajduje się u góry.
@@ -1243,7 +1243,7 @@ CYKLE ROZWOJOWE PASOŻYTÓW
         questions: [
           QuizQuestion(id: 'q_k3_roz_1', question: 'Pączkowanie jest sposobem rozmnażania:', options: ['Płciowego stułbi', 'Bezpłciowego stułbi', 'Płciowego dżdżownicy', 'Bezpłciowego pszczoły'], correctIndex: 1, explanation: 'Nowy osobnik rozwija się z uwypuklenia na ciele rodzica.'),
           QuizQuestion(id: 'q_k3_roz_2', question: 'Trutnie pszczoły miodnej powstają w wyniku:', options: ['Pączkowania', 'Partenogenezy', 'Fragmentacji', 'Samozapłodnienia'], correctIndex: 1, explanation: 'Rozwijają się z niezapłodnionych jaj.'),
-          QuizQuestion(id: 'q_k3_roz_3', question: 'Zapłodnienie zewnętrzne występuje u:', options: ['Ptaków', 'Większości płazów', 'Ssaków', 'Gadów'], correctIndex: 1, explanation: 'Gamety łączą się w wodzie, poza organizmem samicy.'),
+          QuizQuestion(id: 'q_k3_roz_3', question: 'Zapłodnienie zewnętrzne występuje u:', options: ['Ptaków i gadów', 'Większości płazów', 'Ssaków łożyskowych', 'Owadów i pająków'], correctIndex: 1, explanation: 'Gamety łączą się w wodzie, poza organizmem samicy.'),
           QuizQuestion(id: 'q_k3_roz_4', question: 'Tarczka zarodkowa w jaju ptaka znajduje się na:', options: ['Skorupce', 'Powierzchni żółtka', 'Komorze powietrznej', 'Chalazach'], correctIndex: 1, explanation: 'Z tarczki zarodkowej rozwija się zarodek.'),
           QuizQuestion(id: 'q_k3_roz_5', question: 'Listki zarodkowe powstają podczas:', options: ['Bruzdkowania', 'Gastrulacji', 'Organogenezy', 'Zapłodnienia'], correctIndex: 1, explanation: 'Bruzdkowanie prowadzi do powstania blastuli.'),
           QuizQuestion(id: 'q_k3_roz_6', question: 'Układ nerwowy powstaje z:', options: ['Endodermy', 'Mezodermy', 'Ektodermy', 'Kosmówki'], correctIndex: 2, explanation: 'Z ektodermy powstają też naskórek i narządy zmysłów.'),
@@ -1261,7 +1261,7 @@ CYKLE ROZWOJOWE PASOŻYTÓW
         name: 'Rozmnażanie i rozwój człowieka',
         theory: '''
 MĘSKI UKŁAD ROZRODCZY
-Jądra leżą w mosznie, poza jamą brzuszną, ponieważ plemniki powstają prawidłowo w temperaturze o 2–3°C niższej niż temperatura wnętrza ciała. W kanalikach nasiennych jąder zachodzi spermatogeneza, wspomagana przez komórki Sertolego, które odżywiają powstające plemniki. Komórki śródmiąższowe (Leydiga) leżące między kanalikami wytwarzają testosteron. Plemniki dojrzewają i są magazynowane w najądrzach, skąd podczas wytrysku przemieszczają się nasieniowodami do cewki moczowej. Pęcherzyki nasienne wytwarzają wydzielinę bogatą we fruktozę, stanowiącą źródło energii dla plemników, gruczoł krokowy (prostata) — wydzielinę o odczynie zasadowym, neutralizującą kwaśne środowisko pochwy, a gruczoły opuszkowo-cewkowe — śluz oczyszczający cewkę. Plemniki wraz z wydzielinami gruczołów tworzą nasienie. Prącie jest narządem kopulacyjnym, przez które przebiega cewka moczowa.
+Jądra leżą w mosznie, poza jamą brzuszną, ponieważ plemniki powstają prawidłowo w temperaturze o 2–3°C niższej niż temperatura wnętrza ciała. W kanalikach nasiennych jąder zachodzi spermatogeneza, wspomagana przez komórki Sertolego, które odżywiają powstające plemniki. Komórki śródmiąższowe (Leydiga) leżące między kanalikami wytwarzają testosteron. Plemniki dojrzewają i są magazynowane w najądrzach, skąd podczas wytrysku przemieszczają się nasieniowodami do cewki moczowej. Pęcherzyki nasienne wytwarzają zasadową wydzielinę bogatą we fruktozę, stanowiącą źródło energii dla plemników, gruczoł krokowy (prostata) — wydzielinę zawierającą enzymy i substancje zwiększające ruchliwość plemników, a gruczoły opuszkowo-cewkowe — śluz oczyszczający cewkę. Zasadowy odczyn nasienia chroni plemniki przed kwaśnym środowiskiem pochwy. Plemniki wraz z wydzielinami gruczołów tworzą nasienie. Prącie jest narządem kopulacyjnym, przez które przebiega cewka moczowa.
 
 ŻEŃSKI UKŁAD ROZRODCZY
 Jajniki wytwarzają komórki jajowe i hormony — estrogeny i progesteron. Komórki jajowe dojrzewają w pęcherzykach jajnikowych. Jajowody odbierają uwolnioną z jajnika komórkę jajową i przesuwają ją ku macicy dzięki rzęskom i skurczom ścian; w jajowodzie zwykle dochodzi do zapłodnienia. Macica jest mięśniowym narządem, w którym rozwija się zarodek i płód; jej błona śluzowa (endometrium) zmienia się cyklicznie i umożliwia zagnieżdżenie zarodka, a gruba warstwa mięśni gładkich wypycha płód podczas porodu. Pochwa jest narządem kopulacyjnym i stanowi drogę rodną. Kwaśny odczyn pochwy chroni przed drobnoustrojami.
@@ -1273,7 +1273,7 @@ HORMONALNA REGULACJA ROZRODU
 Podwzgórze wydziela gonadoliberynę, która pobudza przysadkę do wydzielania hormonów gonadotropowych: folikulotropiny (FSH) i lutropiny (LH). U mężczyzn FSH pobudza spermatogenezę, a LH — wydzielanie testosteronu przez komórki śródmiąższowe. Testosteron warunkuje rozwój męskich cech płciowych i spermatogenezę, a jego wysokie stężenie hamuje wydzielanie gonadoliberyny i gonadotropin na zasadzie ujemnego sprzężenia zwrotnego.
 
 CYKL MENSTRUACYJNY
-Cykl menstruacyjny trwa średnio 28 dni i obejmuje zmiany zachodzące w jajniku i w błonie śluzowej macicy. Pierwszego dnia cyklu rozpoczyna się miesiączka — złuszczanie się błony śluzowej macicy, trwające zwykle 3–5 dni. W fazie folikularnej FSH pobudza wzrost pęcherzyków jajnikowych, a dojrzewający pęcherzyk wydziela coraz więcej estrogenów, które powodują odbudowę i pogrubienie błony śluzowej macicy. Wysokie stężenie estrogenów powoduje gwałtowny wzrost wydzielania LH, który około 14. dnia cyklu wywołuje owulację, czyli pęknięcie dojrzałego pęcherzyka (pęcherzyka Graafa) i uwolnienie oocytu. W fazie lutealnej z pozostałości pęcherzyka pod wpływem LH powstaje ciałko żółte, wydzielające progesteron i estrogeny. Progesteron przygotowuje błonę śluzową macicy na przyjęcie zarodka — staje się ona silnie ukrwiona i bogata w gruczoły — oraz hamuje wydzielanie FSH i LH, dzięki czemu nie dojrzewają kolejne pęcherzyki. Jeśli nie dojdzie do zapłodnienia, ciałko żółte zanika, stężenie progesteronu i estrogenów spada, błona śluzowa macicy złuszcza się i rozpoczyna się kolejny cykl. Jeśli dojdzie do zapłodnienia, zarodek wydziela gonadotropinę kosmówkową (hCG), która podtrzymuje działanie ciałka żółtego; jej obecność w moczu wykrywają testy ciążowe.
+Cykl menstruacyjny trwa średnio 28 dni i obejmuje zmiany zachodzące w jajniku i w błonie śluzowej macicy. Pierwszego dnia cyklu rozpoczyna się miesiączka — złuszczanie się błony śluzowej macicy, trwające zwykle 3–5 dni. W fazie folikularnej FSH pobudza wzrost pęcherzyków jajnikowych, a dojrzewający pęcherzyk wydziela coraz więcej estrogenów, które powodują odbudowę i pogrubienie błony śluzowej macicy. Wysokie stężenie estrogenów powoduje gwałtowny wzrost wydzielania LH, który około 14. dnia cyklu wywołuje owulację, czyli pęknięcie dojrzałego pęcherzyka (pęcherzyka Graafa) i uwolnienie oocytu. W fazie lutealnej z pozostałości pęcherzyka pod wpływem LH powstaje ciałko żółte, wydzielające progesteron i estrogeny. Progesteron przygotowuje błonę śluzową macicy na przyjęcie zarodka — staje się ona silnie ukrwiona i bogata w gruczoły — oraz hamuje wydzielanie FSH i LH, dzięki czemu nie dojrzewają kolejne pęcherzyki. Jeśli nie dojdzie do zapłodnienia, ciałko żółte zanika, stężenie progesteronu i estrogenów spada, błona śluzowa macicy złuszcza się i rozpoczyna się kolejny cykl. Jeśli dojdzie do zapłodnienia, komórki trofoblastu zarodka wydzielają gonadotropinę kosmówkową (hCG), która podtrzymuje działanie ciałka żółtego; jej obecność w moczu wykrywają testy ciążowe.
 
 ZASTOSOWANIE SYNTETYCZNYCH HORMONÓW PŁCIOWYCH
 Hormonalne środki antykoncepcyjne zawierają syntetyczne estrogeny i progestageny lub same progestageny. Hamują wydzielanie FSH i LH, przez co nie dochodzi do dojrzewania pęcherzyka i owulacji, a także zagęszczają śluz szyjkowy, utrudniając wędrówkę plemników, i zmieniają błonę śluzową macicy. Mogą powodować skutki uboczne, m.in. zwiększać ryzyko zakrzepicy, zwłaszcza u palących kobiet, dlatego stosuje się je wyłącznie z przepisu lekarza. Syntetyczne hormony wykorzystuje się też w leczeniu niepłodności — do pobudzania dojrzewania pęcherzyków i owulacji, m.in. podczas zapłodnienia pozaustrojowego (in vitro) — w podtrzymywaniu zagrożonej ciąży progesteronem, w leczeniu zaburzeń cyklu oraz w hormonalnej terapii zastępczej, łagodzącej objawy menopauzy wynikające ze spadku wydzielania estrogenów.
@@ -1291,13 +1291,13 @@ BADANIA PRENATALNE
 Badania prenatalne pozwalają ocenić rozwój płodu i wykryć wady wrodzone oraz choroby genetyczne. Badania nieinwazyjne nie zagrażają płodowi: badanie USG pozwala ocenić wielkość i budowę płodu, a z krwi matki wykonuje się testy biochemiczne oraz badanie wolnego DNA płodu, oceniające ryzyko m.in. zespołu Downa. Nieprawidłowy wynik wymaga potwierdzenia badaniem inwazyjnym. Do badań inwazyjnych należą amniopunkcja — pobranie płynu owodniowego z komórkami płodu — oraz biopsja kosmówki. Pozwalają one ustalić kariotyp płodu i przeprowadzić badania DNA, ale wiążą się z niewielkim ryzykiem poronienia. Wczesne wykrycie wady umożliwia przygotowanie się do opieki nad dzieckiem, a niekiedy leczenie jeszcze przed urodzeniem.
 
 ROZWÓJ POZAPŁODOWY CZŁOWIEKA
-Po urodzeniu człowiek przechodzi kolejne okresy rozwoju. Okres noworodkowy obejmuje pierwsze cztery tygodnie życia — organizm przystosowuje się do samodzielnego oddychania, odżywiania i termoregulacji. W okresie niemowlęcym, trwającym do końca pierwszego roku, dziecko najszybciej rośnie, uczy się siadać, raczkować i wypowiadać pierwsze słowa. W okresie dzieciństwa rozwijają się ruchy, mowa, myślenie i umiejętności społeczne. Okres dojrzewania, czyli pokwitanie, rozpoczyna się u dziewcząt zwykle wcześniej niż u chłopców; pod wpływem hormonów płciowych następuje skok wzrostu, rozwijają się drugorzędowe cechy płciowe, pojawia się pierwsza miesiączka lub pierwsze wytryski, a także zachodzą zmiany emocjonalne. W okresie dorosłości organizm osiąga pełną sprawność fizyczną i dojrzałość społeczną, a u kobiet w wieku około 45–55 lat następuje menopauza — wygaśnięcie czynności jajników. Starzenie się to stopniowe pogarszanie się sprawności organizmu: zmniejsza się masa mięśni i kości, elastyczność skóry i naczyń krwionośnych, sprawność narządów zmysłów, pamięć i odporność. Tempo starzenia zależy od czynników genetycznych i stylu życia — aktywność fizyczna, właściwa dieta i unikanie używek je spowalniają. Życie kończy śmierć, czyli nieodwracalne ustanie czynności organizmu, stwierdzane na podstawie śmierci mózgu.
+Po urodzeniu człowiek przechodzi kolejne okresy rozwoju. Okres noworodkowy obejmuje pierwsze cztery tygodnie życia — organizm przystosowuje się do samodzielnego oddychania, odżywiania i termoregulacji. W okresie niemowlęcym, trwającym do końca pierwszego roku, dziecko najszybciej rośnie, uczy się siadać, raczkować i wypowiadać pierwsze słowa. W okresie dzieciństwa rozwijają się ruchy, mowa, myślenie i umiejętności społeczne. Okres dojrzewania, czyli pokwitanie, rozpoczyna się u dziewcząt zwykle wcześniej niż u chłopców; pod wpływem hormonów płciowych następuje skok wzrostu, rozwijają się drugorzędowe cechy płciowe, pojawia się pierwsza miesiączka lub pierwsze wytryski, a także zachodzą zmiany emocjonalne. W okresie dorosłości organizm osiąga pełną sprawność fizyczną i dojrzałość społeczną, a u kobiet w wieku około 45–55 lat następuje menopauza — wygaśnięcie czynności jajników. Starzenie się to stopniowe pogarszanie się sprawności organizmu: zmniejsza się masa mięśni i kości, elastyczność skóry i naczyń krwionośnych, sprawność narządów zmysłów, pamięć i odporność. Tempo starzenia zależy od czynników genetycznych i stylu życia — aktywność fizyczna, właściwa dieta i unikanie używek je spowalniają. Życie kończy śmierć, czyli nieodwracalne ustanie czynności organizmu jako całości.
 ''',
         flashcards: [
           Flashcard(id: 'f_k3_roz_23', front: 'Dlaczego jądra leżą w mosznie?', back: 'Plemniki powstają prawidłowo w temperaturze o 2–3°C niższej niż temperatura wnętrza ciała.'),
           Flashcard(id: 'f_k3_roz_24', front: 'Jaką funkcję pełnią komórki Sertolego i komórki śródmiąższowe jądra?', back: 'Komórki Sertolego odżywiają powstające plemniki, a śródmiąższowe (Leydiga) wydzielają testosteron.'),
           Flashcard(id: 'f_k3_roz_25', front: 'Jaką funkcję pełnią najądrza?', back: 'Dojrzewają i są w nich magazynowane plemniki.'),
-          Flashcard(id: 'f_k3_roz_26', front: 'Jaką rolę pełni wydzielina pęcherzyków nasiennych i prostaty?', back: 'Pęcherzyki nasienne dostarczają fruktozy, prostata — zasadowej wydzieliny neutralizującej kwaśne środowisko pochwy.'),
+          Flashcard(id: 'f_k3_roz_26', front: 'Jaką rolę pełni wydzielina pęcherzyków nasiennych i prostaty?', back: 'Pęcherzyki nasienne dostarczają zasadowej wydzieliny z fruktozą — źródłem energii dla plemników, a prostata — wydzieliny z enzymami zwiększającej ich ruchliwość.'),
           Flashcard(id: 'f_k3_roz_27', front: 'Gdzie zwykle dochodzi do zapłodnienia?', back: 'W jajowodzie.'),
           Flashcard(id: 'f_k3_roz_28', front: 'Ile plemników powstaje z jednego spermatocytu I rzędu, a ile komórek jajowych z oocytu I rzędu?', back: 'Cztery plemniki i jedna komórka jajowa (oraz ciałka kierunkowe).'),
           Flashcard(id: 'f_k3_roz_29', front: 'Z czego zbudowany jest plemnik?', back: 'Z główki (jądro i akrosom), wstawki z mitochondriami i witki.'),
@@ -1327,13 +1327,13 @@ Po urodzeniu człowiek przechodzi kolejne okresy rozwoju. Okres noworodkowy obej
           QuizQuestion(id: 'q_k3_roz_16', question: 'Ciałko żółte wydziela głównie:', options: ['FSH', 'Progesteron', 'Testosteron', 'Prolaktynę'], correctIndex: 1, explanation: 'Progesteron przygotowuje błonę śluzową macicy na przyjęcie zarodka.'),
           QuizQuestion(id: 'q_k3_roz_17', question: 'Z jednego oocytu I rzędu powstaje:', options: ['Cztery komórki jajowe', 'Jedna komórka jajowa i ciałka kierunkowe', 'Dwie komórki jajowe', 'Jedna komórka jajowa i trzy plemniki'], correctIndex: 1, explanation: 'Podziały mejotyczne w oogenezie są nierówne.'),
           QuizQuestion(id: 'q_k3_roz_18', question: 'Mitochondria w plemniku znajdują się we:', options: ['Główce', 'Wstawce', 'Witce', 'W akrosomie'], correctIndex: 1, explanation: 'Dostarczają ATP do ruchu witki.'),
-          QuizQuestion(id: 'q_k3_roz_19', question: 'Testy ciążowe wykrywają w moczu:', options: ['Estrogeny', 'hCG', 'FSH', 'Oksytocynę'], correctIndex: 1, explanation: 'Gonadotropinę kosmówkową wydziela zarodek.'),
-          QuizQuestion(id: 'q_k3_roz_20', question: 'Hormonalne środki antykoncepcyjne działają przede wszystkim przez:', options: ['Zabijanie plemników', 'Hamowanie wydzielania FSH i LH i blokowanie owulacji', 'Przyspieszanie owulacji', 'Zwiększanie wydzielania hCG'], correctIndex: 1, explanation: 'Zagęszczają też śluz szyjkowy.'),
+          QuizQuestion(id: 'q_k3_roz_19', question: 'Testy ciążowe wykrywają w moczu:', options: ['Estrogeny', 'hCG', 'FSH', 'Oksytocynę'], correctIndex: 1, explanation: 'Gonadotropinę kosmówkową wydzielają komórki trofoblastu zarodka.'),
+          QuizQuestion(id: 'q_k3_roz_20', question: 'Hormonalne środki antykoncepcyjne działają przede wszystkim przez:', options: ['Zabijanie plemników w drogach rodnych', 'Hamowanie wydzielania FSH i LH i blokowanie owulacji', 'Przyspieszanie owulacji i dojrzewania pęcherzyków', 'Zwiększanie wydzielania hCG przez ciałko żółte'], correctIndex: 1, explanation: 'Zagęszczają też śluz szyjkowy.'),
           QuizQuestion(id: 'q_k3_roz_21', question: 'Krew matki i płodu w łożysku:', options: ['Miesza się swobodnie', 'Nie miesza się', 'Miesza się tylko w III trymestrze', 'Przepływa wspólnymi naczyniami'], correctIndex: 1, explanation: 'Substancje przenikają przez cienką warstwę oddzielającą oba krwiobiegi.'),
           QuizQuestion(id: 'q_k3_roz_22', question: 'Badaniem prenatalnym inwazyjnym jest:', options: ['USG', 'Amniopunkcja', 'Badanie wolnego DNA płodu z krwi matki', 'Test biochemiczny z krwi matki'], correctIndex: 1, explanation: 'Wiąże się z niewielkim ryzykiem poronienia.'),
           QuizQuestion(id: 'q_k3_roz_23', question: 'Niedobór kwasu foliowego w ciąży zwiększa ryzyko:', options: ['Wad cewy nerwowej', 'Cukrzycy', 'Zespołu Downa', 'Hemofilii'], correctIndex: 0, explanation: 'Kwas foliowy zaleca się już przed zajściem w ciążę.'),
           QuizQuestion(id: 'q_k3_roz_24', question: 'Zawiązki wszystkich narządów powstają w okresie:', options: ['Płodowym', 'Zarodkowym', 'Noworodkowym', 'Niemowlęcym'], correctIndex: 1, explanation: 'Okres zarodkowy trwa do końca 8. tygodnia po zapłodnieniu.'),
-          QuizQuestion(id: 'q_k3_roz_25', question: 'Wydzielinę o odczynie zasadowym, neutralizującą kwaśne środowisko pochwy, wytwarza:', options: ['Gruczoł krokowy', 'Najądrze', 'Jądro', 'Nasieniowód'], correctIndex: 0, explanation: 'Pęcherzyki nasienne dostarczają z kolei fruktozy.'),
+          QuizQuestion(id: 'q_k3_roz_25', question: 'Wydzielinę bogatą we fruktozę, będącą źródłem energii dla plemników, wytwarzają:', options: ['Pęcherzyki nasienne', 'Najądrza', 'Jądra', 'Nasieniowody'], correctIndex: 0, explanation: 'W najądrzach plemniki dojrzewają i są magazynowane.'),
         ],
       ),
     ],
