@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../data/biology_data.dart';
+import '../logic/premium.dart';
 import '../logic/study_plan.dart';
 import '../models.dart';
 import '../state/app_state.dart';
@@ -13,9 +14,11 @@ import '../widgets/progress_ring.dart';
 import 'chapter_detail_screen.dart';
 import 'chapter_list_screen.dart';
 import 'data_tasks_screen.dart';
+import 'exam_setup_screen.dart';
 import 'flashcards_home_screen.dart';
 import 'flashcards_screen.dart';
 import 'gaps_screen.dart';
+import 'open_questions_screen.dart';
 import 'school_test_screen.dart';
 import 'study_plan_screen.dart';
 import 'theory_screen.dart';
@@ -33,6 +36,7 @@ class HomeScreen extends StatelessWidget {
     final plan = state.todayPlan();
     final gaps = state.topicGaps(limit: 3);
     final upcomingTests = state.upcomingPlannedTests;
+    final examLocked = isFeatureLocked(PremiumFeature.mockExam, isPremium: state.isPremium);
 
     return ListView(
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
@@ -162,6 +166,29 @@ class HomeScreen extends StatelessWidget {
                 title: 'Zadania z danymi',
                 subtitle: 'wykresy i tabele',
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const DataTasksScreen())),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            Expanded(
+              child: _WideAction(
+                icon: Icons.edit_note_rounded,
+                title: 'Zadania otwarte',
+                subtitle: 'z kluczem odpowiedzi',
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const OpenQuestionsScreen())),
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: _WideAction(
+                icon: Icons.timer_outlined,
+                title: 'Próbna matura',
+                subtitle: examLocked ? 'w Premium' : 'arkusz na czas',
+                locked: examLocked,
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const ExamSetupScreen())),
               ),
             ),
           ],
@@ -418,8 +445,15 @@ class _WideAction extends StatelessWidget {
   final String title;
   final String subtitle;
   final VoidCallback onTap;
+  final bool locked;
 
-  const _WideAction({required this.icon, required this.title, required this.subtitle, required this.onTap});
+  const _WideAction({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    required this.onTap,
+    this.locked = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -439,6 +473,7 @@ class _WideAction extends StatelessWidget {
               ],
             ),
           ),
+          if (locked) const Icon(Icons.lock_rounded, color: AppColors.orange, size: 16),
         ],
       ),
     );

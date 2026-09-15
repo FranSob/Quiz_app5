@@ -94,6 +94,8 @@ class DailyPlan {
   final bool testDoneToday;
   final DataTask? dataTask;
   final bool dataTaskDoneToday;
+  final OpenQuestion? openQuestion;
+  final bool openDoneToday;
 
   const DailyPlan({
     required this.summary,
@@ -106,6 +108,8 @@ class DailyPlan {
     this.testDoneToday = false,
     this.dataTask,
     this.dataTaskDoneToday = false,
+    this.openQuestion,
+    this.openDoneToday = false,
   });
 
   bool get isActive => summary.phase == PlanPhase.learning || summary.phase == PlanPhase.revision;
@@ -115,11 +119,16 @@ class DailyPlan {
   bool get cardsDone => cardsReviewedToday >= cardsTarget;
 
   int get totalItems =>
-      topics.length + (cardsTarget > 0 ? 1 : 0) + (testTopic != null ? 1 : 0) + (dataTask != null ? 1 : 0);
+      topics.length +
+      (cardsTarget > 0 ? 1 : 0) +
+      (testTopic != null ? 1 : 0) +
+      (dataTask != null ? 1 : 0) +
+      (openQuestion != null ? 1 : 0);
 
   int get doneItems =>
       topics.where(isTopicDone).length +
       (cardsTarget > 0 && cardsDone ? 1 : 0) +
       (testTopic != null && testDoneToday ? 1 : 0) +
-      (dataTask != null && dataTaskDoneToday ? 1 : 0);
+      (dataTask != null && dataTaskDoneToday ? 1 : 0) +
+      (openQuestion != null && openDoneToday ? 1 : 0);
 }

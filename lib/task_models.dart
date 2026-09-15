@@ -167,3 +167,37 @@ class DataTask {
   /// Klasa wynika z prefiksu tematu, np. „k3_…" → 3.
   int get classLevel => int.parse(topicId.substring(1, 2));
 }
+
+/// Element odpowiedzi, za który w kluczu przyznaje się punkty.
+class OpenCriterion {
+  final String text;
+  final int points;
+
+  const OpenCriterion(this.text, {this.points = 1});
+}
+
+/// Zadanie otwarte oceniane według klucza — uczeń sam zaznacza, które
+/// elementy odpowiedzi wzorcowej zawiera jego odpowiedź.
+class OpenQuestion {
+  final String id;
+  final String topicId;
+  final String prompt;
+  final List<OpenCriterion> criteria;
+  final String modelAnswer;
+
+  /// Zadanie z metodologii badań (problem badawczy, hipoteza, próba kontrolna).
+  final bool experiment;
+
+  const OpenQuestion({
+    required this.id,
+    required this.topicId,
+    required this.prompt,
+    required this.criteria,
+    required this.modelAnswer,
+    this.experiment = false,
+  });
+
+  int get maxPoints => criteria.fold(0, (sum, c) => sum + c.points);
+
+  int get classLevel => int.parse(topicId.substring(1, 2));
+}

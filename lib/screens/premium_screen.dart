@@ -55,16 +55,17 @@ class PremiumScreen extends StatefulWidget {
 class _PremiumScreenState extends State<PremiumScreen> {
   bool _yearly = true;
 
+  // Tylko funkcje, które naprawdę są w aplikacji. Podział: lib/logic/premium.dart.
   static const _rows = [
-    ['Pytania dzienne', '20', 'bez limitu'],
-    ['Fiszki i powtórki', 'bez limitu', 'bez limitu'],
     ['Teoria wszystkich działów', 'tak', 'tak'],
-    ['Statystyki', 'podstawowe', 'zaawansowane'],
-    ['AI-tutor', 'nie', '50 wiad./dzień'],
-    ['Pytania otwarte oceniane przez AI', 'nie', 'punkty + feedback'],
-    ['Tryb maturalny z timerem', 'nie', 'tak'],
-    ['Pełne arkusze maturalne', 'nie', 'tak'],
-    ['Tryb offline', 'podstawowy', 'pełny'],
+    ['Fiszki z powtórkami', 'bez limitu', 'bez limitu'],
+    ['Testy, sprawdziany i ćwiczenie luk', 'bez limitu', 'bez limitu'],
+    ['Plan nauki do matury', 'tak', 'tak'],
+    ['Zadania z danymi i zadania otwarte', 'tak', 'tak'],
+    ['Notatki do druku (PDF)', 'tak', 'tak'],
+    ['Statystyki i wykryte luki', 'tak', 'tak'],
+    ['Próbna matura z timerem', 'nie', 'tak'],
+    ['Wskaźnik gotowości do matury', 'nie', 'tak'],
   ];
 
   Future<void> _unlock(AppState state) async {
@@ -129,7 +130,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'AI-tutor, pytania otwarte oceniane przez AI i tryb maturalny z timerem.',
+                  'Cała nauka jest za darmo. Premium dodaje próbną maturę z timerem i wskaźnik gotowości do matury.',
                   style: TextStyle(color: Colors.white, fontSize: 14, height: 1.4),
                 ),
               ],

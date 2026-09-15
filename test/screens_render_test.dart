@@ -69,6 +69,8 @@ void main() {
     expect(find.text('SPRAWDZIAN ZA 3 DNI'), findsOneWidget);
     expect(find.text('TWOJA NAJWIĘKSZA LUKA'), findsOneWidget);
     expect(find.text('Genetyka populacji i prawo Hardy\'ego–Weinberga'), findsOneWidget);
+    expect(find.text('Zadania otwarte'), findsOneWidget);
+    expect(find.text('Próbna matura'), findsOneWidget);
   });
 
   testWidgets('study plan screen', (tester) async {
@@ -79,6 +81,7 @@ void main() {
     expect(find.text('Matura: 10 maja 2027'), findsOneWidget);
     expect(find.text('Powtórz 30 fiszek'), findsOneWidget);
     expect(find.textContaining('Zadanie z danymi: Wpływ temperatury'), findsOneWidget);
+    expect(find.textContaining('Zadanie otwarte: '), findsOneWidget);
   });
 
   testWidgets('stats, gaps, premium and data task list render', (tester) async {

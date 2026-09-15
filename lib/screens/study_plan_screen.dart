@@ -11,6 +11,7 @@ import '../utils/plurals.dart';
 import '../widgets/app_card.dart';
 import 'data_task_screen.dart';
 import 'flashcards_screen.dart';
+import 'open_question_screen.dart';
 import 'quiz_screen.dart';
 import 'theory_screen.dart';
 
@@ -25,6 +26,7 @@ String planItemsLabel(DailyPlan plan) => [
       if (plan.cardsTarget > 0) cardsLabel(plan.cardsTarget),
       if (plan.testTopic != null) '1 test',
       if (plan.dataTask != null) '1 zadanie z danymi',
+      if (plan.openQuestion != null) '1 zadanie otwarte',
     ].join(' · ');
 
 Future<void> pickExamDate(BuildContext context) async {
@@ -144,6 +146,15 @@ class StudyPlanScreen extends StatelessWidget {
                   builder: (_) => DataTaskScreen(task: plan.dataTask!),
                 )),
               ),
+            if (plan.openQuestion != null)
+              _PlanItem(
+                done: plan.openDoneToday,
+                title: 'Zadanie otwarte: ${findTopicById(plan.openQuestion!.topicId)?.name ?? ''}',
+                subtitle: 'Napisz odpowiedź i oceń ją według klucza',
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => OpenQuestionScreen(question: plan.openQuestion!),
+                )),
+              ),
           ],
           const SizedBox(height: 20),
           AppCard(
@@ -175,7 +186,7 @@ class StudyPlanScreen extends StatelessWidget {
         return [
           const AppCard(
             child: Text(
-              'Ustaw datę matury, a rozpiszę cały materiał na dni: codziennie dostaniesz listę tematów, fiszek, test i zadanie z danymi.',
+              'Ustaw datę matury, a rozpiszę cały materiał na dni: codziennie dostaniesz listę tematów, fiszek, test, zadanie z danymi i zadanie otwarte.',
               style: TextStyle(fontSize: 14, height: 1.4),
             ),
           ),
@@ -223,7 +234,7 @@ class StudyPlanScreen extends StatelessWidget {
                 Text(
                   summary.phase == PlanPhase.learning
                       ? 'Nowy materiał: ${topicsLabel(summary.topicsPerDay)} dziennie do ${formatDatePl(revisionStart)}, potem powtórki.'
-                      : 'Czas powtórek: fiszki, testy z luk i zadania z danymi.',
+                      : 'Czas powtórek: fiszki, testy z luk, zadania z danymi i zadania otwarte.',
                   style: const TextStyle(color: Colors.white, fontSize: 13, height: 1.4),
                 ),
               ],

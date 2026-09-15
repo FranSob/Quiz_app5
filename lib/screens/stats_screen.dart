@@ -1,14 +1,15 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:provider/provider.dart';
 
 import '../data/biology_data.dart';
+import '../logic/premium.dart';
 import '../state/app_state.dart';
 import '../theme.dart';
 import '../widgets/app_card.dart';
+import '../widgets/premium_lock.dart';
 import 'gaps_screen.dart';
-import 'premium_screen.dart';
+import 'readiness_screen.dart';
 
 class StatsScreen extends StatelessWidget {
   const StatsScreen({super.key});
@@ -185,7 +186,30 @@ class StatsScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 16),
-        _LockedAchievements(isPremium: state.isPremium),
+        if (isFeatureLocked(PremiumFeature.readiness, isPremium: state.isPremium))
+          const PremiumLockedCard(feature: PremiumFeature.readiness, description: readinessDescription)
+        else
+          AppCard(
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const ReadinessScreen())),
+            child: Row(
+              children: [
+                Text('${state.readinessReport.overall.round()}%',
+                    style: const TextStyle(color: AppColors.green, fontSize: 26, fontWeight: FontWeight.bold)),
+                const SizedBox(width: 14),
+                const Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Gotowość do matury', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                      Text('Szacunek opanowania materiału klas 1–4',
+                          style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
+                    ],
+                  ),
+                ),
+                const Icon(Icons.chevron_right_rounded, color: AppColors.textMuted),
+              ],
+            ),
+          ),
       ],
     );
   }
@@ -212,74 +236,3 @@ class _StatTile extends StatelessWidget {
   }
 }
 
-class _LockedAchievements extends StatelessWidget {
-  final bool isPremium;
-  const _LockedAchievements({required this.isPremium});
-
-  @override
-  Widget build(BuildContext context) {
-    final content = AppCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text('Najnowsze osiągnięcia', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-          SizedBox(height: 6),
-          Text('Program nauki, historia sesji, szczegółowa analiza.', style: TextStyle(color: AppColors.textMuted, fontSize: 13)),
-          SizedBox(height: 16),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: [
-              _FakeChip(),
-              _FakeChip(),
-              _FakeChip(),
-            ],
-          ),
-        ],
-      ),
-    );
-
-    if (isPremium) return content;
-
-    return Stack(
-      children: [
-        ImageFiltered(
-          imageFilter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-          child: content,
-        ),
-        Positioned.fill(
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: const BoxDecoration(color: AppColors.orange, shape: BoxShape.circle),
-                  child: const Icon(Icons.lock_rounded, color: Colors.black),
-                ),
-                const SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const PremiumScreen())),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black),
-                  child: const Text('Odblokuj w Premium'),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _FakeChip extends StatelessWidget {
-  const _FakeChip();
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 90,
-      height: 28,
-      decoration: BoxDecoration(color: AppColors.green.withValues(alpha: 0.3), borderRadius: BorderRadius.circular(8)),
-    );
-  }
-}

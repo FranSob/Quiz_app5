@@ -107,7 +107,7 @@ class _Legend extends StatelessWidget {
                 decoration: BoxDecoration(color: _seriesColors[i % _seriesColors.length], borderRadius: BorderRadius.circular(2)),
               ),
               const SizedBox(width: 6),
-              Text(names[i], style: const TextStyle(fontSize: 12)),
+              Flexible(child: Text(names[i], style: const TextStyle(fontSize: 12))),
             ],
           ),
       ],
@@ -440,7 +440,7 @@ class _LegendSymbol extends StatelessWidget {
       children: [
         SizedBox(width: 14, height: 14, child: CustomPaint(painter: _SymbolPainter(male, affected, ink))),
         const SizedBox(width: 6),
-        Text(label, style: const TextStyle(fontSize: 12)),
+        Flexible(child: Text(label, style: const TextStyle(fontSize: 12))),
       ],
     );
   }

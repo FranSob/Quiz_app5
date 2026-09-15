@@ -87,6 +87,41 @@ class PlannedTest {
       );
 }
 
+/// Wynik próbnej matury.
+class ExamRecord {
+  final String dateKey;
+  final String variant;
+  final int points;
+  final int maxPoints;
+  final int seconds;
+
+  const ExamRecord({
+    required this.dateKey,
+    required this.variant,
+    required this.points,
+    required this.maxPoints,
+    required this.seconds,
+  });
+
+  double get percent => maxPoints > 0 ? points / maxPoints * 100 : 0;
+
+  Map<String, dynamic> toJson() => {
+        'date': dateKey,
+        'variant': variant,
+        'points': points,
+        'max': maxPoints,
+        'seconds': seconds,
+      };
+
+  factory ExamRecord.fromJson(Map<String, dynamic> j) => ExamRecord(
+        dateKey: j['date'],
+        variant: j['variant'] ?? 'mini',
+        points: j['points'] ?? 0,
+        maxPoints: j['max'] ?? 0,
+        seconds: j['seconds'] ?? 0,
+      );
+}
+
 class Topic {
   final String id;
   final String name;

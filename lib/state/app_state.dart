@@ -6,6 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/biology_data.dart';
 import '../data/data_tasks.dart';
+import '../data/open_questions.dart';
+import '../logic/readiness.dart';
 import '../logic/study_plan.dart';
 import '../models.dart';
 import '../utils/dates.dart';
@@ -16,6 +18,7 @@ class DailyStat {
   int cards;
   int tests;
   int dataTasks;
+  int openAnswers;
   final Set<String> topicsRead;
 
   DailyStat({
@@ -24,6 +27,7 @@ class DailyStat {
     this.cards = 0,
     this.tests = 0,
     this.dataTasks = 0,
+    this.openAnswers = 0,
     Set<String>? topicsRead,
   }) : topicsRead = topicsRead ?? {};
 
@@ -33,6 +37,7 @@ class DailyStat {
         'f': cards,
         't': tests,
         'd': dataTasks,
+        'o': openAnswers,
         'r': topicsRead.toList(),
       };
 
@@ -42,6 +47,7 @@ class DailyStat {
         cards: j['f'] ?? 0,
         tests: j['t'] ?? 0,
         dataTasks: j['d'] ?? 0,
+        openAnswers: j['o'] ?? 0,
         topicsRead: Set<String>.from(j['r'] ?? const []),
       );
 }
@@ -141,7 +147,14 @@ class AppState extends ChangeNotifier {
 
   /// Najlepszy wynik (liczba poprawnych odpowiedzi) w zadaniach z danymi.
   final Map<String, int> dataTaskBest = {};
+
+  /// Najlepszy wynik (punkty) w zadaniach otwartych.
+  final Map<String, int> openBest = {};
   final List<PlannedTest> plannedTests = [];
+  final List<ExamRecord> examHistory = [];
+
+  /// Wskaźnik gotowości zapisany na koniec każdego dnia nauki (klucz: data).
+  final Map<String, int> readinessHistory = {};
 
   // Plan na dziś jest ustalany raz dziennie, żeby lista zadań nie zmieniała
   // się w trakcie dnia, gdy uczeń odhacza kolejne punkty.
@@ -152,6 +165,7 @@ class AppState extends ChangeNotifier {
   String? _planTestTopicId;
   bool _planTestFromGaps = false;
   String? _planDataTaskId;
+  String? _planOpenQuestionId;
 
   Future<void> load() async {
     _prefs = await SharedPreferences.getInstance();
@@ -191,9 +205,14 @@ class AppState extends ChangeNotifier {
         wrongQuestionIds.addAll(List<String>.from(j['wrongQuestions'] ?? []));
         examDateKey = parseDateKey(j['examDate']) != null ? j['examDate'] : null;
         dataTaskBest.addAll(Map<String, int>.from(j['dataTaskBest'] ?? {}));
+        openBest.addAll(Map<String, int>.from(j['openBest'] ?? {}));
         plannedTests.addAll(List<dynamic>.from(j['plannedTests'] ?? [])
             .map((t) => PlannedTest.fromJson(Map<String, dynamic>.from(t)))
             .where((t) => parseDateKey(t.dateKey) != null));
+        examHistory.addAll(List<dynamic>.from(j['examHistory'] ?? [])
+            .map((e) => ExamRecord.fromJson(Map<String, dynamic>.from(e)))
+            .where((e) => parseDateKey(e.dateKey) != null));
+        readinessHistory.addAll(Map<String, int>.from(j['readinessHistory'] ?? {}));
         final plan = Map<String, dynamic>.from(j['plan'] ?? {});
         _planDayKey = plan['day'];
         _planExamKey = plan['exam'];
@@ -202,6 +221,7 @@ class AppState extends ChangeNotifier {
         _planTestTopicId = plan['test'];
         _planTestFromGaps = plan['testGaps'] ?? false;
         _planDataTaskId = plan['dataTask'];
+        _planOpenQuestionId = plan['open'];
       } catch (_) {
         // Corrupt data — start fresh.
       }
@@ -211,13 +231,13 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Nowe fiszki są od razu do powtórki, niezależnie od godziny wczytania stanu.
   void _ensureAllFlashcardsTracked() {
-    final now = clock().millisecondsSinceEpoch;
     for (final c in biologyData) {
       for (final ch in c.chapters) {
         for (final t in ch.topics) {
           for (final f in t.flashcards) {
-            _srs.putIfAbsent(f.id, () => _Srs(box: 0, dueMillis: now));
+            _srs.putIfAbsent(f.id, () => _Srs(box: 0, dueMillis: 0));
           }
         }
       }
@@ -250,7 +270,10 @@ class AppState extends ChangeNotifier {
       'wrongQuestions': wrongQuestionIds.toList(),
       'examDate': examDateKey,
       'dataTaskBest': dataTaskBest,
+      'openBest': openBest,
       'plannedTests': plannedTests.map((t) => t.toJson()).toList(),
+      'examHistory': examHistory.map((e) => e.toJson()).toList(),
+      'readinessHistory': readinessHistory,
       'plan': {
         'day': _planDayKey,
         'exam': _planExamKey,
@@ -259,6 +282,7 @@ class AppState extends ChangeNotifier {
         'test': _planTestTopicId,
         'testGaps': _planTestFromGaps,
         'dataTask': _planDataTaskId,
+        'open': _planOpenQuestionId,
       },
     };
     await _prefs!.setString(_prefsKey, jsonEncode(j));
@@ -301,6 +325,16 @@ class AppState extends ChangeNotifier {
     if (topics.isEmpty) return 0;
     final mastered = topics.where((t) => topicAccuracy(t.id) >= 80 && topicAnsweredCount(t.id) > 0).length;
     return (mastered / topics.length) * 100;
+  }
+
+  ReadinessReport get readinessReport => buildReadinessReport(
+        classes: biologyData,
+        answered: topicAnsweredCount,
+        accuracy: topicAccuracy,
+      );
+
+  void _recordReadinessSnapshot() {
+    readinessHistory[dateKey(clock())] = readinessReport.overall.round();
   }
 
   bool _isDue(String cardId, int now) {
@@ -573,6 +607,13 @@ class AppState extends ChangeNotifier {
           break;
         }
       }
+      _planOpenQuestionId = null;
+      for (final question in openQuestions) {
+        if (!openBest.containsKey(question.id) && readTopics.contains(question.topicId)) {
+          _planOpenQuestionId = question.id;
+          break;
+        }
+      }
       _planDayKey = todayKey;
       _planExamKey = examDateKey;
       _save();
@@ -593,6 +634,8 @@ class AppState extends ChangeNotifier {
       testDoneToday: (stat?.tests ?? 0) > 0,
       dataTask: _planDataTaskId == null ? null : dataTaskById(_planDataTaskId!),
       dataTaskDoneToday: (stat?.dataTasks ?? 0) > 0,
+      openQuestion: _planOpenQuestionId == null ? null : openQuestionById(_planOpenQuestionId!),
+      openDoneToday: (stat?.openAnswers ?? 0) > 0,
     );
   }
 
@@ -624,7 +667,7 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ---- Zadania z danymi ----
+  // ---- Zadania z danymi, zadania otwarte, próbna matura ----
 
   void completeDataTask(String taskId, int correct) {
     final previous = dataTaskBest[taskId];
@@ -632,6 +675,45 @@ class AppState extends ChangeNotifier {
     _todayStatForWrite().dataTasks += 1;
     totalXp += 15;
     _checkBadges();
+    _save();
+    notifyListeners();
+  }
+
+  /// Wynik zadania otwartego wlicza się do statystyk tematu punktowo:
+  /// każdy możliwy punkt to jedna „odpowiedź", a zdobyty punkt — poprawna.
+  void recordOpenAnswer({
+    required String topicId,
+    required String questionId,
+    required int points,
+    required int maxPoints,
+  }) {
+    if (maxPoints <= 0) return;
+    final earned = points.clamp(0, maxPoints);
+    final chapterId = chapterOfTopic(topicId)?.id ?? topicId;
+    _topicAnswered[topicId] = (_topicAnswered[topicId] ?? 0) + maxPoints;
+    _topicCorrect[topicId] = (_topicCorrect[topicId] ?? 0) + earned;
+    _chapterAnswered[chapterId] = (_chapterAnswered[chapterId] ?? 0) + maxPoints;
+    _chapterCorrect[chapterId] = (_chapterCorrect[chapterId] ?? 0) + earned;
+    final previous = openBest[questionId];
+    if (previous == null || earned > previous) openBest[questionId] = earned;
+    final stat = _todayStatForWrite();
+    stat.openAnswers += 1;
+    stat.answered += maxPoints;
+    stat.correct += earned;
+    totalXp += earned * 10 + 2;
+    lastActiveTopicId = topicId;
+    _checkBadges();
+    _recordReadinessSnapshot();
+    _save();
+    notifyListeners();
+  }
+
+  void completeExam(ExamRecord record) {
+    examHistory.add(record);
+    _todayStatForWrite().tests += 1;
+    totalXp += 50;
+    _checkBadges();
+    _recordReadinessSnapshot();
     _save();
     notifyListeners();
   }
@@ -684,6 +766,7 @@ class AppState extends ChangeNotifier {
     totalXp += correct ? 10 : 2;
     lastActiveTopicId = topicId;
     _checkBadges();
+    _recordReadinessSnapshot();
     _save();
     notifyListeners();
   }

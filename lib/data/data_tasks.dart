@@ -1,10 +1,11 @@
 import '../task_models.dart';
+import 'data_tasks_more.dart';
 
 /// Zadania z materiałem źródłowym, ułożone w kolejności programu (klasy 1–4).
 ///
 /// Dane liczbowe są przykładowe (hipotetyczne), ale zgodne z przebiegiem
 /// opisywanych procesów, a każdą odpowiedź da się wyczytać z materiału.
-const List<DataTask> dataTasks = [
+const List<DataTask> _coreDataTasks = [
   // ===========================================================================
   // KLASA 1
   // ===========================================================================
@@ -887,6 +888,12 @@ const List<DataTask> dataTasks = [
     ],
   ),
 ];
+
+/// Wszystkie zadania z danymi, uporządkowane według klas.
+final List<DataTask> dataTasks = List.unmodifiable([
+  for (var level = 1; level <= 4; level++)
+    ...[..._coreDataTasks, ...moreDataTasks].where((t) => t.classLevel == level),
+]);
 
 DataTask? dataTaskById(String id) {
   for (final t in dataTasks) {
