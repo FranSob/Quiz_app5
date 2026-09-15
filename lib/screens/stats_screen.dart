@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:provider/provider.dart';
 
+import '../data/biology_data.dart';
 import '../state/app_state.dart';
 import '../theme.dart';
 import '../widgets/app_card.dart';
+import 'gaps_screen.dart';
 import 'premium_screen.dart';
-import 'quiz_screen.dart';
 
 class StatsScreen extends StatelessWidget {
   const StatsScreen({super.key});
@@ -15,7 +16,8 @@ class StatsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<AppState>();
-    final weakest = state.weakestChapters();
+    final answeredChapters = state.weakestChapters(count: allChapters.length);
+    final gaps = state.topicGaps(limit: 3);
     final weekly = state.last7DaysAccuracy();
 
     return ListView(
@@ -29,7 +31,7 @@ class StatsScreen extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
-          childAspectRatio: 1.7,
+          childAspectRatio: 1.55,
           children: [
             _StatTile(value: '${state.masteredMaterialPercent.round()}%', label: 'Opanowany materiał'),
             _StatTile(value: '${state.totalQuestionsAnswered}', label: 'Rozwiązane pytania'),
@@ -45,13 +47,65 @@ class StatsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const Text('Wykryte luki', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+              const SizedBox(height: 4),
+              const Text('Tematy, w których tracisz najwięcej punktów.',
+                  style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
+              const SizedBox(height: 12),
+              if (gaps.isEmpty)
+                const Text('Brak wykrytych luk — rozwiązuj testy i powtarzaj fiszki.',
+                    style: TextStyle(color: AppColors.textMuted, fontSize: 13))
+              else ...[
+                for (final gap in gaps)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(gap.topic.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                              Text(gapReason(gap), style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        ElevatedButton(
+                          onPressed: () => openGapPractice(context, [gap], title: gap.topic.name),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.greenDark,
+                            foregroundColor: AppColors.green,
+                            elevation: 0,
+                          ),
+                          child: const Text('Ćwicz'),
+                        ),
+                      ],
+                    ),
+                  ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: TextButton(
+                    onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const GapsScreen())),
+                    child: const Text('Zobacz wszystkie luki'),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+        AppCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               const Text('Skuteczność w działach', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
               const SizedBox(height: 12),
-              if (weakest.isEmpty)
+              if (answeredChapters.isEmpty)
                 const Text('Rozwiąż pierwszy test, żeby zobaczyć podział na działy.',
                     style: TextStyle(color: AppColors.textMuted, fontSize: 13))
               else
-                ...weakest.map((c) => Padding(
+                ...answeredChapters.map((c) => Padding(
                       padding: const EdgeInsets.only(bottom: 10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,6 +171,7 @@ class StatsScreen extends StatelessWidget {
                       LineChartBarData(
                         spots: List.generate(weekly.length, (i) => FlSpot(i.toDouble(), weekly[i].value)),
                         isCurved: true,
+                        preventCurveOverShooting: true,
                         color: AppColors.green,
                         barWidth: 3,
                         dotData: const FlDotData(show: true),
@@ -126,55 +181,6 @@ class StatsScreen extends StatelessWidget {
                   ),
                 ),
               ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 16),
-        AppCard(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('Najsłabsze działy', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-              const SizedBox(height: 12),
-              if (weakest.isEmpty)
-                const Text('Brak danych — rozwiąż kilka testów.', style: TextStyle(color: AppColors.textMuted, fontSize: 13))
-              else
-                ...weakest.map((c) => Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(c.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-                                Text('${state.chapterAccuracy(c.id).round()}% skuteczności',
-                                    style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
-                              ],
-                            ),
-                          ),
-                          ElevatedButton(
-                            onPressed: c.allQuestions.isEmpty
-                                ? null
-                                : () => Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) => QuizScreen(
-                                        chapterId: c.id,
-                                        title: 'Test — ${c.name}',
-                                        items: c.topics
-                                            .expand((t) => t.questions.map((q) => QuizItem(question: q, topicId: t.id)))
-                                            .toList(),
-                                      ),
-                                    )),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.greenDark,
-                              foregroundColor: AppColors.green,
-                              elevation: 0,
-                            ),
-                            child: const Text('Ćwicz teraz'),
-                          ),
-                        ],
-                      ),
-                    )),
             ],
           ),
         ),

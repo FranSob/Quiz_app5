@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../data/biology_data.dart';
+import '../logic/school_test.dart';
 import '../models.dart';
 import '../state/app_state.dart';
 import '../theme.dart';
 import '../widgets/app_card.dart';
-
-class QuizItem {
-  final QuizQuestion question;
-  final String topicId;
-  QuizItem({required this.question, required this.topicId});
-}
+import 'theory_screen.dart';
 
 /// Pytanie z wylosowaną kolejnością odpowiedzi.
 ///
@@ -43,12 +40,28 @@ class _ShuffledQuestion {
   }
 }
 
+class _TopicScore {
+  int answered = 0;
+  int correct = 0;
+}
+
 class QuizScreen extends StatefulWidget {
-  final String chapterId;
+  /// Dział, do którego wliczają się odpowiedzi. Gdy null, dział ustala się
+  /// osobno dla każdego pytania — w testach obejmujących kilka działów.
+  final String? chapterId;
   final String title;
   final List<QuizItem> items;
 
-  const QuizScreen({super.key, required this.chapterId, required this.title, required this.items});
+  /// Pokazuje na wyniku orientacyjną ocenę szkolną (tryb sprawdzianu).
+  final bool showSchoolGrade;
+
+  const QuizScreen({
+    super.key,
+    this.chapterId,
+    required this.title,
+    required this.items,
+    this.showSchoolGrade = false,
+  });
 
   @override
   State<QuizScreen> createState() => _QuizScreenState();
@@ -56,6 +69,7 @@ class QuizScreen extends StatefulWidget {
 
 class _QuizScreenState extends State<QuizScreen> {
   late final List<_ShuffledQuestion> _items;
+  final Map<String, _TopicScore> _scores = {};
   int _index = 0;
   int? _selected;
   bool _answered = false;
@@ -75,10 +89,14 @@ class _QuizScreenState extends State<QuizScreen> {
       _selected = optionIndex;
       _answered = true;
       if (isCorrect) _correct++;
+      final score = _scores.putIfAbsent(item.topicId, () => _TopicScore());
+      score.answered++;
+      if (isCorrect) score.correct++;
     });
     context.read<AppState>().recordTestAnswer(
           topicId: item.topicId,
-          chapterId: widget.chapterId,
+          chapterId: widget.chapterId ?? chapterOfTopic(item.topicId)?.id ?? item.topicId,
+          questionId: item.question.id,
           correct: isCorrect,
         );
   }
@@ -88,7 +106,12 @@ class _QuizScreenState extends State<QuizScreen> {
       final perfect = _correct == _items.length;
       context.read<AppState>().completeTest(perfect: perfect);
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (_) => _QuizResultScreen(correct: _correct, total: _items.length),
+        builder: (_) => _QuizResultScreen(
+          correct: _correct,
+          total: _items.length,
+          scores: _scores,
+          showSchoolGrade: widget.showSchoolGrade,
+        ),
       ));
       return;
     }
@@ -177,40 +200,124 @@ class _QuizScreenState extends State<QuizScreen> {
 class _QuizResultScreen extends StatelessWidget {
   final int correct;
   final int total;
-  const _QuizResultScreen({required this.correct, required this.total});
+  final Map<String, _TopicScore> scores;
+  final bool showSchoolGrade;
+
+  const _QuizResultScreen({
+    required this.correct,
+    required this.total,
+    required this.scores,
+    required this.showSchoolGrade,
+  });
 
   @override
   Widget build(BuildContext context) {
     final pct = total > 0 ? (correct / total * 100).round() : 0;
+    final grade = gradeFor(correct, total);
+    final topicRows = [
+      for (final entry in scores.entries)
+        if (findTopicById(entry.key) != null) MapEntry(findTopicById(entry.key)!, entry.value),
+    ]..sort((a, b) => (a.value.correct / a.value.answered).compareTo(b.value.correct / b.value.answered));
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Wynik testu')),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                pct >= 80 ? Icons.emoji_events_rounded : Icons.check_circle_rounded,
-                color: AppColors.green,
-                size: 72,
-              ),
-              const SizedBox(height: 16),
-              Text('$pct%', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: AppColors.green)),
-              const SizedBox(height: 8),
-              Text('Poprawne odpowiedzi: $correct / $total', style: const TextStyle(color: AppColors.textMuted, fontSize: 15)),
-              const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst),
-                style: ElevatedButton.styleFrom(backgroundColor: AppColors.green, foregroundColor: Colors.black),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                  child: Text('Wróć do nauki'),
-                ),
-              ),
-            ],
+      appBar: AppBar(title: Text(showSchoolGrade ? 'Wynik sprawdzianu' : 'Wynik testu')),
+      body: ListView(
+        padding: const EdgeInsets.all(24),
+        children: [
+          Icon(
+            pct >= 80 ? Icons.emoji_events_rounded : Icons.check_circle_rounded,
+            color: AppColors.green,
+            size: 72,
           ),
-        ),
+          const SizedBox(height: 16),
+          Text('$pct%',
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: AppColors.green)),
+          const SizedBox(height: 8),
+          Text('Poprawne odpowiedzi: $correct / $total',
+              textAlign: TextAlign.center, style: const TextStyle(color: AppColors.textMuted, fontSize: 15)),
+          if (showSchoolGrade) ...[
+            const SizedBox(height: 20),
+            AppCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Orientacyjna ocena: ${grade.value} (${grade.name})',
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  const SizedBox(height: 6),
+                  const Text(
+                    'Według typowej skali: 100% — 6, od 90% — 5, od 75% — 4, od 55% — 3, od 40% — 2. '
+                    'W Twojej szkole progi mogą być inne.',
+                    style: TextStyle(color: AppColors.textMuted, fontSize: 12.5, height: 1.4),
+                  ),
+                ],
+              ),
+            ),
+          ],
+          if (topicRows.isNotEmpty) ...[
+            const SizedBox(height: 20),
+            const Text('WYNIK W TEMATACH',
+                style: TextStyle(color: AppColors.textMuted, fontWeight: FontWeight.bold, letterSpacing: 0.8, fontSize: 13)),
+            const SizedBox(height: 10),
+            for (final row in topicRows)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: _TopicResultRow(topic: row.key, score: row.value),
+              ),
+          ],
+          const SizedBox(height: 12),
+          ElevatedButton(
+            onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst),
+            style: ElevatedButton.styleFrom(backgroundColor: AppColors.green, foregroundColor: Colors.black),
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              child: Text('Wróć do nauki'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TopicResultRow extends StatelessWidget {
+  final Topic topic;
+  final _TopicScore score;
+
+  const _TopicResultRow({required this.topic, required this.score});
+
+  @override
+  Widget build(BuildContext context) {
+    final percent = score.correct / score.answered * 100;
+    final needsReview = percent < gapAccuracyThreshold;
+    return AppCard(
+      padding: const EdgeInsets.fromLTRB(14, 12, 8, 12),
+      child: Row(
+        children: [
+          Icon(
+            needsReview ? Icons.error_outline_rounded : Icons.check_circle_outline_rounded,
+            color: needsReview ? AppColors.orange : AppColors.green,
+            size: 22,
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(topic.name, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
+                Text(
+                  '${score.correct} / ${score.answered} poprawnych${needsReview ? ' · do powtórki' : ''}',
+                  style: const TextStyle(color: AppColors.textMuted, fontSize: 12),
+                ),
+              ],
+            ),
+          ),
+          if (needsReview)
+            TextButton(
+              onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => TheoryScreen(topic: topic))),
+              child: const Text('Teoria'),
+            ),
+        ],
       ),
     );
   }

@@ -5,6 +5,46 @@ import '../state/app_state.dart';
 import '../theme.dart';
 import '../widgets/app_card.dart';
 
+/// Porównanie ceny rocznej z korepetycjami. Wyliczenia: rok szkolny to około
+/// 36 tygodni, więc lekcja raz w tygodniu po 100–150 zł kosztuje 3600–5400 zł;
+/// 149 zł : 365 dni ≈ 41 gr dziennie.
+class _TutoringComparison extends StatelessWidget {
+  const _TutoringComparison();
+
+  @override
+  Widget build(BuildContext context) {
+    return AppCard(
+      borderColor: AppColors.orange,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(color: AppColors.orange.withValues(alpha: 0.18), borderRadius: BorderRadius.circular(10)),
+            child: const Icon(Icons.school_outlined, color: AppColors.orange),
+          ),
+          const SizedBox(width: 12),
+          const Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('149 zł za cały rok = mniej niż jedna godzina korepetycji',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, height: 1.3)),
+                SizedBox(height: 8),
+                Text(
+                  'Godzina korepetycji z biologii kosztuje zwykle 100–150 zł. Korepetycje raz w tygodniu przez rok szkolny '
+                  'to około 3600–5400 zł. Premium w planie rocznym to około 41 gr dziennie.',
+                  style: TextStyle(color: AppColors.textMuted, fontSize: 12.5, height: 1.45),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class PremiumScreen extends StatefulWidget {
   const PremiumScreen({super.key});
 
@@ -99,6 +139,8 @@ class _PremiumScreenState extends State<PremiumScreen> {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
+                const _TutoringComparison(),
+                const SizedBox(height: 16),
                 AppCard(
                   padding: EdgeInsets.zero,
                   child: Table(
@@ -196,7 +238,8 @@ class _PremiumScreenState extends State<PremiumScreen> {
                                   ),
                                 ],
                               ),
-                              const Text('12,42 zł / miesiąc · polecany', style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
+                              const Text('12,42 zł / miesiąc · mniej niż 1 h korepetycji',
+                                  style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
                             ],
                           ),
                         ),

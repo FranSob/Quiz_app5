@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'state/app_state.dart';
@@ -43,6 +44,9 @@ class _BioMaturaAppState extends State<BioMaturaApp> {
           return MaterialApp(
             title: 'BioMatura',
             debugShowCheckedModeBanner: false,
+            locale: const Locale('pl'),
+            supportedLocales: const [Locale('pl')],
+            localizationsDelegates: GlobalMaterialLocalizations.delegates,
             theme: buildLightTheme(),
             darkTheme: buildDarkTheme(),
             themeMode: state.themeMode,

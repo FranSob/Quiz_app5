@@ -5,7 +5,9 @@ import '../data/biology_data.dart';
 import '../models.dart';
 import '../state/app_state.dart';
 import '../theme.dart';
+import '../utils/theory_sections.dart';
 import '../widgets/app_card.dart';
+import '../widgets/notes_export_sheet.dart';
 import 'flashcards_screen.dart';
 import 'quiz_screen.dart';
 
@@ -28,28 +30,40 @@ class _TheoryScreenState extends State<TheoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final sections = widget.topic.theory.trim().split('\n\n');
+    final sections = parseTheorySections(widget.topic.theory);
+    final chapter = chapterOfTopic(widget.topic.id);
     return Scaffold(
-      appBar: AppBar(title: Text(widget.topic.name)),
+      appBar: AppBar(
+        title: Text(widget.topic.name),
+        actions: [
+          IconButton(
+            tooltip: 'Notatki do druku (PDF)',
+            icon: const Icon(Icons.print_outlined),
+            onPressed: () => showNotesExportSheet(
+              context,
+              title: widget.topic.name,
+              subtitle: chapter?.name,
+              topics: [widget.topic],
+            ),
+          ),
+        ],
+      ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
           ...sections.map((section) {
-            final lines = section.trim().split('\n');
-            final isHeading = lines.first == lines.first.toUpperCase() && lines.first.length > 3 && lines.length > 1;
             return Padding(
               padding: const EdgeInsets.only(bottom: 16),
               child: AppCard(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (isHeading) ...[
-                      Text(lines.first,
+                    if (section.heading != null) ...[
+                      Text(section.heading!,
                           style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 14, letterSpacing: 0.3)),
                       const SizedBox(height: 8),
-                      Text(lines.skip(1).join('\n'), style: const TextStyle(fontSize: 14, height: 1.5)),
-                    ] else
-                      Text(section, style: const TextStyle(fontSize: 14, height: 1.5)),
+                    ],
+                    Text(section.body, style: const TextStyle(fontSize: 14, height: 1.5)),
                   ],
                 ),
               ),
@@ -76,7 +90,7 @@ class _TheoryScreenState extends State<TheoryScreen> {
                       ? null
                       : () => Navigator.of(context).push(MaterialPageRoute(
                             builder: (_) => QuizScreen(
-                              chapterId: chapterOfTopic(widget.topic.id)?.id ?? widget.topic.id,
+                              chapterId: chapter?.id ?? widget.topic.id,
                               title: widget.topic.name,
                               items: widget.topic.questions
                                   .map((q) => QuizItem(question: q, topicId: widget.topic.id))

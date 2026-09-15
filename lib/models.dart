@@ -50,6 +50,43 @@ class QuizQuestion {
   });
 }
 
+/// Pytanie testowe razem z tematem, do którego należy — potrzebne przy
+/// testach mieszanych (luki, sprawdziany), obejmujących wiele tematów.
+class QuizItem {
+  final QuizQuestion question;
+  final String topicId;
+  const QuizItem({required this.question, required this.topicId});
+}
+
+/// Sprawdzian szkolny zaplanowany przez ucznia na konkretny dzień.
+class PlannedTest {
+  final String id;
+  final String dateKey;
+  final int classLevel;
+  final List<String> chapterIds;
+
+  const PlannedTest({
+    required this.id,
+    required this.dateKey,
+    required this.classLevel,
+    required this.chapterIds,
+  });
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'date': dateKey,
+        'class': classLevel,
+        'chapters': chapterIds,
+      };
+
+  factory PlannedTest.fromJson(Map<String, dynamic> j) => PlannedTest(
+        id: j['id'],
+        dateKey: j['date'],
+        classLevel: j['class'] ?? 1,
+        chapterIds: List<String>.from(j['chapters'] ?? []),
+      );
+}
+
 class Topic {
   final String id;
   final String name;

@@ -5,6 +5,7 @@ import '../models.dart';
 import '../state/app_state.dart';
 import '../theme.dart';
 import '../widgets/app_card.dart';
+import '../widgets/notes_export_sheet.dart';
 import '../widgets/progress_ring.dart';
 import 'flashcards_screen.dart';
 import 'quiz_screen.dart';
@@ -19,7 +20,21 @@ class ChapterDetailScreen extends StatelessWidget {
     final state = context.watch<AppState>();
 
     return Scaffold(
-      appBar: AppBar(title: Text(chapter.name)),
+      appBar: AppBar(
+        title: Text(chapter.name),
+        actions: [
+          IconButton(
+            tooltip: 'Notatki z działu (PDF)',
+            icon: const Icon(Icons.print_outlined),
+            onPressed: () => showNotesExportSheet(
+              context,
+              title: chapter.name,
+              subtitle: 'Notatki z działu',
+              topics: chapter.topics,
+            ),
+          ),
+        ],
+      ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
