@@ -43,3 +43,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Klucze i podpisywanie — nigdy do repozytorium
+supabase.json
+*.jks
+*.keystore
+/android/key.properties

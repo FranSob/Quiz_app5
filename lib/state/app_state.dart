@@ -8,9 +8,13 @@ import '../data/biology_data.dart';
 import '../data/data_tasks.dart';
 import '../data/open_questions.dart';
 import '../logic/readiness.dart';
+import '../logic/state_merge.dart';
 import '../logic/study_plan.dart';
 import '../models.dart';
 import '../utils/dates.dart';
+
+/// Co zrobiła ostatnia synchronizacja — komunikat dla ucznia.
+enum SyncOutcome { uploaded, downloaded, merged, upToDate, failed }
 
 class DailyStat {
   int answered;
@@ -32,24 +36,24 @@ class DailyStat {
   }) : topicsRead = topicsRead ?? {};
 
   Map<String, dynamic> toJson() => {
-        'a': answered,
-        'c': correct,
-        'f': cards,
-        't': tests,
-        'd': dataTasks,
-        'o': openAnswers,
-        'r': topicsRead.toList(),
-      };
+    'a': answered,
+    'c': correct,
+    'f': cards,
+    't': tests,
+    'd': dataTasks,
+    'o': openAnswers,
+    'r': topicsRead.toList(),
+  };
 
   factory DailyStat.fromJson(Map<String, dynamic> j) => DailyStat(
-        answered: j['a'] ?? 0,
-        correct: j['c'] ?? 0,
-        cards: j['f'] ?? 0,
-        tests: j['t'] ?? 0,
-        dataTasks: j['d'] ?? 0,
-        openAnswers: j['o'] ?? 0,
-        topicsRead: Set<String>.from(j['r'] ?? const []),
-      );
+    answered: j['a'] ?? 0,
+    correct: j['c'] ?? 0,
+    cards: j['f'] ?? 0,
+    tests: j['t'] ?? 0,
+    dataTasks: j['d'] ?? 0,
+    openAnswers: j['o'] ?? 0,
+    topicsRead: Set<String>.from(j['r'] ?? const []),
+  );
 }
 
 class _Srs {
@@ -172,62 +176,139 @@ class AppState extends ChangeNotifier {
     final raw = _prefs!.getString(_prefsKey);
     if (raw != null) {
       try {
-        final j = jsonDecode(raw) as Map<String, dynamic>;
-        themeMode = (j['themeMode'] == 'light') ? ThemeMode.light : ThemeMode.dark;
-        selectedClassLevel = j['selectedClassLevel'] ?? 4;
-        userName = j['userName'] ?? 'Uczeń';
-        totalXp = j['totalXp'] ?? 0;
-        isPremium = j['isPremium'] ?? false;
-        lastActiveTopicId = j['lastActiveTopicId'];
-        flashcardReviews = j['flashcardReviews'] ?? 0;
-        testsCompleted = j['testsCompleted'] ?? 0;
-        totalQuestionsAnswered = j['totalQuestionsAnswered'] ?? 0;
-        totalQuestionsCorrect = j['totalQuestionsCorrect'] ?? 0;
-        anyPerfectTest = j['anyPerfectTest'] ?? false;
-        _topicAnswered.addAll(Map<String, int>.from(j['topicAnswered'] ?? {}));
-        _topicCorrect.addAll(Map<String, int>.from(j['topicCorrect'] ?? {}));
-        _chapterAnswered.addAll(Map<String, int>.from(j['chapterAnswered'] ?? {}));
-        _chapterCorrect.addAll(Map<String, int>.from(j['chapterCorrect'] ?? {}));
-        readTopics.addAll(List<String>.from(j['readTopics'] ?? []));
-        unlockedBadges.addAll(List<String>.from(j['unlockedBadges'] ?? []));
-        final srsJson = Map<String, dynamic>.from(j['srs'] ?? {});
-        srsJson.forEach((k, v) {
-          _srs[k] = _Srs.fromJson(Map<String, dynamic>.from(v));
-        });
-        final dailyJson = Map<String, dynamic>.from(j['dailyStats'] ?? {});
-        dailyJson.forEach((k, v) {
-          dailyStats[k] = DailyStat.fromJson(Map<String, dynamic>.from(v));
-        });
-        final foldersJson = List<dynamic>.from(j['customFolders'] ?? []);
-        customFolders.addAll(
-          foldersJson.map((f) => FlashcardFolder.fromJson(Map<String, dynamic>.from(f))),
-        );
-        wrongQuestionIds.addAll(List<String>.from(j['wrongQuestions'] ?? []));
-        examDateKey = parseDateKey(j['examDate']) != null ? j['examDate'] : null;
-        dataTaskBest.addAll(Map<String, int>.from(j['dataTaskBest'] ?? {}));
-        openBest.addAll(Map<String, int>.from(j['openBest'] ?? {}));
-        plannedTests.addAll(List<dynamic>.from(j['plannedTests'] ?? [])
-            .map((t) => PlannedTest.fromJson(Map<String, dynamic>.from(t)))
-            .where((t) => parseDateKey(t.dateKey) != null));
-        examHistory.addAll(List<dynamic>.from(j['examHistory'] ?? [])
-            .map((e) => ExamRecord.fromJson(Map<String, dynamic>.from(e)))
-            .where((e) => parseDateKey(e.dateKey) != null));
-        readinessHistory.addAll(Map<String, int>.from(j['readinessHistory'] ?? {}));
-        final plan = Map<String, dynamic>.from(j['plan'] ?? {});
-        _planDayKey = plan['day'];
-        _planExamKey = plan['exam'];
-        _planTopicIds = List<String>.from(plan['topics'] ?? []);
-        _planCardsTarget = plan['cards'] ?? 0;
-        _planTestTopicId = plan['test'];
-        _planTestFromGaps = plan['testGaps'] ?? false;
-        _planDataTaskId = plan['dataTask'];
-        _planOpenQuestionId = plan['open'];
+        _applyJson(jsonDecode(raw) as Map<String, dynamic>);
       } catch (_) {
         // Corrupt data — start fresh.
       }
     }
     _ensureAllFlashcardsTracked();
     _loaded = true;
+    notifyListeners();
+  }
+
+  /// Czyści cały postęp w pamięci — przed wczytaniem innego zapisu.
+  void _clearAll() {
+    _topicAnswered.clear();
+    _topicCorrect.clear();
+    _chapterAnswered.clear();
+    _chapterCorrect.clear();
+    _srs.clear();
+    readTopics.clear();
+    dailyStats.clear();
+    unlockedBadges.clear();
+    customFolders.clear();
+    wrongQuestionIds.clear();
+    dataTaskBest.clear();
+    openBest.clear();
+    plannedTests.clear();
+    examHistory.clear();
+    readinessHistory.clear();
+  }
+
+  void _applyJson(Map<String, dynamic> j) {
+    _clearAll();
+    themeMode = (j['themeMode'] == 'light') ? ThemeMode.light : ThemeMode.dark;
+    selectedClassLevel = j['selectedClassLevel'] ?? 4;
+    userName = j['userName'] ?? 'Uczeń';
+    totalXp = j['totalXp'] ?? 0;
+    isPremium = j['isPremium'] ?? false;
+    lastActiveTopicId = j['lastActiveTopicId'];
+    flashcardReviews = j['flashcardReviews'] ?? 0;
+    testsCompleted = j['testsCompleted'] ?? 0;
+    totalQuestionsAnswered = j['totalQuestionsAnswered'] ?? 0;
+    totalQuestionsCorrect = j['totalQuestionsCorrect'] ?? 0;
+    anyPerfectTest = j['anyPerfectTest'] ?? false;
+    _topicAnswered.addAll(Map<String, int>.from(j['topicAnswered'] ?? {}));
+    _topicCorrect.addAll(Map<String, int>.from(j['topicCorrect'] ?? {}));
+    _chapterAnswered.addAll(Map<String, int>.from(j['chapterAnswered'] ?? {}));
+    _chapterCorrect.addAll(Map<String, int>.from(j['chapterCorrect'] ?? {}));
+    readTopics.addAll(List<String>.from(j['readTopics'] ?? []));
+    unlockedBadges.addAll(List<String>.from(j['unlockedBadges'] ?? []));
+    final srsJson = Map<String, dynamic>.from(j['srs'] ?? {});
+    srsJson.forEach((k, v) {
+      _srs[k] = _Srs.fromJson(Map<String, dynamic>.from(v));
+    });
+    final dailyJson = Map<String, dynamic>.from(j['dailyStats'] ?? {});
+    dailyJson.forEach((k, v) {
+      dailyStats[k] = DailyStat.fromJson(Map<String, dynamic>.from(v));
+    });
+    final foldersJson = List<dynamic>.from(j['customFolders'] ?? []);
+    customFolders.addAll(foldersJson.map((f) => FlashcardFolder.fromJson(Map<String, dynamic>.from(f))));
+    wrongQuestionIds.addAll(List<String>.from(j['wrongQuestions'] ?? []));
+    examDateKey = parseDateKey(j['examDate']) != null ? j['examDate'] : null;
+    dataTaskBest.addAll(Map<String, int>.from(j['dataTaskBest'] ?? {}));
+    openBest.addAll(Map<String, int>.from(j['openBest'] ?? {}));
+    plannedTests.addAll(
+      List<dynamic>.from(
+        j['plannedTests'] ?? [],
+      ).map((t) => PlannedTest.fromJson(Map<String, dynamic>.from(t))).where((t) => parseDateKey(t.dateKey) != null),
+    );
+    examHistory.addAll(
+      List<dynamic>.from(
+        j['examHistory'] ?? [],
+      ).map((e) => ExamRecord.fromJson(Map<String, dynamic>.from(e))).where((e) => parseDateKey(e.dateKey) != null),
+    );
+    readinessHistory.addAll(Map<String, int>.from(j['readinessHistory'] ?? {}));
+    final plan = Map<String, dynamic>.from(j['plan'] ?? {});
+    _planDayKey = plan['day'];
+    _planExamKey = plan['exam'];
+    _planTopicIds = List<String>.from(plan['topics'] ?? []);
+    _planCardsTarget = plan['cards'] ?? 0;
+    _planTestTopicId = plan['test'];
+    _planTestFromGaps = plan['testGaps'] ?? false;
+    _planDataTaskId = plan['dataTask'];
+    _planOpenQuestionId = plan['open'];
+    _stateUpdatedAt = j['updatedAt'] is int ? j['updatedAt'] : 0;
+  }
+
+  /// Synchronizacja z chmurą: pobiera zdalny zapis, scala go z lokalnym
+  /// (nic nie ginie — patrz [mergeStates]) i odsyła wynik, jeśli się zmienił.
+  Future<SyncOutcome> syncWith({
+    required Future<Map<String, dynamic>?> Function() fetch,
+    required Future<void> Function(Map<String, dynamic> state) push,
+  }) async {
+    final local = exportState();
+    Map<String, dynamic>? remote;
+    try {
+      remote = await fetch();
+    } catch (_) {
+      return SyncOutcome.failed;
+    }
+    try {
+      if (remote == null) {
+        await push(local);
+        return SyncOutcome.uploaded;
+      }
+      final merged = mergeStates(local, remote);
+      final mergedJson = _canonical(merged);
+      final localChanged = mergedJson != _canonical(local);
+      final remoteChanged = mergedJson != _canonical(remote);
+      if (localChanged) await applyState(merged);
+      if (remoteChanged) await push(merged);
+      if (localChanged && remoteChanged) return SyncOutcome.merged;
+      if (localChanged) return SyncOutcome.downloaded;
+      if (remoteChanged) return SyncOutcome.uploaded;
+      return SyncOutcome.upToDate;
+    } catch (_) {
+      return SyncOutcome.failed;
+    }
+  }
+
+  /// Porównanie zapisów niezależne od kolejności kluczy.
+  static String _canonical(Object? value) {
+    if (value is Map) {
+      final keys = value.keys.map((k) => k.toString()).toList()..sort();
+      return '{${keys.map((k) => '$k:${_canonical(value[k])}').join(',')}}';
+    }
+    if (value is List) return '[${value.map(_canonical).join(',')}]';
+    return '$value';
+  }
+
+  /// Podmienia cały stan na scalony zapis z chmury.
+  Future<void> applyState(Map<String, dynamic> json) async {
+    _applyJson(json);
+    _ensureAllFlashcardsTracked();
+    await _save(touch: false);
     notifyListeners();
   }
 
@@ -244,9 +325,21 @@ class AppState extends ChangeNotifier {
     }
   }
 
-  Future<void> _save() async {
+  /// Kiedy ostatnio zmienił się postęp — po tym poznaję, który zapis
+  /// (ten w telefonie czy ten w chmurze) jest świeższy.
+  int _stateUpdatedAt = 0;
+
+  int get stateUpdatedAt => _stateUpdatedAt;
+
+  Future<void> _save({bool touch = true}) async {
+    if (touch) _stateUpdatedAt = clock().millisecondsSinceEpoch;
     if (_prefs == null) return;
-    final j = <String, dynamic>{
+    await _prefs!.setString(_prefsKey, jsonEncode(exportState()));
+  }
+
+  /// Cały postęp jako JSON — do zapisu lokalnego i do wysyłki do chmury.
+  Map<String, dynamic> exportState() {
+    return <String, dynamic>{
       'themeMode': themeMode == ThemeMode.light ? 'light' : 'dark',
       'selectedClassLevel': selectedClassLevel,
       'userName': userName,
@@ -284,8 +377,8 @@ class AppState extends ChangeNotifier {
         'dataTask': _planDataTaskId,
         'open': _planOpenQuestionId,
       },
+      'updatedAt': _stateUpdatedAt,
     };
-    await _prefs!.setString(_prefsKey, jsonEncode(j));
   }
 
   // ---- Derived values ----
@@ -294,9 +387,7 @@ class AppState extends ChangeNotifier {
   int get xpIntoLevel => totalXp % 100;
   int get xpForNextLevel => 100;
 
-  double get overallAccuracy => totalQuestionsAnswered > 0
-      ? (totalQuestionsCorrect / totalQuestionsAnswered) * 100
-      : 0;
+  double get overallAccuracy => totalQuestionsAnswered > 0 ? (totalQuestionsCorrect / totalQuestionsAnswered) * 100 : 0;
 
   double chapterAccuracy(String chapterId) {
     final a = _chapterAnswered[chapterId] ?? 0;
@@ -327,11 +418,8 @@ class AppState extends ChangeNotifier {
     return (mastered / topics.length) * 100;
   }
 
-  ReadinessReport get readinessReport => buildReadinessReport(
-        classes: biologyData,
-        answered: topicAnsweredCount,
-        accuracy: topicAccuracy,
-      );
+  ReadinessReport get readinessReport =>
+      buildReadinessReport(classes: biologyData, answered: topicAnsweredCount, accuracy: topicAccuracy);
 
   void _recordReadinessSnapshot() {
     readinessHistory[dateKey(clock())] = readinessReport.overall.round();
@@ -374,10 +462,7 @@ class AppState extends ChangeNotifier {
   void createFolder(String name) {
     final trimmed = name.trim();
     if (trimmed.isEmpty) return;
-    customFolders.add(FlashcardFolder(
-      id: 'folder_${DateTime.now().microsecondsSinceEpoch}',
-      name: trimmed,
-    ));
+    customFolders.add(FlashcardFolder(id: 'folder_${DateTime.now().microsecondsSinceEpoch}', name: trimmed));
     _save();
     notifyListeners();
   }
@@ -408,11 +493,9 @@ class AppState extends ChangeNotifier {
     final trimmedFront = front.trim();
     final trimmedBack = back.trim();
     if (trimmedFront.isEmpty || trimmedBack.isEmpty) return;
-    folder.cards.add(Flashcard(
-      id: 'card_${DateTime.now().microsecondsSinceEpoch}',
-      front: trimmedFront,
-      back: trimmedBack,
-    ));
+    folder.cards.add(
+      Flashcard(id: 'card_${DateTime.now().microsecondsSinceEpoch}', front: trimmedFront, back: trimmedBack),
+    );
     _save();
     notifyListeners();
   }
@@ -495,15 +578,17 @@ class AppState extends ChangeNotifier {
           score += 0.5 * lapsed / topic.flashcards.length;
         }
         if (score <= 0) continue;
-        gaps.add(TopicGap(
-          topic: topic,
-          chapter: chapter,
-          answered: answered,
-          correct: correct,
-          lapsedCards: lapsed,
-          wrongQuestions: topic.questions.where((q) => wrongQuestionIds.contains(q.id)).length,
-          score: score,
-        ));
+        gaps.add(
+          TopicGap(
+            topic: topic,
+            chapter: chapter,
+            answered: answered,
+            correct: correct,
+            lapsedCards: lapsed,
+            wrongQuestions: topic.questions.where((q) => wrongQuestionIds.contains(q.id)).length,
+            score: score,
+          ),
+        );
       }
     }
     gaps.sort((a, b) => b.score.compareTo(a.score));
@@ -541,10 +626,10 @@ class AppState extends ChangeNotifier {
 
   /// Fiszki z tematów-luk, które uczeń ostatnio oznaczył „Nie umiem".
   List<Flashcard> lapsedCardsFor(List<TopicGap> gaps) => [
-        for (final gap in gaps)
-          for (final card in gap.topic.flashcards)
-            if (_isLapsed(card.id)) card,
-      ];
+    for (final gap in gaps)
+      for (final card in gap.topic.flashcards)
+        if (_isLapsed(card.id)) card,
+  ];
 
   // ---- Plan nauki ----
 
@@ -597,9 +682,8 @@ class AppState extends ChangeNotifier {
       _planTopicIds = [for (final t in topics) t.id];
       _planCardsTarget = min(dueFlashcardsCount(), summary.phase == PlanPhase.revision ? 50 : 30);
       _planTestFromGaps = gaps.isNotEmpty;
-      _planTestTopicId = gaps.isNotEmpty
-          ? gaps.first.topic.id
-          : (topics.isNotEmpty ? topics.first.id : _weakestAnsweredTopic()?.id);
+      _planTestTopicId =
+          gaps.isNotEmpty ? gaps.first.topic.id : (topics.isNotEmpty ? topics.first.id : _weakestAnsweredTopic()?.id);
       _planDataTaskId = null;
       for (final task in dataTasks) {
         if (!dataTaskBest.containsKey(task.id) && readTopics.contains(task.topicId)) {
@@ -644,19 +728,22 @@ class AppState extends ChangeNotifier {
   /// Nadchodzące sprawdziany (od dziś), od najbliższego.
   List<PlannedTest> get upcomingPlannedTests {
     final today = clock();
-    final upcoming = plannedTests.where((t) => daysBetween(today, parseDateKey(t.dateKey)!) >= 0).toList()
-      ..sort((a, b) => a.dateKey.compareTo(b.dateKey));
+    final upcoming =
+        plannedTests.where((t) => daysBetween(today, parseDateKey(t.dateKey)!) >= 0).toList()
+          ..sort((a, b) => a.dateKey.compareTo(b.dateKey));
     return upcoming;
   }
 
   void addPlannedTest({required DateTime date, required int classLevel, required List<String> chapterIds}) {
     if (chapterIds.isEmpty) return;
-    plannedTests.add(PlannedTest(
-      id: 'test_${DateTime.now().microsecondsSinceEpoch}',
-      dateKey: dateKey(date),
-      classLevel: classLevel,
-      chapterIds: List.unmodifiable(chapterIds),
-    ));
+    plannedTests.add(
+      PlannedTest(
+        id: 'test_${DateTime.now().microsecondsSinceEpoch}',
+        dateKey: dateKey(date),
+        classLevel: classLevel,
+        chapterIds: List.unmodifiable(chapterIds),
+      ),
+    );
     _save();
     notifyListeners();
   }

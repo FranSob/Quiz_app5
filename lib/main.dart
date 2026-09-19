@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
+import 'services/cloud_sync.dart';
 import 'state/app_state.dart';
 import 'theme.dart';
 import 'screens/root_shell.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Bez kluczy Supabase aplikacja działa dalej, tyle że bez kont.
+  await CloudSync.init();
   runApp(const BioMaturaApp());
 }
 
@@ -23,7 +27,10 @@ class _BioMaturaAppState extends State<BioMaturaApp> {
   @override
   void initState() {
     super.initState();
-    _appState.load();
+    _appState.load().then((_) {
+      // Po starcie ściągamy postęp z chmury, jeśli uczeń jest zalogowany.
+      if (CloudSync.signedIn) syncNow(_appState);
+    });
   }
 
   @override

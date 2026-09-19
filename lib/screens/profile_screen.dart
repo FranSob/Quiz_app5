@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models.dart';
+import '../services/cloud_sync.dart';
 import '../state/app_state.dart';
 import '../theme.dart';
 import '../widgets/app_card.dart';
+import 'account_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -71,6 +73,35 @@ class ProfileScreen extends StatelessWidget {
             ],
           ),
         ),
+        if (CloudSync.available) ...[
+          const SizedBox(height: 10),
+          AppCard(
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const AccountScreen())),
+            child: Row(
+              children: [
+                Icon(
+                  CloudSync.signedIn ? Icons.cloud_done_rounded : Icons.cloud_off_rounded,
+                  color: CloudSync.signedIn ? AppColors.green : AppColors.textMuted,
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(CloudSync.signedIn ? 'Postęp zapisywany w chmurze' : 'Zaloguj się',
+                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                      Text(
+                        CloudSync.email ?? 'Postęp jest tylko na tym urządzeniu',
+                        style: const TextStyle(color: AppColors.textMuted, fontSize: 12.5),
+                      ),
+                    ],
+                  ),
+                ),
+                const Icon(Icons.chevron_right_rounded, color: AppColors.textMuted),
+              ],
+            ),
+          ),
+        ],
         const SizedBox(height: 16),
         AppCard(
           child: Column(
