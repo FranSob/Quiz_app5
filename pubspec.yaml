@@ -72,6 +72,11 @@ flutter:
     - assets/fonts/NotoSans-Regular.ttf
     - assets/fonts/NotoSans-Bold.ttf
     - assets/fonts/NotoSansMath-Regular.ttf
+    # Dokumenty prawne: ten sam plik czyta aplikacja i publikujemy go na stronie.
+    - docs/polityka-prywatnosci.md
+    - docs/regulamin.md
+    - docs/dane-i-zgodnosc.md
+    - docs/usuwanie-konta.md
 
   # To add assets to your application, add an assets section, like this:
   # assets:

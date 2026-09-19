@@ -48,6 +48,24 @@ class CloudSync {
     return data is Map ? Map<String, dynamic>.from(data) : null;
   }
 
+  /// Usuwa dane ucznia i samo konto. Wiersz z postępem kasuje aplikacja,
+  /// a konto w systemie logowania — funkcja serwerowa (tylko ona ma do tego
+  /// prawo). Zwraca true, jeśli udało się usunąć również samo konto.
+  static Future<bool> deleteAccount() async {
+    final user = currentUser;
+    if (user == null) return false;
+    await _client.from('progress').delete().eq('user_id', user.id);
+    var accountRemoved = false;
+    try {
+      await _client.functions.invoke('delete-account');
+      accountRemoved = true;
+    } catch (_) {
+      // Funkcja nie jest wdrożona albo nie odpowiedziała — dane i tak zniknęły.
+    }
+    await signOut();
+    return accountRemoved;
+  }
+
   static Future<void> pushProgress(Map<String, dynamic> state) async {
     final user = currentUser;
     if (user == null) return;

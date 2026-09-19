@@ -5,6 +5,8 @@ import '../services/cloud_sync.dart';
 import '../state/app_state.dart';
 import '../theme.dart';
 import '../widgets/app_card.dart';
+import 'legal_screen.dart';
+import 'my_data_screen.dart';
 
 /// Logowanie, zakładanie konta i ręczna synchronizacja postępu.
 class AccountScreen extends StatefulWidget {
@@ -19,6 +21,7 @@ class _AccountScreenState extends State<AccountScreen> {
   final _password = TextEditingController();
   bool _newAccount = false;
   bool _busy = false;
+  bool _accepted = false;
   String? _error;
   String? _info;
 
@@ -53,6 +56,10 @@ class _AccountScreenState extends State<AccountScreen> {
     }
     if (password.length < 6) {
       setState(() => _error = 'Hasło musi mieć co najmniej 6 znaków.');
+      return;
+    }
+    if (_newAccount && !_accepted) {
+      setState(() => _error = 'Aby założyć konto, zaakceptuj regulamin i politykę prywatności.');
       return;
     }
     await _run(() async {
@@ -174,7 +181,68 @@ class _AccountScreenState extends State<AccountScreen> {
                 }),
         child: const Text('Wyloguj'),
       ),
+      const SizedBox(height: 20),
+      const Text('TWOJE DANE',
+          style: TextStyle(color: AppColors.textMuted, fontWeight: FontWeight.bold, letterSpacing: 0.8, fontSize: 13)),
+      const SizedBox(height: 8),
+      AppCard(
+        onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const MyDataScreen())),
+        child: const Row(
+          children: [
+            Icon(Icons.description_outlined, color: AppColors.green),
+            SizedBox(width: 12),
+            Expanded(child: Text('Moje dane — zobacz i skopiuj', style: TextStyle(fontSize: 14))),
+            Icon(Icons.chevron_right_rounded, color: AppColors.textMuted),
+          ],
+        ),
+      ),
+      const SizedBox(height: 8),
+      AppCard(
+        onTap: _busy ? null : _confirmDelete,
+        child: const Row(
+          children: [
+            Icon(Icons.delete_outline_rounded, color: AppColors.red),
+            SizedBox(width: 12),
+            Expanded(child: Text('Usuń konto i dane', style: TextStyle(fontSize: 14, color: AppColors.red))),
+            Icon(Icons.chevron_right_rounded, color: AppColors.textMuted),
+          ],
+        ),
+      ),
+      const SizedBox(height: 8),
+      const Text(
+        'Usunięcie konta jest nieodwracalne i kasuje postęp zapisany na serwerze. '
+        'Nie anuluje subskrypcji — tę anulujesz w Google Play.',
+        style: TextStyle(color: AppColors.textMuted, fontSize: 12, height: 1.4),
+      ),
     ];
+  }
+
+  Future<void> _confirmDelete() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Usunąć konto?'),
+        content: const Text(
+          'Skasujemy Twoje konto i cały postęp zapisany na serwerze. '
+          'Tej operacji nie da się cofnąć. Postęp zapisany w tym telefonie pozostanie.',
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.of(context).pop(false), child: const Text('Anuluj')),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Usuń konto', style: TextStyle(color: AppColors.red)),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+    await _run(() async {
+      final removed = await CloudSync.deleteAccount();
+      if (!mounted) return;
+      setState(() => _info = removed
+          ? 'Konto i dane zostały usunięte.'
+          : 'Dane zostały usunięte, a Ciebie wylogowaliśmy. Samo konto skasujemy po zgłoszeniu na adres podany w polityce prywatności.');
+    });
   }
 
   List<Widget> _signedOut() {
@@ -203,6 +271,33 @@ class _AccountScreenState extends State<AccountScreen> {
         autofillHints: const [AutofillHints.password],
         decoration: const InputDecoration(labelText: 'Hasło', border: OutlineInputBorder()),
       ),
+      if (_newAccount) ...[
+        const SizedBox(height: 8),
+        CheckboxListTile(
+          contentPadding: EdgeInsets.zero,
+          controlAffinity: ListTileControlAffinity.leading,
+          activeColor: AppColors.green,
+          checkColor: Colors.black,
+          value: _accepted,
+          onChanged: (value) => setState(() => _accepted = value ?? false),
+          title: const Text(
+            'Akceptuję regulamin i politykę prywatności. Jeśli mam mniej niż 16 lat, '
+            'zakładam konto za zgodą rodzica lub opiekuna.',
+            style: TextStyle(fontSize: 12.5, height: 1.35),
+          ),
+        ),
+        Wrap(
+          children: [
+            for (final document in legalDocuments.take(3))
+              TextButton(
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => LegalScreen(document: document)),
+                ),
+                child: Text(document.title, style: const TextStyle(fontSize: 12.5)),
+              ),
+          ],
+        ),
+      ],
       const SizedBox(height: 16),
       ElevatedButton(
         onPressed: _busy ? null : _submit,

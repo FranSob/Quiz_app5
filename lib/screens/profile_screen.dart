@@ -7,6 +7,7 @@ import '../state/app_state.dart';
 import '../theme.dart';
 import '../widgets/app_card.dart';
 import 'account_screen.dart';
+import 'legal_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -180,6 +181,27 @@ class ProfileScreen extends StatelessWidget {
             );
           }).toList(),
         ),
+        const SizedBox(height: 24),
+        const Text('DOKUMENTY',
+            style: TextStyle(color: AppColors.textMuted, fontWeight: FontWeight.bold, letterSpacing: 0.8, fontSize: 13)),
+        const SizedBox(height: 10),
+        for (final document in legalDocuments)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: AppCard(
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => LegalScreen(document: document)),
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.article_outlined, color: AppColors.textMuted, size: 20),
+                  const SizedBox(width: 12),
+                  Expanded(child: Text(document.title, style: const TextStyle(fontSize: 14))),
+                  const Icon(Icons.chevron_right_rounded, color: AppColors.textMuted),
+                ],
+              ),
+            ),
+          ),
       ],
     );
   }
