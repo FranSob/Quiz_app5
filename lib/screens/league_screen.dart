@@ -7,6 +7,7 @@ import '../services/cloud_sync.dart';
 import '../services/league_sync.dart';
 import '../state/app_state.dart';
 import '../theme.dart';
+import '../utils/plurals.dart';
 import '../widgets/app_card.dart';
 import 'account_screen.dart';
 
@@ -22,6 +23,7 @@ class LeagueScreen extends StatefulWidget {
 class _LeagueScreenState extends State<LeagueScreen> {
   final _joinCode = TextEditingController();
   final _groupName = TextEditingController();
+  final _nickname = TextEditingController();
 
   bool _loading = true;
   bool _busy = false;
@@ -32,6 +34,7 @@ class _LeagueScreenState extends State<LeagueScreen> {
   @override
   void initState() {
     super.initState();
+    _nickname.text = context.read<AppState>().leagueNickname ?? '';
     if (CloudSync.available && CloudSync.signedIn) _load();
     _loading = CloudSync.available && CloudSync.signedIn;
   }
@@ -40,6 +43,7 @@ class _LeagueScreenState extends State<LeagueScreen> {
   void dispose() {
     _joinCode.dispose();
     _groupName.dispose();
+    _nickname.dispose();
     super.dispose();
   }
 
@@ -54,7 +58,9 @@ class _LeagueScreenState extends State<LeagueScreen> {
       final state = context.read<AppState>();
       final group = await LeagueSync.myGroup();
       if (group != null) {
-        await LeagueSync.updateMyScore(nickname: normalizeNickname(state.userName), xp: state.totalXp);
+        // Najpierw wysyłamy postęp, bo ranking liczy XP z zapisu na serwerze.
+        await syncNow(state);
+        await LeagueSync.updateMyScore(nickname: normalizeNickname(state.leagueNickname ?? 'Uczeń'));
         final members = await LeagueSync.fetchMembers(group.id);
         setState(() {
           _group = group;
@@ -88,24 +94,59 @@ class _LeagueScreenState extends State<LeagueScreen> {
     }
   }
 
+  /// Zapisuje pseudonim wybrany przez ucznia; zwraca null, gdy go nie podał.
+  String? _saveNickname() {
+    final nickname = normalizeNickname(_nickname.text);
+    if (_nickname.text.trim().isEmpty) {
+      setState(() => _error = 'Podaj pseudonim, który zobaczą osoby z klasy.');
+      return null;
+    }
+    context.read<AppState>().setLeagueNickname(nickname);
+    return nickname;
+  }
+
   Future<void> _join() async {
     final normalized = normalizeGroupCode(_joinCode.text);
     if (!isValidGroupCode(normalized)) {
       setState(() => _error = 'Wpisz poprawny kod klasy.');
       return;
     }
-    final state = context.read<AppState>();
-    await _run(() => LeagueSync.joinGroup(normalized, nickname: normalizeNickname(state.userName), xp: state.totalXp));
+    final nickname = _saveNickname();
+    if (nickname == null) return;
+    await _run(() => LeagueSync.joinGroup(normalized, nickname: nickname));
   }
 
   Future<void> _create() async {
-    final state = context.read<AppState>();
+    final nickname = _saveNickname();
+    if (nickname == null) return;
     final name = _groupName.text.trim();
-    await _run(() => LeagueSync.createGroup(
-          name: name.isEmpty ? null : name,
-          nickname: normalizeNickname(state.userName),
-          xp: state.totalXp,
-        ));
+    await _run(() => LeagueSync.createGroup(name: name.isEmpty ? null : name, nickname: nickname));
+  }
+
+  Future<void> _changeNickname() async {
+    final controller = TextEditingController(text: context.read<AppState>().leagueNickname ?? '');
+    final result = await showDialog<String>(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: AppColors.darkCard,
+        title: const Text('Pseudonim w rankingu'),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+          decoration: const InputDecoration(hintText: 'np. Franek S.', border: OutlineInputBorder()),
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Anuluj')),
+          TextButton(onPressed: () => Navigator.of(context).pop(controller.text), child: const Text('Zapisz')),
+        ],
+      ),
+    );
+    controller.dispose();
+    if (result == null || result.trim().isEmpty || !mounted) return;
+    final nickname = normalizeNickname(result);
+    context.read<AppState>().setLeagueNickname(nickname);
+    _nickname.text = nickname;
+    await _run(() => LeagueSync.updateMyScore(nickname: nickname));
   }
 
   Future<void> _leave() async {
@@ -183,6 +224,24 @@ class _LeagueScreenState extends State<LeagueScreen> {
 
   List<Widget> _noGroup() {
     return [
+      const Text('Twój pseudonim', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+      const SizedBox(height: 6),
+      const Text(
+        'Pseudonim i liczba XP będą widoczne dla osób z Twojej klasy — nikt spoza niej ich nie zobaczy. '
+        'Nie podawaj nazwiska, adresu ani numeru telefonu. Imię z profilu zostaje na Twoim telefonie.',
+        style: TextStyle(color: AppColors.textMuted, fontSize: 13, height: 1.45),
+      ),
+      const SizedBox(height: 10),
+      TextField(
+        controller: _nickname,
+        maxLength: 24,
+        decoration: const InputDecoration(
+          labelText: 'Pseudonim w rankingu',
+          hintText: 'np. Franek S.',
+          border: OutlineInputBorder(),
+        ),
+      ),
+      const SizedBox(height: 12),
       const Text('Dołącz do klasy', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
       const SizedBox(height: 6),
       const Text(
@@ -249,7 +308,8 @@ class _LeagueScreenState extends State<LeagueScreen> {
                       style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
                   const SizedBox(height: 4),
                   Text(
-                    'Kod: ${group.id} · ${_entries.length} ${_entries.length == 1 ? 'osoba' : 'osób'}',
+                    'Kod: ${group.id} · ${_entries.length} '
+                    '${plural(_entries.length, 'osoba', 'osoby', 'osób')}',
                     style: const TextStyle(color: Colors.white70, fontSize: 12.5),
                   ),
                 ],
@@ -297,6 +357,29 @@ class _LeagueScreenState extends State<LeagueScreen> {
             ),
           ),
         ),
+      const SizedBox(height: 4),
+      AppCard(
+        onTap: _busy ? null : _changeNickname,
+        child: Row(
+          children: [
+            const Icon(Icons.badge_outlined, color: AppColors.textMuted, size: 20),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                'Twój pseudonim: ${context.read<AppState>().leagueNickname ?? 'Uczeń'}',
+                style: const TextStyle(fontSize: 13.5),
+              ),
+            ),
+            const Text('Zmień', style: TextStyle(color: AppColors.green, fontSize: 13)),
+          ],
+        ),
+      ),
+      const SizedBox(height: 6),
+      const Text(
+        'W rankingu widać tylko pseudonim i XP. Osoby z klasy nie widzą Twojego e-maila, '
+        'wyników z testów ani planu nauki.',
+        style: TextStyle(color: AppColors.textMuted, fontSize: 12, height: 1.4),
+      ),
       const SizedBox(height: 12),
       Center(
         child: TextButton(

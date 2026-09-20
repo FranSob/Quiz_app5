@@ -1,8 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:biomatura/logic/league.dart';
+import 'package:biomatura/logic/state_merge.dart';
+import 'package:biomatura/state/app_state.dart';
 
 void main() {
   test('group codes are 6 characters using only unambiguous letters and digits', () {
@@ -48,5 +51,33 @@ void main() {
 
   test('rankMembers handles an empty group', () {
     expect(rankMembers(const [], myUserId: 'x'), isEmpty);
+  });
+
+  group('pseudonim w rankingu', () {
+    setUp(() => SharedPreferences.setMockInitialValues({}));
+
+    test('is kept separately from the profile name and survives a restart', () async {
+      final state = AppState();
+      await state.load();
+      state.setUserName('Franciszek Sobierajski');
+      expect(state.leagueNickname, isNull, reason: 'imię z profilu nie trafia do ligi samo z siebie');
+
+      state.setLeagueNickname('  Franek S.  ');
+      expect(state.leagueNickname, 'Franek S.');
+      await Future<void>.delayed(Duration.zero);
+
+      final reloaded = AppState();
+      await reloaded.load();
+      expect(reloaded.leagueNickname, 'Franek S.');
+      expect(reloaded.userName, 'Franciszek Sobierajski');
+    });
+
+    test('merging two devices keeps the nickname from the newer save', () {
+      final merged = mergeStates(
+        {'updatedAt': 2, 'leagueNickname': 'Nowy'},
+        {'updatedAt': 1, 'leagueNickname': 'Stary'},
+      );
+      expect(merged['leagueNickname'], 'Nowy');
+    });
   });
 }

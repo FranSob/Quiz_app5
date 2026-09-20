@@ -11,6 +11,7 @@ Ta strona zbiera w jednym miejscu szczegóły techniczne: gdzie leżą dane, kto
 | Konto (e-mail, skrót hasła) | Supabase, region UE (Frankfurt) | administrator danych, Supabase jako podmiot przetwarzający |
 | Postęp nauki | Supabase, region UE (Frankfurt) | wyłącznie właściciel konta |
 | Status subskrypcji | Supabase, region UE (Frankfurt) | zapisuje serwer, użytkownik tylko odczytuje |
+| Pseudonim i XP w lidze (dobrowolne) | Supabase, region UE (Frankfurt) | osoby z tej samej klasy |
 | Dane płatności (karta) | Google Play | wyłącznie Google — nie mamy do nich dostępu |
 | Postęp bez konta | pamięć telefonu | wyłącznie użytkownik |
 
@@ -27,6 +28,7 @@ Ta strona zbiera w jednym miejscu szczegóły techniczne: gdzie leżą dane, kto
 - Tabela subskrypcji jest dla aplikacji tylko do odczytu — status Premium ustawia serwer po weryfikacji zakupu w Google Play. Zmiana danych w telefonie nie odblokuje Premium.
 - Hasła przechowywane jako skróty (hashe), po stronie Supabase.
 - Klucze serwerowe nie znajdują się w kodzie aplikacji ani w repozytorium.
+- Liga: kod klasy działa jak hasło wstępu. Tabeli klas nie da się odczytać w całości — dołączenie odbywa się przez funkcję w bazie, która sprawdza konkretny kod. Widać wyłącznie członków własnej klasy, a XP w rankingu liczy serwer z zapisanego postępu, więc nie da się go podać z telefonu.
 
 ## Realizacja praw użytkownika
 
@@ -35,6 +37,7 @@ Ta strona zbiera w jednym miejscu szczegóły techniczne: gdzie leżą dane, kto
 | Dostęp do danych i przeniesienie | Profil → Konto → Moje dane (podgląd i kopiowanie pełnego zapisu) |
 | Usunięcie danych | Profil → Konto → Usuń konto (natychmiast) lub e-mail na [E-MAIL_KONTAKTOWY] |
 | Sprostowanie | zmiana w profilu lub e-mail |
+| Wycofanie zgody na ligę | Profil → Liga klasy → Opuść klasę (pseudonim i wynik znikają z rankingu) |
 | Ograniczenie, sprzeciw, skarga | e-mail na [E-MAIL_KONTAKTOWY]; skarga do Prezesa UODO |
 
 Adres strony do usunięcia konta, wymagany przez Google Play: [ADRES_STRONY_USUWANIA_KONTA].

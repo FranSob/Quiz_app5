@@ -16,6 +16,7 @@ Map<String, dynamic> mergeStates(Map<String, dynamic> a, Map<String, dynamic> b)
     'themeMode': newer['themeMode'] ?? older['themeMode'],
     'selectedClassLevel': newer['selectedClassLevel'] ?? older['selectedClassLevel'],
     'userName': newer['userName'] ?? older['userName'],
+    'leagueNickname': newer['leagueNickname'] ?? older['leagueNickname'],
     'lastActiveTopicId': newer['lastActiveTopicId'] ?? older['lastActiveTopicId'],
     'examDate': newer['examDate'] ?? older['examDate'],
     'plan': newer['plan'] ?? older['plan'],

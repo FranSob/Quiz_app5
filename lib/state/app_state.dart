@@ -127,6 +127,10 @@ class AppState extends ChangeNotifier {
   bool isPremium = false;
   String? lastActiveTopicId;
 
+  /// Pseudonim widoczny w rankingu klasy. Celowo osobny od imienia w profilu —
+  /// imię zostaje na telefonie, a do klasy trafia tylko to, co uczeń sam poda.
+  String? leagueNickname;
+
   final Map<String, int> _topicAnswered = {};
   final Map<String, int> _topicCorrect = {};
   final Map<String, int> _chapterAnswered = {};
@@ -213,6 +217,7 @@ class AppState extends ChangeNotifier {
     totalXp = j['totalXp'] ?? 0;
     isPremium = j['isPremium'] ?? false;
     lastActiveTopicId = j['lastActiveTopicId'];
+    leagueNickname = j['leagueNickname'];
     flashcardReviews = j['flashcardReviews'] ?? 0;
     testsCompleted = j['testsCompleted'] ?? 0;
     totalQuestionsAnswered = j['totalQuestionsAnswered'] ?? 0;
@@ -346,6 +351,7 @@ class AppState extends ChangeNotifier {
       'totalXp': totalXp,
       'isPremium': isPremium,
       'lastActiveTopicId': lastActiveTopicId,
+      'leagueNickname': leagueNickname,
       'flashcardReviews': flashcardReviews,
       'testsCompleted': testsCompleted,
       'totalQuestionsAnswered': totalQuestionsAnswered,
@@ -815,6 +821,13 @@ class AppState extends ChangeNotifier {
 
   void toggleTheme() {
     themeMode = themeMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+    _save();
+    notifyListeners();
+  }
+
+  void setLeagueNickname(String value) {
+    final trimmed = value.trim();
+    leagueNickname = trimmed.isEmpty ? null : trimmed;
     _save();
     notifyListeners();
   }

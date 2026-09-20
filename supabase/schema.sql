@@ -58,10 +58,14 @@ create table if not exists public.groups (
 
 alter table public.groups enable row level security;
 
--- Każdy zalogowany może sprawdzić, czy kod istnieje (żeby dołączyć), i założyć nową klasę.
+-- Kod klasy jest hasłem wstępu, więc tabeli klas nie wolno dać odczytać w całości:
+-- inaczej każdy zalogowany pobrałby listę wszystkich kodów i dołączył, gdzie chce.
+-- Widać więc tylko klasy, do których się należy, a dołączanie idzie przez
+-- funkcję join_group, która sprawdza konkretny kod.
 drop policy if exists "groups_select_authenticated" on public.groups;
-create policy "groups_select_authenticated" on public.groups
-  for select using (auth.role() = 'authenticated');
+drop policy if exists "groups_select_own" on public.groups;
+create policy "groups_select_own" on public.groups
+  for select using (id in (select public.my_group_ids()));
 
 drop policy if exists "groups_insert_authenticated" on public.groups;
 create policy "groups_insert_authenticated" on public.groups
@@ -112,3 +116,71 @@ create policy "group_members_update_own" on public.group_members
 drop policy if exists "group_members_delete_own" on public.group_members;
 create policy "group_members_delete_own" on public.group_members
   for delete using (auth.uid() = user_id);
+
+-- XP do rankingu bierzemy z zapisanego postępu, a nie z tego, co przyśle telefon.
+-- Inaczej wystarczyłoby podmienić jedną liczbę w żądaniu, żeby wygrać ligę.
+create or replace function public.my_saved_xp()
+returns integer
+language sql
+security definer
+stable
+set search_path = public
+as $$
+  select coalesce((data ->> 'totalXp')::integer, 0)
+  from public.progress
+  where user_id = auth.uid();
+$$;
+
+-- Dołączenie do klasy po kodzie. Funkcja sprawdza kod, więc uczeń nie musi
+-- (i nie może) czytać całej tabeli klas.
+create or replace function public.join_group(p_code text, p_nickname text)
+returns table (group_id text, group_name text)
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_code text := upper(regexp_replace(coalesce(p_code, ''), '\s', '', 'g'));
+  v_name text;
+  v_nickname text := left(nullif(btrim(coalesce(p_nickname, '')), ''), 24);
+begin
+  if auth.uid() is null then
+    raise exception 'Trzeba być zalogowanym.';
+  end if;
+  select g.name into v_name from public.groups g where g.id = v_code;
+  if not found then
+    raise exception 'Nie ma klasy o takim kodzie.';
+  end if;
+  delete from public.group_members where user_id = auth.uid();
+  insert into public.group_members (group_id, user_id, nickname, xp)
+  values (v_code, auth.uid(), coalesce(v_nickname, 'Uczeń'), coalesce(public.my_saved_xp(), 0));
+  return query select v_code, v_name;
+end;
+$$;
+
+-- Odświeżenie własnego wyniku w rankingu: pseudonim od ucznia, XP z postępu.
+create or replace function public.refresh_my_league_score(p_nickname text)
+returns void
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_nickname text := left(nullif(btrim(coalesce(p_nickname, '')), ''), 24);
+begin
+  if auth.uid() is null then
+    return;
+  end if;
+  update public.group_members
+  set nickname = coalesce(v_nickname, nickname),
+      xp = coalesce(public.my_saved_xp(), 0),
+      updated_at = now()
+  where user_id = auth.uid();
+end;
+$$;
+
+revoke all on function public.join_group(text, text) from public;
+revoke all on function public.refresh_my_league_score(text) from public;
+revoke all on function public.my_saved_xp() from public;
+grant execute on function public.join_group(text, text) to authenticated;
+grant execute on function public.refresh_my_league_score(text) to authenticated;

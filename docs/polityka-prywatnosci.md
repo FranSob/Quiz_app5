@@ -19,6 +19,8 @@ Administratorem danych jest [IMIĘ_I_NAZWISKO_SPRZEDAWCY], [ADRES], kontakt: [E-
 - postęp nauki — przeczytane tematy, wyniki testów, powtórki fiszek, wyniki próbnych matur, plan nauki, data matury, imię wpisane w profilu,
 - datę założenia konta i datę ostatniego logowania.
 
+**Gdy dołączysz do ligi klasowej** zbieramy dodatkowo pseudonim, który sam wpiszesz, oraz liczbę zdobytych punktów XP. Te dwie informacje **widzą osoby należące do tej samej klasy** — po to jest ranking. Nikt spoza klasy ich nie zobaczy, a Twój e-mail, wyniki z testów i plan nauki nie są widoczne dla nikogo. Więcej w sekcji „Liga klasowa".
+
 **Gdy wykupisz Premium** zbieramy stan subskrypcji: identyfikator produktu, datę ważności i informację, czy jest aktywna. **Nie mamy dostępu do danych Twojej karty ani konta bankowego** — płatność obsługuje w całości Google Play.
 
 **Czego nie robimy:** nie wyświetlamy reklam, nie korzystamy z narzędzi śledzących ani analitycznych, nie tworzymy profili reklamowych, nie sprzedajemy i nie udostępniamy danych w celach marketingowych.
@@ -33,6 +35,16 @@ Administratorem danych jest [IMIĘ_I_NAZWISKO_SPRZEDAWCY], [ADRES], kontakt: [E-
 ## Wiek użytkowników
 
 Aplikacja jest przeznaczona dla osób od 13 lat. Jeśli masz mniej niż 16 lat, konto możesz założyć wyłącznie za zgodą rodzica lub opiekuna prawnego — potwierdzasz to przy zakładaniu konta. Jeśli dowiemy się, że konto założyła osoba młodsza bez takiej zgody, usuniemy je razem z danymi.
+
+## Liga klasowa
+
+Liga jest **dobrowolna** — działa dopiero wtedy, gdy sam wpiszesz kod klasy albo założysz nową klasę.
+
+- Osoby z Twojej klasy widzą wyłącznie Twój pseudonim i liczbę XP.
+- Pseudonim wpisujesz sam i możesz go w każdej chwili zmienić. Imię z profilu nie jest nigdzie wysyłane — zostaje na Twoim telefonie. Zalecamy, żeby nie wpisywać nazwiska.
+- Kod klasy działa jak hasło: do rankingu dołączy tylko ten, komu go podasz.
+- W każdej chwili możesz opuścić klasę — wtedy znikasz z rankingu razem z pseudonimem i wynikiem.
+- Liczba XP w rankingu jest liczona z Twojego zapisanego postępu po stronie serwera, żeby nie dało się wpisać dowolnego wyniku.
 
 ## Komu przekazujemy dane
 

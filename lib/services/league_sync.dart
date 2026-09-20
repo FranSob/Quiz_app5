@@ -7,6 +7,11 @@ import 'cloud_sync.dart';
 
 /// Klasa (grupa) do rankingu XP. Działa wyłącznie dla zalogowanych uczniów —
 /// ranking z natury wymaga wspólnego serwera, tak jak CloudSync.
+///
+/// Dołączanie i odświeżanie wyniku idzie przez funkcje w bazie, bo:
+/// * kod klasy jest hasłem wstępu i nie wolno pozwolić odczytać listy kodów,
+/// * XP do rankingu bierze się z zapisanego postępu, a nie z tego, co przyśle
+///   telefon — inaczej wystarczyłaby podmiana jednej liczby, żeby wygrać ligę.
 class LeagueSync {
   static SupabaseClient get _client => Supabase.instance.client;
 
@@ -38,43 +43,37 @@ class LeagueSync {
   }
 
   /// Zakłada nową klasę i od razu do niej dołącza. Zwraca wylosowany kod.
-  static Future<String> createGroup({String? name, required String nickname, required int xp}) async {
-    if (CloudSync.currentUser == null) throw StateError('Trzeba być zalogowanym.');
+  static Future<String> createGroup({String? name, required String nickname}) async {
+    final user = CloudSync.currentUser;
+    if (user == null) throw StateError('Trzeba być zalogowanym.');
     final random = Random.secure();
     for (var attempt = 0; attempt < 5; attempt++) {
       final code = generateGroupCode(random);
       try {
-        await _client.from('groups').insert({'id': code, 'name': name});
-        await _joinExisting(code, nickname: nickname, xp: xp);
-        return code;
+        await _client.from('groups').insert({'id': code, 'name': name, 'created_by': user.id});
       } on PostgrestException catch (e) {
         // Kod już zajęty przez inną klasę — losujemy kolejny, chyba że to
         // ostatnia próba, wtedy przekazujemy błąd dalej.
         if (e.code == '23505' && attempt < 4) continue;
-        rethrow;
+        throw StateError(_friendlyError(e));
       }
+      await joinGroup(code, nickname: nickname);
+      return code;
     }
     throw StateError('Nie udało się wylosować wolnego kodu klasy.');
   }
 
   /// Dołącza do istniejącej klasy po kodzie podanym przez kolegę lub nauczyciela.
-  static Future<void> joinGroup(String code, {required String nickname, required int xp}) async {
-    final normalized = normalizeGroupCode(code);
-    final exists = await _client.from('groups').select('id').eq('id', normalized).maybeSingle();
-    if (exists == null) throw StateError('Nie ma klasy o takim kodzie.');
-    await _joinExisting(normalized, nickname: nickname, xp: xp);
-  }
-
-  static Future<void> _joinExisting(String groupId, {required String nickname, required int xp}) async {
-    final user = CloudSync.currentUser!;
-    // Jedna osoba należy naraz tylko do jednej klasy — najpierw opuszcza poprzednią.
-    await _client.from('group_members').delete().eq('user_id', user.id);
-    await _client.from('group_members').insert({
-      'group_id': groupId,
-      'user_id': user.id,
-      'nickname': nickname,
-      'xp': xp,
-    });
+  static Future<void> joinGroup(String code, {required String nickname}) async {
+    if (CloudSync.currentUser == null) throw StateError('Trzeba być zalogowanym.');
+    try {
+      await _client.rpc<void>('join_group', params: {
+        'p_code': normalizeGroupCode(code),
+        'p_nickname': normalizeNickname(nickname),
+      });
+    } on PostgrestException catch (e) {
+      throw StateError(_friendlyError(e));
+    }
   }
 
   static Future<void> leaveGroup() async {
@@ -83,15 +82,17 @@ class LeagueSync {
     await _client.from('group_members').delete().eq('user_id', user.id);
   }
 
-  /// Odświeża widoczne w rankingu imię i XP — wołane przy otwarciu ekranu ligi,
-  /// żeby koledzy z klasy widzieli aktualny wynik bez osobnej synchronizacji.
-  static Future<void> updateMyScore({required String nickname, required int xp}) async {
-    final user = CloudSync.currentUser;
-    if (user == null) return;
-    await _client.from('group_members').update({
-      'nickname': nickname,
-      'xp': xp,
-      'updated_at': DateTime.now().toUtc().toIso8601String(),
-    }).eq('user_id', user.id);
+  /// Odświeża widoczny w rankingu pseudonim i przelicza XP z zapisanego postępu.
+  static Future<void> updateMyScore({required String nickname}) async {
+    if (CloudSync.currentUser == null) return;
+    await _client.rpc<void>('refresh_my_league_score', params: {'p_nickname': normalizeNickname(nickname)});
   }
+}
+
+/// Komunikaty z bazy są po polsku, ale pozostałe błędy tłumaczymy na ludzki język.
+String _friendlyError(PostgrestException error) {
+  final message = error.message;
+  if (message.contains('Nie ma klasy')) return 'Nie ma klasy o takim kodzie.';
+  if (message.contains('zalogowan')) return 'Trzeba być zalogowanym.';
+  return 'Nie udało się połączyć z klasą. Sprawdź internet i spróbuj ponownie.';
 }

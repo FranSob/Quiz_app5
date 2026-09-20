@@ -55,6 +55,7 @@ class CloudSync {
     final user = currentUser;
     if (user == null) return false;
     await _client.from('progress').delete().eq('user_id', user.id);
+    await _client.from('group_members').delete().eq('user_id', user.id);
     var accountRemoved = false;
     try {
       await _client.functions.invoke('delete-account');
