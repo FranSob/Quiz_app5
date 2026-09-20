@@ -66,7 +66,7 @@ void main() {
         home: Scaffold(body: LegalContent(text: text)),
       ));
       await tester.pumpAndSettle();
-      final firstHeading = text.split('\n').first.replaceFirst('# ', '');
+      final firstHeading = text.split('\n').first.replaceFirst('# ', '').trim();
       expect(find.text(firstHeading), findsOneWidget, reason: document.asset);
       if (missingLegalDetails().isNotEmpty) {
         expect(find.textContaining('Dokument nie jest gotowy do publikacji'), findsOneWidget);
