@@ -7,6 +7,7 @@ import '../state/app_state.dart';
 import '../theme.dart';
 import '../widgets/app_card.dart';
 import 'account_screen.dart';
+import 'league_screen.dart';
 import 'legal_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -103,6 +104,18 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
         ],
+        const SizedBox(height: 10),
+        AppCard(
+          onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const LeagueScreen())),
+          child: const Row(
+            children: [
+              Icon(Icons.leaderboard_rounded, color: AppColors.orange),
+              SizedBox(width: 14),
+              Expanded(child: Text('Liga klasy — ranking XP', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15))),
+              Icon(Icons.chevron_right_rounded, color: AppColors.textMuted),
+            ],
+          ),
+        ),
         const SizedBox(height: 16),
         AppCard(
           child: Column(
