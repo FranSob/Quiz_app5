@@ -48,6 +48,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.14.3
+  flutter_native_splash: ^2.4.6
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -69,6 +70,19 @@ flutter_launcher_icons:
     image_path: "assets/icon/icon.png"
     background_color: "#0A0E14"
     theme_color: "#3ECF8E"
+
+# Ekran startowy — bez niego przy uruchomieniu na telefonie miga białe tło.
+# Po zmianie uruchom: dart run flutter_native_splash:create
+flutter_native_splash:
+  color: "#0A0E14"
+  image: "assets/icon/icon_foreground.png"
+  android: true
+  ios: false
+  web: false
+  android_12:
+    color: "#0A0E14"
+    image: "assets/icon/icon_foreground.png"
+    icon_background_color: "#0A0E14"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
