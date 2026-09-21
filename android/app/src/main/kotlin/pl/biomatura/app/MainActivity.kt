@@ -1,4 +1,4 @@
-package com.biomatura.biomatura
+package pl.biomatura.app
 
 import io.flutter.embedding.android.FlutterActivity
 

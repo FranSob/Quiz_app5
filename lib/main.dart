@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
+import 'services/billing.dart';
 import 'services/cloud_sync.dart';
 import 'state/app_state.dart';
 import 'theme.dart';
@@ -27,10 +28,18 @@ class _BioMaturaAppState extends State<BioMaturaApp> {
   @override
   void initState() {
     super.initState();
-    _appState.load().then((_) {
-      // Po starcie ściągamy postęp z chmury, jeśli uczeń jest zalogowany.
-      if (CloudSync.signedIn) syncNow(_appState);
+    _appState.load().then((_) async {
+      // Po starcie ściągamy postęp z chmury i sprawdzamy subskrypcję.
+      if (!CloudSync.signedIn) return;
+      await syncNow(_appState);
+      _appState.setPremium(await CloudSync.fetchPremium());
     });
+    // Zakup w Google Play liczy się dopiero wtedy, gdy potwierdzi go serwer.
+    billing.verifier = (productId, token) => CloudSync.verifyPurchase(productId: productId, purchaseToken: token);
+    billing.onPremiumChanged = (premium) {
+      if (premium) _appState.setPremium(true);
+    };
+    billing.init();
   }
 
   @override

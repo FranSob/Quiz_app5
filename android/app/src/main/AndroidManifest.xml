@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Konta, synchronizacja postępu i liga wymagają internetu także w wydaniu
+         (szablon Fluttera dodaje to uprawnienie tylko do wersji deweloperskich). -->
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="biomatura"
+        android:label="BioMatura"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

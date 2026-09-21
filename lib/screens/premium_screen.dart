@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../logic/premium.dart';
+import '../services/billing.dart';
+import '../services/cloud_sync.dart';
 import '../state/app_state.dart';
 import '../theme.dart';
 import '../widgets/app_card.dart';
+import 'account_screen.dart';
 
 /// Porównanie ceny rocznej z korepetycjami. Wyliczenia: rok szkolny to około
 /// 36 tygodni, więc lekcja raz w tygodniu po 100–150 zł kosztuje 3600–5400 zł;
@@ -98,10 +102,127 @@ class _PremiumScreenState extends State<PremiumScreen> {
     }
   }
 
+  /// Przyciski zakupu. Na Androidzie kupuje się przez Google Play; gdzie indziej
+  /// (przeglądarka, komputer) sklepu nie ma, więc zostaje podgląd projektu.
+  List<Widget> _purchaseSection(AppState state) {
+    if (!BillingService.supported) return _previewSection(state);
+
+    if (state.isPremium) {
+      return [
+        const AppCard(
+          borderColor: AppColors.green,
+          child: Row(
+            children: [
+              Icon(Icons.check_circle_rounded, color: AppColors.green),
+              SizedBox(width: 12),
+              Expanded(child: Text('Premium jest aktywne. Dziękujemy!', style: TextStyle(fontSize: 14))),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        const Text(
+          'Subskrypcję anulujesz w Google Play: Płatności i subskrypcje → Subskrypcje. '
+          'Premium działa do końca opłaconego okresu.',
+          style: TextStyle(color: AppColors.textMuted, fontSize: 12, height: 1.4),
+        ),
+      ];
+    }
+
+    if (!CloudSync.signedIn) {
+      return [
+        AppCard(
+          borderColor: AppColors.orange,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('Najpierw zaloguj się', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+              const SizedBox(height: 6),
+              const Text(
+                'Premium jest przypisane do konta, dzięki czemu działa też po zmianie telefonu. '
+                'Zakup bez konta nie miałby do czego się przypiąć.',
+                style: TextStyle(color: AppColors.textMuted, fontSize: 13, height: 1.4),
+              ),
+              const SizedBox(height: 12),
+              ElevatedButton(
+                onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const AccountScreen())),
+                style: ElevatedButton.styleFrom(backgroundColor: AppColors.green, foregroundColor: Colors.black),
+                child: const Text('Przejdź do konta'),
+              ),
+            ],
+          ),
+        ),
+      ];
+    }
+
+    final productId = _yearly ? yearlySubscriptionId : monthlySubscriptionId;
+    return [
+      SizedBox(
+        width: double.infinity,
+        child: ElevatedButton.icon(
+          onPressed: billing.busy ? null : () => billing.buy(productId),
+          icon: const Icon(Icons.workspace_premium_rounded),
+          label: Text(billing.busy ? 'Chwileczkę…' : 'Kup Premium — ${billing.priceFor(productId)}'),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.orange,
+            foregroundColor: Colors.black,
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+          ),
+        ),
+      ),
+      const SizedBox(height: 8),
+      TextButton(
+        onPressed: billing.busy ? null : billing.restore,
+        child: const Text('Mam już subskrypcję — przywróć zakup'),
+      ),
+      if (billing.lastError != null)
+        Text(billing.lastError!, style: const TextStyle(color: AppColors.red, fontSize: 12.5, height: 1.4)),
+      const SizedBox(height: 6),
+      const Text(
+        'Płatność obsługuje Google Play. Subskrypcja odnawia się automatycznie, '
+        'dopóki jej nie anulujesz w Google Play. Ceny zawierają VAT.',
+        style: TextStyle(color: AppColors.textMuted, fontSize: 12, height: 1.4),
+      ),
+    ];
+  }
+
+  /// Wersja bez sklepu — służy do oglądania płatnych ekranów w podglądzie.
+  List<Widget> _previewSection(AppState state) {
+    return [
+      SizedBox(
+        width: double.infinity,
+        child: ElevatedButton.icon(
+          onPressed: () => _unlock(state),
+          icon: Icon(state.isPremium ? Icons.check_circle_rounded : Icons.workspace_premium_rounded),
+          label: Text(state.isPremium ? 'Premium aktywne (wyłącz)' : 'Odblokuj Premium'),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.orange,
+            foregroundColor: Colors.black,
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+          ),
+        ),
+      ),
+      const SizedBox(height: 10),
+      const Text(
+        'Podgląd projektu — tutaj nie ma sklepu Google Play, więc zakup jest tylko udawany. '
+        'W aplikacji na Androida w tym miejscu jest prawdziwa płatność.',
+        style: TextStyle(color: AppColors.textMuted, fontSize: 12, height: 1.4),
+      ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = context.watch<AppState>();
 
+    return ListenableBuilder(
+      listenable: billing,
+      builder: (context, _) => _content(state),
+    );
+  }
+
+  Widget _content(AppState state) {
     return Scaffold(
       body: ListView(
         padding: EdgeInsets.zero,
@@ -210,7 +331,8 @@ class _PremiumScreenState extends State<PremiumScreen> {
                             ],
                           ),
                         ),
-                        const Text('19,99 zł', style: TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 16)),
+                        Text(billing.priceFor(monthlySubscriptionId),
+                            style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 16)),
                       ],
                     ),
                   ),
@@ -244,29 +366,14 @@ class _PremiumScreenState extends State<PremiumScreen> {
                             ],
                           ),
                         ),
-                        const Text('149 zł', style: TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 16)),
+                        Text(billing.priceFor(yearlySubscriptionId),
+                            style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 16)),
                       ],
                     ),
                   ),
                 ),
                 const SizedBox(height: 20),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton.icon(
-                    onPressed: () => _unlock(state),
-                    icon: Icon(state.isPremium ? Icons.check_circle_rounded : Icons.workspace_premium_rounded),
-                    label: Text(state.isPremium ? 'Premium aktywne (wyłącz)' : 'Odblokuj Premium'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.orange,
-                      foregroundColor: Colors.black,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                const Text('Podgląd projektu — brak realnych płatności.',
-                    style: TextStyle(color: AppColors.textMuted, fontSize: 12)),
+                ..._purchaseSection(state),
               ],
             ),
           ),

@@ -1,5 +1,6 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../logic/premium.dart';
 import '../state/app_state.dart';
 import 'supabase_config.dart';
 
@@ -65,6 +66,43 @@ class CloudSync {
     }
     await signOut();
     return accountRemoved;
+  }
+
+  /// Status Premium zapisany przez serwer po sprawdzeniu zakupu w Google Play.
+  static Future<bool> fetchPremium() async {
+    final user = currentUser;
+    if (user == null) return false;
+    try {
+      final row = await _client
+          .from('subscriptions')
+          .select('status, expires_at')
+          .eq('user_id', user.id)
+          .maybeSingle();
+      if (row == null) return false;
+      return premiumFromSubscription(
+        status: row['status'] as String?,
+        expiresAt: DateTime.tryParse('${row['expires_at']}')?.toUtc(),
+        now: DateTime.now().toUtc(),
+      );
+    } catch (_) {
+      return false;
+    }
+  }
+
+  /// Przekazuje token zakupu do funkcji serwerowej, która sprawdza go
+  /// w Google Play i zapisuje subskrypcję. Zwraca, czy Premium jest aktywne.
+  static Future<bool> verifyPurchase({required String productId, required String purchaseToken}) async {
+    if (!signedIn) return false;
+    try {
+      final response = await _client.functions.invoke(
+        'verify-purchase',
+        body: {'productId': productId, 'purchaseToken': purchaseToken},
+      );
+      final data = response.data;
+      return data is Map && data['active'] == true;
+    } catch (_) {
+      return false;
+    }
   }
 
   static Future<void> pushProgress(Map<String, dynamic> state) async {

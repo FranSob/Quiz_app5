@@ -10,6 +10,30 @@ const Set<PremiumFeature> paidFeatures = {PremiumFeature.mockExam, PremiumFeatur
 bool isFeatureLocked(PremiumFeature feature, {required bool isPremium}) =>
     !isPremium && paidFeatures.contains(feature);
 
+/// Identyfikatory subskrypcji — muszą być dokładnie takie same w Konsoli Google Play.
+const String monthlySubscriptionId = 'premium_monthly';
+const String yearlySubscriptionId = 'premium_yearly';
+const Set<String> subscriptionIds = {monthlySubscriptionId, yearlySubscriptionId};
+
+/// Ceny pokazywane, zanim sklep zdąży podać własne (i w podglądzie w przeglądarce).
+const Map<String, String> fallbackSubscriptionPrices = {
+  monthlySubscriptionId: '19,99 zł',
+  yearlySubscriptionId: '149 zł',
+};
+
+/// Czy zapis subskrypcji z serwera oznacza aktywne Premium.
+/// Wygasłą subskrypcję traktujemy jak brak — nawet jeśli serwer nie zdążył
+/// jeszcze zmienić jej statusu.
+bool premiumFromSubscription({
+  required String? status,
+  required DateTime? expiresAt,
+  required DateTime now,
+}) {
+  if (status != 'active') return false;
+  if (expiresAt == null) return true;
+  return expiresAt.isAfter(now);
+}
+
 String premiumFeatureName(PremiumFeature feature) {
   switch (feature) {
     case PremiumFeature.mockExam:
