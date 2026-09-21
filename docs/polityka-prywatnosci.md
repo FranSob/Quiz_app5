@@ -46,11 +46,21 @@ Liga jest **dobrowolna** — działa dopiero wtedy, gdy sam wpiszesz kod klasy a
 - W każdej chwili możesz opuścić klasę — wtedy znikasz z rankingu razem z pseudonimem i wynikiem.
 - Liczba XP w rankingu jest liczona z Twojego zapisanego postępu po stronie serwera, żeby nie dało się wpisać dowolnego wyniku.
 
+## Ocenianie odpowiedzi przez AI
+
+Jeśli masz Premium, przy zadaniu otwartym możesz kliknąć „Oceń przez AI". Wtedy — i **tylko wtedy** — wysyłamy do modelu językowego trzy rzeczy: treść zadania, klucz punktowania oraz Twoją odpowiedź. Nie wysyłamy Twojego adresu e-mail, imienia ani pozostałych wyników.
+
+- Dostawcą modelu jest **Anthropic PBC** (USA), działający jako podmiot przetwarzający. Przekazanie danych poza Europejski Obszar Gospodarczy odbywa się na podstawie standardowych klauzul umownych.
+- Anthropic nie wykorzystuje danych przesyłanych przez interfejs programistyczny do trenowania swoich modeli.
+- Ocena AI jest orientacyjna i nie zastępuje egzaminatora — ostatnie słowo należy do Ciebie, bo możesz poprawić zaznaczone punkty.
+- Bez Premium ta funkcja jest nieaktywna i żadna Twoja odpowiedź nigdzie nie wychodzi — zadania otwarte oceniasz wtedy sam według klucza.
+
 ## Komu przekazujemy dane
 
 - **Supabase Inc.** — hosting bazy danych i obsługa logowania. Dane przechowujemy w regionie Unii Europejskiej (Frankfurt).
 - **Google Ireland Ltd.** — dystrybucja aplikacji i obsługa płatności w Google Play.
 - **[DOSTAWCA_POCZTY]** — wysyłka wiadomości z potwierdzeniem adresu e-mail i linkiem do zmiany hasła.
+- **Anthropic PBC** — wyłącznie treść zadania i Twojej odpowiedzi, gdy sam poprosisz o ocenę przez AI (patrz sekcja wyżej).
 
 Nikomu innemu danych nie przekazujemy. Nie sprzedajemy ich.
 

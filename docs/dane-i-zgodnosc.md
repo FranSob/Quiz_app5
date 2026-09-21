@@ -20,6 +20,7 @@ Ta strona zbiera w jednym miejscu szczegóły techniczne: gdzie leżą dane, kto
 - **Supabase Inc.** — baza danych i logowanie, dane w UE.
 - **Google Ireland Ltd.** — dystrybucja aplikacji, płatności, powiadomienia o stanie subskrypcji.
 - **[DOSTAWCA_POCZTY]** — wysyłka maili z potwierdzeniem adresu i linkiem do zmiany hasła.
+- **Anthropic PBC (USA)** — ocenianie odpowiedzi na zadania otwarte, wyłącznie na wyraźne żądanie ucznia z Premium. Przekazujemy treść zadania, klucz punktowania i odpowiedź ucznia; bez adresu e-mail i bez innych danych konta.
 
 ## Zabezpieczenia
 
@@ -28,6 +29,7 @@ Ta strona zbiera w jednym miejscu szczegóły techniczne: gdzie leżą dane, kto
 - Tabela subskrypcji jest dla aplikacji tylko do odczytu — status Premium ustawia serwer po weryfikacji zakupu w Google Play. Zmiana danych w telefonie nie odblokuje Premium.
 - Hasła przechowywane jako skróty (hashe), po stronie Supabase.
 - Klucze serwerowe nie znajdują się w kodzie aplikacji ani w repozytorium.
+- Klucz do API modelu językowego leży wyłącznie po stronie serwera. Limit 20 ocen dziennie i sprawdzenie Premium wykonuje serwer, więc nie da się ich obejść z telefonu.
 - Liga: kod klasy działa jak hasło wstępu. Tabeli klas nie da się odczytać w całości — dołączenie odbywa się przez funkcję w bazie, która sprawdza konkretny kod. Widać wyłącznie członków własnej klasy, a XP w rankingu liczy serwer z zapisanego postępu, więc nie da się go podać z telefonu.
 
 ## Realizacja praw użytkownika

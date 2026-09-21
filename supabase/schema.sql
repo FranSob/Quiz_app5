@@ -46,6 +46,47 @@ drop policy if exists "subscriptions_select_own" on public.subscriptions;
 create policy "subscriptions_select_own" on public.subscriptions
   for select using (auth.uid() = user_id);
 
+-- Zużycie oceniania przez AI. Każde sprawdzenie odpowiedzi kosztuje pieniądze,
+-- więc limit dzienny pilnuje serwer, a nie telefon.
+create table if not exists public.ai_usage (
+  user_id uuid not null references auth.users (id) on delete cascade,
+  day date not null default current_date,
+  used integer not null default 0,
+  primary key (user_id, day)
+);
+
+alter table public.ai_usage enable row level security;
+
+-- Uczeń może tylko podejrzeć swoje zużycie; zapisuje wyłącznie funkcja poniżej.
+drop policy if exists "ai_usage_select_own" on public.ai_usage;
+create policy "ai_usage_select_own" on public.ai_usage
+  for select using (auth.uid() = user_id);
+
+-- Pobiera jedną „porcję" z dziennego limitu. Zwraca false, gdy limit wyczerpany.
+-- Zliczanie i sprawdzanie w jednym zapytaniu, żeby dwa równoległe żądania
+-- nie przepuściły jednej oceny ponad limit.
+create or replace function public.consume_ai_credit(p_user uuid, p_limit integer)
+returns boolean
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_used integer;
+begin
+  insert into public.ai_usage (user_id, day, used)
+  values (p_user, current_date, 1)
+  on conflict (user_id, day) do update
+    set used = public.ai_usage.used + 1
+    where public.ai_usage.used < p_limit
+  returning used into v_used;
+
+  return v_used is not null;
+end;
+$$;
+
+revoke all on function public.consume_ai_credit(uuid, integer) from public;
+
 -- Liga i ranking klasowy. Klasa to po prostu krótki kod, po którym dołączają
 -- do niej koledzy z klasy — bez kont nauczycielskich ani rabatów (to osobna,
 -- jeszcze nie zrobiona funkcja z planu).

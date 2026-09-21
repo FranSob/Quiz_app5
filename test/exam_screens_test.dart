@@ -121,8 +121,11 @@ void main() {
 
     await tester.pumpWidget(_app(state, const PremiumScreen()));
     await tester.pumpAndSettle();
-    expect(find.textContaining('AI'), findsNothing);
+    // Tabela ma opisywać tylko funkcje, które naprawdę są w aplikacji.
+    expect(find.textContaining('AI-tutor'), findsNothing);
+    expect(find.textContaining('Pełne arkusze maturalne'), findsNothing);
     expect(find.text('Próbna matura z timerem'), findsOneWidget);
+    expect(find.text('Ocenianie odpowiedzi przez AI'), findsOneWidget);
 
     state.setPremium(true);
     state.readinessHistory

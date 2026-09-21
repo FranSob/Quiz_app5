@@ -9,6 +9,7 @@ import '../state/app_state.dart';
 import '../theme.dart';
 import '../utils/dates.dart';
 import '../widgets/app_card.dart';
+import '../widgets/cke_link_card.dart';
 import '../widgets/premium_lock.dart';
 import 'exam_screen.dart';
 
@@ -64,6 +65,8 @@ class ExamSetupScreen extends StatelessWidget {
               ],
             ),
           ),
+          const SizedBox(height: 10),
+          const CkeLinkCard(),
           if (history.isNotEmpty) ...[
             const SizedBox(height: 20),
             const Text('TWOJE WYNIKI',

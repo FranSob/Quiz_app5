@@ -6,6 +6,7 @@ import '../data/open_questions.dart';
 import '../state/app_state.dart';
 import '../theme.dart';
 import '../widgets/app_card.dart';
+import '../widgets/cke_link_card.dart';
 import 'open_question_screen.dart';
 
 class OpenQuestionsScreen extends StatefulWidget {
@@ -33,6 +34,8 @@ class _OpenQuestionsScreenState extends State<OpenQuestionsScreen> {
             'i sam zaznacz, za które elementy należy się punkt.',
             style: TextStyle(color: AppColors.textMuted, fontSize: 13, height: 1.4),
           ),
+          const SizedBox(height: 12),
+          const CkeLinkCard(),
           const SizedBox(height: 16),
           Wrap(
             spacing: 8,

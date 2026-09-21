@@ -39,6 +39,7 @@ LIGA KLASOWA
 Załóż klasę, podaj kolegom kod i sprawdzajcie się w rankingu XP. Widoczny jest tylko pseudonim i punkty — nic więcej.
 
 PREMIUM (opcjonalnie)
+• Ocenianie odpowiedzi przez AI: piszesz odpowiedź własnymi słowami, a aplikacja sprawdza ją według klucza punktowania i pokazuje, czego brakuje do pełnej liczby punktów (20 ocen dziennie)
 • Próbna matura z timerem: mini 60 minut albo pełna 180 minut, jak na prawdziwym egzaminie. Po czasie arkusz zamyka się sam, a Ty dostajesz wynik w punktach i omówienie każdego błędu.
 • Wskaźnik gotowości do matury: ile materiału masz opanowane — ogółem, w każdej klasie i w każdym dziale, z wykresem zmian w czasie.
 

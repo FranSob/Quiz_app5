@@ -70,6 +70,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
     ['Statystyki i wykryte luki', 'tak', 'tak'],
     ['Próbna matura z timerem', 'nie', 'tak'],
     ['Wskaźnik gotowości do matury', 'nie', 'tak'],
+    ['Ocenianie odpowiedzi przez AI', 'nie', '20 dziennie'],
   ];
 
   Future<void> _unlock(AppState state) async {
@@ -251,7 +252,8 @@ class _PremiumScreenState extends State<PremiumScreen> {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Cała nauka jest za darmo. Premium dodaje próbną maturę z timerem i wskaźnik gotowości do matury.',
+                  'Cała nauka jest za darmo. Premium dodaje próbną maturę z timerem, wskaźnik gotowości '
+                  'i ocenianie Twoich odpowiedzi przez AI według klucza.',
                   style: TextStyle(color: Colors.white, fontSize: 14, height: 1.4),
                 ),
               ],

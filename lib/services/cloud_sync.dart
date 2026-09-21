@@ -1,7 +1,9 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../logic/ai_grading.dart';
 import '../logic/premium.dart';
 import '../state/app_state.dart';
+import '../task_models.dart';
 import 'supabase_config.dart';
 
 /// Konto ucznia i kopia postępu w chmurze (Supabase).
@@ -102,6 +104,39 @@ class CloudSync {
       return data is Map && data['active'] == true;
     } catch (_) {
       return false;
+    }
+  }
+
+  /// Ocena odpowiedzi na zadanie otwarte przez AI (funkcja serwerowa).
+  /// Zwraca albo ocenę, albo powód, dla którego się nie udało.
+  static Future<({AiGrade? grade, AiGradingError? error})> gradeOpenAnswer({
+    required OpenQuestion question,
+    required String answer,
+  }) async {
+    if (answer.trim().isEmpty) return (grade: null, error: AiGradingError.emptyAnswer);
+    if (!signedIn) return (grade: null, error: AiGradingError.notPremium);
+    try {
+      final response = await _client.functions.invoke('grade-open-answer', body: {
+        'prompt': question.prompt,
+        'modelAnswer': question.modelAnswer,
+        'answer': answer.trim(),
+        'criteria': [
+          for (final criterion in question.criteria) {'text': criterion.text, 'points': criterion.points},
+        ],
+      });
+      final data = response.data;
+      if (data is Map && data['error'] != null) {
+        return (grade: null, error: aiErrorFromCode('${data['error']}'));
+      }
+      final grade = parseAiGrade(data, question);
+      if (grade == null) return (grade: null, error: AiGradingError.notConfigured);
+      return (grade: grade, error: null);
+    } on FunctionException catch (e) {
+      final details = e.details;
+      final code = details is Map ? '${details['error']}' : '';
+      return (grade: null, error: aiErrorFromCode(code));
+    } catch (_) {
+      return (grade: null, error: AiGradingError.network);
     }
   }
 

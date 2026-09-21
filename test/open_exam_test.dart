@@ -133,8 +133,8 @@ void main() {
     });
   });
 
-  test('only the mock exam and the readiness indicator are paid', () {
-    expect(paidFeatures, {PremiumFeature.mockExam, PremiumFeature.readiness});
+  test('the mock exam, readiness indicator and AI grading are paid', () {
+    expect(paidFeatures, {PremiumFeature.mockExam, PremiumFeature.readiness, PremiumFeature.aiGrading});
     for (final feature in PremiumFeature.values) {
       expect(isFeatureLocked(feature, isPremium: false), isTrue);
       expect(isFeatureLocked(feature, isPremium: true), isFalse);
