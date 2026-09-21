@@ -105,7 +105,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
   /// Przyciski zakupu. Na Androidzie kupuje się przez Google Play; gdzie indziej
   /// (przeglądarka, komputer) sklepu nie ma, więc zostaje podgląd projektu.
   List<Widget> _purchaseSection(AppState state) {
-    if (!BillingService.supported) return _previewSection(state);
+    if (!BillingService.supported || previewPremiumUnlock) return _previewSection(state);
 
     if (state.isPremium) {
       return [

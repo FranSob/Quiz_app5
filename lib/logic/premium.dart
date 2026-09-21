@@ -10,6 +10,13 @@ const Set<PremiumFeature> paidFeatures = {PremiumFeature.mockExam, PremiumFeatur
 bool isFeatureLocked(PremiumFeature feature, {required bool isPremium}) =>
     !isPremium && paidFeatures.contains(feature);
 
+/// Włącza przełącznik podglądowy Premium także na Androidzie — wyłącznie
+/// w naszych wersjach testowych, budowanych z:
+///   flutter build apk --release --dart-define=PREVIEW_PREMIUM=true
+/// Wersja wysyłana do Google Play budowana jest bez tej flagi, więc Premium
+/// można tam włączyć jedynie prawdziwym zakupem.
+const bool previewPremiumUnlock = bool.fromEnvironment('PREVIEW_PREMIUM');
+
 /// Identyfikatory subskrypcji — muszą być dokładnie takie same w Konsoli Google Play.
 const String monthlySubscriptionId = 'premium_monthly';
 const String yearlySubscriptionId = 'premium_yearly';

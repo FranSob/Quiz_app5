@@ -20,7 +20,9 @@ if (hasReleaseKeystore) {
 android {
     namespace = "pl.biomatura.app"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    // Wersji wymaganej przez wtyczki (płatności, ekran startowy, PDF) — wyższa
+    // niż domyślna Fluttera i zgodna wstecz.
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
