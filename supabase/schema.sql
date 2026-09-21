@@ -58,19 +58,6 @@ create table if not exists public.groups (
 
 alter table public.groups enable row level security;
 
--- Kod klasy jest hasłem wstępu, więc tabeli klas nie wolno dać odczytać w całości:
--- inaczej każdy zalogowany pobrałby listę wszystkich kodów i dołączył, gdzie chce.
--- Widać więc tylko klasy, do których się należy, a dołączanie idzie przez
--- funkcję join_group, która sprawdza konkretny kod.
-drop policy if exists "groups_select_authenticated" on public.groups;
-drop policy if exists "groups_select_own" on public.groups;
-create policy "groups_select_own" on public.groups
-  for select using (id in (select public.my_group_ids()));
-
-drop policy if exists "groups_insert_authenticated" on public.groups;
-create policy "groups_insert_authenticated" on public.groups
-  for insert with check (auth.role() = 'authenticated');
-
 -- Członkostwo w klasie: pseudonim i XP widoczne dla współklasowiczów, żeby
 -- zbudować ranking, bez ujawniania e-maila ani reszty postępu ucznia.
 create table if not exists public.group_members (
@@ -87,9 +74,10 @@ create unique index if not exists group_members_one_group_per_user on public.gro
 
 alter table public.group_members enable row level security;
 
--- Pomocnicza funkcja z ominięciem RLS — bezpieczny sposób, żeby polityka
--- poniżej mogła sprawdzić "moje klasy" bez rekurencyjnego odpytywania tej
+-- Pomocnicza funkcja z ominięciem RLS — bezpieczny sposób, żeby polityki
+-- poniżej mogły sprawdzić „moje klasy" bez rekurencyjnego odpytywania tej
 -- samej, chronionej przez RLS tabeli.
+-- Musi powstać przed politykami, które jej używają.
 create or replace function public.my_group_ids()
 returns setof text
 language sql
@@ -99,6 +87,19 @@ set search_path = public
 as $$
   select group_id from public.group_members where user_id = auth.uid();
 $$;
+
+-- Kod klasy jest hasłem wstępu, więc tabeli klas nie wolno dać odczytać w całości:
+-- inaczej każdy zalogowany pobrałby listę wszystkich kodów i dołączył, gdzie chce.
+-- Widać więc tylko klasy, do których się należy, a dołączanie idzie przez
+-- funkcję join_group, która sprawdza konkretny kod.
+drop policy if exists "groups_select_authenticated" on public.groups;
+drop policy if exists "groups_select_own" on public.groups;
+create policy "groups_select_own" on public.groups
+  for select using (id in (select public.my_group_ids()));
+
+drop policy if exists "groups_insert_authenticated" on public.groups;
+create policy "groups_insert_authenticated" on public.groups
+  for insert with check (auth.role() = 'authenticated');
 
 -- Widzisz tylko członków klas, do których sam należysz.
 drop policy if exists "group_members_select_same_group" on public.group_members;
