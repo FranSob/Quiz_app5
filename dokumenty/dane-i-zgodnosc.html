@@ -1,0 +1,86 @@
+<!doctype html><html lang="pl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dane i zgodność — BioMatura</title><style>
+:root { color-scheme: light dark; }
+body { margin: 0 auto; padding: 32px 20px 64px; max-width: 720px;
+  font: 16px/1.6 -apple-system, "Segoe UI", Roboto, sans-serif; color: #11171f; background: #f4f6f8; }
+h1 { font-size: 28px; margin: 0 0 8px; }
+h2 { font-size: 19px; margin: 32px 0 8px; color: #177a54; }
+a { color: #177a54; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 14px; }
+td { border: 1px solid #e2e6ea; padding: 8px 10px; vertical-align: top; }
+tr:first-child td { background: #eaf7f1; font-weight: 600; }
+.powrot { display: inline-block; margin-bottom: 24px; font-size: 14px; }
+@media (prefers-color-scheme: dark) {
+  body { background: #0a0e14; color: #e6eaf0; }
+  h2, a { color: #3ecf8e; }
+  td { border-color: #232b37; }
+  tr:first-child td { background: #163d2c; }
+}</style></head><body>
+<a class="powrot" href="../">← BioMatura</a>
+<h1>Dane i zgodność</h1>
+<p>Wersja z dnia 20 września 2026 r.</p>
+<p>Ta strona zbiera w jednym miejscu szczegóły techniczne: gdzie leżą dane, kto ma do nich dostęp i jak spełniamy wymagania RODO oraz zasad Google Play. Ogólne zasady opisuje <a href="polityka-prywatnosci.html">Polityka prywatności</a>.</p>
+<h2>Gdzie są przechowywane dane</h2>
+<table>
+<tr><td>Co</td><td>Gdzie</td><td>Kto ma dostęp</td></tr>
+<tr><td>Konto (e-mail, skrót hasła)</td><td>Supabase, region UE (Frankfurt)</td><td>administrator danych, Supabase jako podmiot przetwarzający</td></tr>
+<tr><td>Postęp nauki</td><td>Supabase, region UE (Frankfurt)</td><td>wyłącznie właściciel konta</td></tr>
+<tr><td>Status subskrypcji</td><td>Supabase, region UE (Frankfurt)</td><td>zapisuje serwer, użytkownik tylko odczytuje</td></tr>
+<tr><td>Pseudonim i XP w lidze (dobrowolne)</td><td>Supabase, region UE (Frankfurt)</td><td>osoby z tej samej klasy</td></tr>
+<tr><td>Dane płatności (karta)</td><td>Google Play</td><td>wyłącznie Google — nie mamy do nich dostępu</td></tr>
+<tr><td>Postęp bez konta</td><td>pamięć telefonu</td><td>wyłącznie użytkownik</td></tr>
+</table>
+<h2>Podmioty przetwarzające</h2>
+<ul>
+<li><strong>Supabase Inc.</strong> — baza danych i logowanie, dane w UE.</li>
+<li><strong>Google Ireland Ltd.</strong> — dystrybucja aplikacji, płatności, powiadomienia o stanie subskrypcji.</li>
+<li><strong>[DOSTAWCA_POCZTY]</strong> — wysyłka maili z potwierdzeniem adresu i linkiem do zmiany hasła.</li>
+<li><strong>Anthropic PBC (USA)</strong> — ocenianie odpowiedzi na zadania otwarte, wyłącznie na wyraźne żądanie ucznia z Premium. Przekazujemy treść zadania, klucz punktowania i odpowiedź ucznia; bez adresu e-mail i bez innych danych konta.</li>
+</ul>
+<h2>Zabezpieczenia</h2>
+<ul>
+<li>Połączenie z serwerem wyłącznie po TLS.</li>
+<li>Reguły bezpieczeństwa na poziomie wiersza w bazie (RLS): zapytanie jednego użytkownika nie jest w stanie sięgnąć po dane innego.</li>
+<li>Tabela subskrypcji jest dla aplikacji tylko do odczytu — status Premium ustawia serwer po weryfikacji zakupu w Google Play. Zmiana danych w telefonie nie odblokuje Premium.</li>
+<li>Hasła przechowywane jako skróty (hashe), po stronie Supabase.</li>
+<li>Klucze serwerowe nie znajdują się w kodzie aplikacji ani w repozytorium.</li>
+<li>Klucz do API modelu językowego leży wyłącznie po stronie serwera. Limit 20 ocen dziennie i sprawdzenie Premium wykonuje serwer, więc nie da się ich obejść z telefonu.</li>
+<li>Liga: kod klasy działa jak hasło wstępu. Tabeli klas nie da się odczytać w całości — dołączenie odbywa się przez funkcję w bazie, która sprawdza konkretny kod. Widać wyłącznie członków własnej klasy, a XP w rankingu liczy serwer z zapisanego postępu, więc nie da się go podać z telefonu.</li>
+</ul>
+<h2>Realizacja praw użytkownika</h2>
+<table>
+<tr><td>Prawo</td><td>Jak z niego skorzystać</td></tr>
+<tr><td>Dostęp do danych i przeniesienie</td><td>Profil → Konto → Moje dane (podgląd i kopiowanie pełnego zapisu)</td></tr>
+<tr><td>Usunięcie danych</td><td>Profil → Konto → Usuń konto (natychmiast) lub e-mail na [E-MAIL_KONTAKTOWY]</td></tr>
+<tr><td>Sprostowanie</td><td>zmiana w profilu lub e-mail</td></tr>
+<tr><td>Wycofanie zgody na ligę</td><td>Profil → Liga klasy → Opuść klasę (pseudonim i wynik znikają z rankingu)</td></tr>
+<tr><td>Ograniczenie, sprzeciw, skarga</td><td>e-mail na [E-MAIL_KONTAKTOWY]; skarga do Prezesa UODO</td></tr>
+</table>
+<p>Adres strony do usunięcia konta, wymagany przez Google Play: [ADRES_STRONY_USUWANIA_KONTA].</p>
+<h2>Dzieci i młodzież</h2>
+<ul>
+<li>Grupa docelowa: 13 lat i więcej.</li>
+<li>Osoby poniżej 16 lat zakładają konto za zgodą rodzica lub opiekuna — potwierdzenie zgody jest warunkiem założenia konta.</li>
+<li>Brak reklam, brak narzędzi śledzących, brak profilowania, brak przekazywania danych brokerom.</li>
+<li>Aplikacja nie zbiera lokalizacji, kontaktów, zdjęć ani listy zainstalowanych aplikacji.</li>
+</ul>
+<h2>Deklaracja „Bezpieczeństwo danych" w Google Play</h2>
+<p>Do wpisania w formularzu w Konsoli Google Play:</p>
+<ul>
+<li>Zbierane dane: <strong>adres e-mail</strong> (konto, wymagane do logowania) oraz <strong>aktywność w aplikacji</strong> (postęp nauki).</li>
+<li>Cel: <strong>funkcjonalność aplikacji</strong> i <strong>zarządzanie kontem</strong>.</li>
+<li>Dane są szyfrowane w trakcie przesyłania: <strong>tak</strong>.</li>
+<li>Użytkownik może poprosić o usunięcie danych: <strong>tak</strong>, z poziomu aplikacji.</li>
+<li>Dane są udostępniane innym firmom: <strong>nie</strong>.</li>
+<li>Dane wykorzystywane do reklam lub śledzenia: <strong>nie</strong>.</li>
+</ul>
+<h2>Zgłaszanie incydentów</h2>
+<p>Jeśli zauważysz lukę bezpieczeństwa albo wyciek danych, napisz na [E-MAIL_KONTAKTOWY]. Naruszenie ochrony danych zgłaszamy Prezesowi UODO w ciągu 72 godzin od stwierdzenia, a osobom, których dotyczy — jeśli wiąże się z wysokim ryzykiem.</p>
+<h2>Co jeszcze warto wiedzieć</h2>
+<ul>
+<li>Treści edukacyjne są przygotowane na potrzeby aplikacji i nie pochodzą z arkuszy CKE.</li>
+<li>Wskaźnik gotowości to szacunek opanowania materiału, a nie prognoza wyniku matury.</li>
+<li>Aplikacja działa bez konta — wtedy żadne dane nie opuszczają telefonu.</li>
+</ul>
+</body></html>
