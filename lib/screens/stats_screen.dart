@@ -75,8 +75,8 @@ class StatsScreen extends StatelessWidget {
                         ElevatedButton(
                           onPressed: () => openGapPractice(context, [gap], title: gap.topic.name),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.greenDark,
-                            foregroundColor: AppColors.green,
+                            backgroundColor: context.appGreenSoft,
+                            foregroundColor: context.appGreenText,
                             elevation: 0,
                           ),
                           child: const Text('Ćwicz'),
@@ -115,7 +115,7 @@ class StatsScreen extends StatelessWidget {
                             children: [
                               Expanded(child: Text(c.name, style: const TextStyle(fontSize: 13))),
                               Text('${state.chapterAccuracy(c.id).round()}%',
-                                  style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 13)),
+                                  style: TextStyle(color: context.appGreenText, fontWeight: FontWeight.bold, fontSize: 13)),
                             ],
                           ),
                           const SizedBox(height: 4),
@@ -124,7 +124,7 @@ class StatsScreen extends StatelessWidget {
                             child: LinearProgressIndicator(
                               value: state.chapterAccuracy(c.id) / 100,
                               minHeight: 6,
-                              backgroundColor: AppColors.darkBorder,
+                              backgroundColor: context.appTrack,
                               color: AppColors.green,
                             ),
                           ),
@@ -194,7 +194,7 @@ class StatsScreen extends StatelessWidget {
             child: Row(
               children: [
                 Text('${state.readinessReport.overall.round()}%',
-                    style: const TextStyle(color: AppColors.green, fontSize: 26, fontWeight: FontWeight.bold)),
+                    style: TextStyle(color: context.appGreenText, fontSize: 26, fontWeight: FontWeight.bold)),
                 const SizedBox(width: 14),
                 const Expanded(
                   child: Column(
@@ -227,7 +227,7 @@ class _StatTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(value, style: const TextStyle(color: AppColors.green, fontSize: 24, fontWeight: FontWeight.bold)),
+          Text(value, style: TextStyle(color: context.appGreenText, fontSize: 24, fontWeight: FontWeight.bold)),
           const SizedBox(height: 4),
           Text(label, style: const TextStyle(color: AppColors.textMuted, fontSize: 12)),
         ],

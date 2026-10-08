@@ -58,7 +58,7 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text('Poziom ${state.level} · ${state.totalXp} XP',
-                    style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.w600, fontSize: 13)),
+                    style: TextStyle(color: context.appGreenText, fontWeight: FontWeight.w600, fontSize: 13)),
                 const SizedBox(height: 6),
                 SizedBox(
                   width: 110,
@@ -67,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                     child: LinearProgressIndicator(
                       value: state.xpIntoLevel / state.xpForNextLevel,
                       minHeight: 6,
-                      backgroundColor: AppColors.darkBorder,
+                      backgroundColor: context.appTrack,
                       color: AppColors.green,
                     ),
                   ),
@@ -102,8 +102,8 @@ class HomeScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('KONTYNUUJ NAUKĘ',
-                          style: TextStyle(color: AppColors.green, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
+                      Text('KONTYNUUJ NAUKĘ',
+                          style: TextStyle(color: context.appGreenText, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
                       const SizedBox(height: 2),
                       Text(continueTopic.name,
                           style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white)),
@@ -203,7 +203,7 @@ class HomeScreen extends StatelessWidget {
         ],
         const SizedBox(height: 16),
         AppCard(
-          color: AppColors.greenDark.withValues(alpha: 0.35),
+          color: context.appGreenSoft,
           borderColor: Colors.transparent,
           onTap: () {
             final cards = state.dueFlashcards(classLevel: state.selectedClassLevel);
@@ -215,9 +215,9 @@ class HomeScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: Text('Do powtórki dziś: $dueCount',
-                    style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 15)),
+                    style: TextStyle(color: context.appGreenText, fontWeight: FontWeight.bold, fontSize: 15)),
               ),
-              const Icon(Icons.chevron_right_rounded, color: AppColors.green),
+              Icon(Icons.chevron_right_rounded, color: context.appGreenText),
             ],
           ),
         ),
@@ -301,8 +301,8 @@ class _PlanCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('PLAN NAUKI',
-                    style: TextStyle(color: AppColors.green, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
+                Text('PLAN NAUKI',
+                    style: TextStyle(color: context.appGreenText, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
                 const SizedBox(height: 2),
                 Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 2),
@@ -317,14 +317,14 @@ class _PlanCard extends StatelessWidget {
                           child: LinearProgressIndicator(
                             value: plan.doneItems / plan.totalItems,
                             minHeight: 6,
-                            backgroundColor: AppColors.darkBorder,
+                            backgroundColor: context.appTrack,
                             color: AppColors.green,
                           ),
                         ),
                       ),
                       const SizedBox(width: 8),
                       Text('${plan.doneItems}/${plan.totalItems}',
-                          style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 12)),
+                          style: TextStyle(color: context.appGreenText, fontWeight: FontWeight.bold, fontSize: 12)),
                     ],
                   ),
                 ],
@@ -498,9 +498,9 @@ class _ClassTabs extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 decoration: BoxDecoration(
-                  color: selected ? AppColors.green : AppColors.darkCard,
+                  color: selected ? AppColors.green : context.appCard,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: selected ? AppColors.green : AppColors.darkBorder),
+                  border: Border.all(color: selected ? AppColors.green : context.appBorder),
                 ),
                 child: Center(
                   child: Text('Kl. $level',

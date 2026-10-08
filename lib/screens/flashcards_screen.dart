@@ -83,7 +83,7 @@ class _FlashcardsScreenState extends State<FlashcardsScreen> {
           children: [
             LinearProgressIndicator(
               value: _index / widget.cards.length,
-              backgroundColor: AppColors.darkBorder,
+              backgroundColor: context.appTrack,
               color: AppColors.green,
               minHeight: 6,
             ),
@@ -104,7 +104,7 @@ class _FlashcardsScreenState extends State<FlashcardsScreen> {
                       children: [
                         Text(
                           _flipped ? 'ODPOWIEDŹ' : 'PYTANIE',
-                          style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, letterSpacing: 1, fontSize: 12),
+                          style: TextStyle(color: context.appGreenText, fontWeight: FontWeight.bold, letterSpacing: 1, fontSize: 12),
                         ),
                         const SizedBox(height: 16),
                         Expanded(
@@ -161,7 +161,7 @@ class _FlashcardsScreenState extends State<FlashcardsScreen> {
                 child: ElevatedButton(
                   onPressed: () => setState(() => _flipped = true),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.darkCardAlt,
+                    backgroundColor: context.appCardAlt,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 14),
                   ),

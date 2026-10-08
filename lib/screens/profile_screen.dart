@@ -18,7 +18,7 @@ class ProfileScreen extends StatelessWidget {
     final result = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkCard,
+        backgroundColor: context.appCard,
         title: const Text('Zmień imię'),
         content: TextField(controller: controller, autofocus: true),
         actions: [
@@ -44,7 +44,7 @@ class ProfileScreen extends StatelessWidget {
             IconButton(
               onPressed: () => state.toggleTheme(),
               icon: Icon(state.themeMode == ThemeMode.dark ? Icons.dark_mode_rounded : Icons.light_mode_rounded),
-              style: IconButton.styleFrom(backgroundColor: AppColors.darkCardAlt, shape: const CircleBorder()),
+              style: IconButton.styleFrom(backgroundColor: context.appCardAlt, shape: const CircleBorder()),
             ),
           ],
         ),
@@ -135,7 +135,7 @@ class ProfileScreen extends StatelessWidget {
                 child: LinearProgressIndicator(
                   value: state.xpIntoLevel / state.xpForNextLevel,
                   minHeight: 8,
-                  backgroundColor: AppColors.darkBorder,
+                  backgroundColor: context.appTrack,
                   color: AppColors.green,
                 ),
               ),
@@ -162,7 +162,7 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 20,
-                    backgroundColor: unlocked ? AppColors.green.withValues(alpha: 0.2) : AppColors.darkCardAlt,
+                    backgroundColor: unlocked ? AppColors.green.withValues(alpha: 0.2) : context.appCardAlt,
                     child: Icon(
                       unlocked ? _iconForBadge(b.id) : Icons.lock_outline_rounded,
                       color: unlocked ? AppColors.green : AppColors.textMuted,

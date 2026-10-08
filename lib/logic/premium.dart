@@ -21,6 +21,13 @@ bool isFeatureLocked(PremiumFeature feature, {required bool isPremium}) =>
 /// można tam włączyć jedynie prawdziwym zakupem.
 const bool previewPremiumUnlock = bool.fromEnvironment('PREVIEW_PREMIUM');
 
+/// Wersja wystawiona publicznie w internecie (demo do pokazania innym).
+/// Buduje się ją tak:
+///   flutter build web --release --dart-define=PUBLIC_DEMO=true
+/// Chowa podglądowy przełącznik Premium — inaczej każdy odwiedzający
+/// odblokowałby sobie płatne funkcje jednym kliknięciem.
+const bool publicDemo = bool.fromEnvironment('PUBLIC_DEMO');
+
 /// Identyfikatory subskrypcji — muszą być dokładnie takie same w Konsoli Google Play.
 const String monthlySubscriptionId = 'premium_monthly';
 const String yearlySubscriptionId = 'premium_yearly';

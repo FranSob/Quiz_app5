@@ -128,7 +128,7 @@ class _LeagueScreenState extends State<LeagueScreen> {
     final result = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkCard,
+        backgroundColor: context.appCard,
         title: const Text('Pseudonim w rankingu'),
         content: TextField(
           controller: controller,
@@ -153,7 +153,7 @@ class _LeagueScreenState extends State<LeagueScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkCard,
+        backgroundColor: context.appCard,
         title: const Text('Opuścić klasę?'),
         content: const Text('Znikniesz z tego rankingu. Możesz dołączyć ponownie w każdej chwili, podając ten sam kod.'),
         actions: [
@@ -352,7 +352,7 @@ class _LeagueScreenState extends State<LeagueScreen> {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                Text('${entry.member.xp} XP', style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 13.5)),
+                Text('${entry.member.xp} XP', style: TextStyle(color: context.appGreenText, fontWeight: FontWeight.bold, fontSize: 13.5)),
               ],
             ),
           ),
@@ -370,7 +370,7 @@ class _LeagueScreenState extends State<LeagueScreen> {
                 style: const TextStyle(fontSize: 13.5),
               ),
             ),
-            const Text('Zmień', style: TextStyle(color: AppColors.green, fontSize: 13)),
+            Text('Zmień', style: TextStyle(color: context.appGreenText, fontSize: 13)),
           ],
         ),
       ),

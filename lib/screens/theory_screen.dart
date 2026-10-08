@@ -60,7 +60,7 @@ class _TheoryScreenState extends State<TheoryScreen> {
                   children: [
                     if (section.heading != null) ...[
                       Text(section.heading!,
-                          style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 14, letterSpacing: 0.3)),
+                          style: TextStyle(color: context.appGreenText, fontWeight: FontWeight.bold, fontSize: 14, letterSpacing: 0.3)),
                       const SizedBox(height: 8),
                     ],
                     Text(section.body, style: const TextStyle(fontSize: 14, height: 1.5)),

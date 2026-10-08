@@ -143,7 +143,7 @@ class _QuizScreenState extends State<QuizScreen> {
           children: [
             LinearProgressIndicator(
               value: (_index) / _items.length,
-              backgroundColor: AppColors.darkBorder,
+              backgroundColor: context.appTrack,
               color: AppColors.green,
               minHeight: 6,
             ),
@@ -158,7 +158,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 separatorBuilder: (_, __) => const SizedBox(height: 10),
                 itemBuilder: (context, i) {
                   Color? bg;
-                  Color border = AppColors.darkBorder;
+                  Color border = context.appBorder;
                   if (_answered) {
                     if (i == item.correctIndex) {
                       bg = AppColors.green.withValues(alpha: 0.18);
@@ -180,7 +180,7 @@ class _QuizScreenState extends State<QuizScreen> {
             if (_answered) ...[
               const SizedBox(height: 12),
               AppCard(
-                color: AppColors.darkCardAlt,
+                color: context.appCardAlt,
                 child: Text(q.explanation, style: const TextStyle(color: AppColors.textMuted, fontSize: 13, height: 1.4)),
               ),
               const SizedBox(height: 16),

@@ -17,7 +17,7 @@ class FolderDetailScreen extends StatelessWidget {
     final saved = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkCard,
+        backgroundColor: context.appCard,
         title: Text(existing == null ? 'Nowa fiszka' : 'Edytuj fiszkę'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -59,7 +59,7 @@ class FolderDetailScreen extends StatelessWidget {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkCard,
+        backgroundColor: context.appCard,
         title: const Text('Usunąć fiszkę?'),
         actions: [
           TextButton(onPressed: () => Navigator.of(context).pop(false), child: const Text('Anuluj')),

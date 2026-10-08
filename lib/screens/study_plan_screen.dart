@@ -102,7 +102,7 @@ class StudyPlanScreen extends StatelessWidget {
                       style: TextStyle(color: AppColors.textMuted, fontWeight: FontWeight.bold, letterSpacing: 0.8, fontSize: 13)),
                 ),
                 Text('${plan.doneItems} / ${plan.totalItems} zrobione',
-                    style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 13)),
+                    style: TextStyle(color: context.appGreenText, fontWeight: FontWeight.bold, fontSize: 13)),
               ],
             ),
             const SizedBox(height: 10),

@@ -280,7 +280,7 @@ class _BarChartView extends StatelessWidget {
                     getTooltipColor: (_) => AppColors.darkCardAlt,
                     getTooltipItem: (group, groupIndex, rod, rodIndex) => BarTooltipItem(
                       _formatNumber(rod.toY),
-                      const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 12),
+                      TextStyle(color: context.appGreenText, fontWeight: FontWeight.bold, fontSize: 12),
                     ),
                   ),
                 ),

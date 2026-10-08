@@ -127,7 +127,7 @@ class _AccountScreenState extends State<AccountScreen> {
           ],
           if (_info != null) ...[
             const SizedBox(height: 12),
-            Text(_info!, style: const TextStyle(color: AppColors.green, fontSize: 13)),
+            Text(_info!, style: TextStyle(color: context.appGreenText, fontSize: 13)),
           ],
         ],
       ),

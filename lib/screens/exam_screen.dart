@@ -225,7 +225,7 @@ class _ExamScreenState extends State<ExamScreen> {
                       decoration: BoxDecoration(
                         color: _isAnswered(i) ? AppColors.green.withValues(alpha: 0.25) : Colors.transparent,
                         border: Border.all(
-                          color: i == _index ? AppColors.orange : AppColors.darkBorder,
+                          color: i == _index ? AppColors.orange : context.appBorder,
                           width: i == _index ? 2 : 1,
                         ),
                         borderRadius: BorderRadius.circular(8),
@@ -285,7 +285,7 @@ class _ExamScreenState extends State<ExamScreen> {
         children: [
           Text(
             '${_kindLabel(item).toUpperCase()} · ${item.maxPoints} PKT',
-            style: const TextStyle(color: AppColors.green, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 0.5),
+            style: TextStyle(color: context.appGreenText, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 0.5),
           ),
           const SizedBox(height: 8),
           ..._itemBody(item, _index),
@@ -453,7 +453,7 @@ class _ExamScreenState extends State<ExamScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Zadanie ${index + 1}', style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 12)),
+          Text('Zadanie ${index + 1}', style: TextStyle(color: context.appGreenText, fontWeight: FontWeight.bold, fontSize: 12)),
           const SizedBox(height: 6),
           Text(question.prompt, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600, height: 1.4)),
           const SizedBox(height: 10),
@@ -549,7 +549,7 @@ class _ExamScreenState extends State<ExamScreen> {
                         children: [
                           Expanded(child: Text(label, style: const TextStyle(fontSize: 14))),
                           Text('$points / $sectionMax pkt',
-                              style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 14)),
+                              style: TextStyle(color: context.appGreenText, fontWeight: FontWeight.bold, fontSize: 14)),
                         ],
                       ),
                     ),
@@ -749,7 +749,7 @@ class _MistakeCard extends StatelessWidget {
             const SizedBox(height: 6),
             Text(given == null ? 'Brak odpowiedzi' : 'Twoja odpowiedź: $given',
                 style: const TextStyle(color: AppColors.red, fontSize: 13)),
-            Text('Poprawna odpowiedź: $correct', style: const TextStyle(color: AppColors.green, fontSize: 13)),
+            Text('Poprawna odpowiedź: $correct', style: TextStyle(color: context.appGreenText, fontSize: 13)),
             const SizedBox(height: 4),
             Text(explanation, style: const TextStyle(color: AppColors.textMuted, fontSize: 12.5, height: 1.4)),
           ],

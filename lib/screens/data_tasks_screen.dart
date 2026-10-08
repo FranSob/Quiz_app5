@@ -90,7 +90,7 @@ class _DataTasksScreenState extends State<DataTasksScreen> {
                     const SizedBox(width: 8),
                     if (state.dataTaskBest.containsKey(task.id))
                       Text('${state.dataTaskBest[task.id]} / ${task.questions.length}',
-                          style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold))
+                          style: TextStyle(color: context.appGreenText, fontWeight: FontWeight.bold))
                     else
                       const Icon(Icons.chevron_right_rounded, color: AppColors.textMuted),
                   ],

@@ -85,7 +85,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkCard,
+        backgroundColor: context.appCard,
         title: const Text('Podgląd projektu'),
         content: const Text('To jest wersja demonstracyjna — brak realnych płatności. Odblokować funkcje Premium lokalnie?'),
         actions: [
@@ -189,6 +189,26 @@ class _PremiumScreenState extends State<PremiumScreen> {
 
   /// Wersja bez sklepu — służy do oglądania płatnych ekranów w podglądzie.
   List<Widget> _previewSection(AppState state) {
+    if (publicDemo) {
+      return [
+        AppCard(
+          borderColor: AppColors.orange,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('To wersja pokazowa w przeglądarce',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+              const SizedBox(height: 6),
+              Text(
+                'Cała nauka działa tu za darmo i bez konta. Premium — próbna matura z timerem, '
+                'wskaźnik gotowości i ocenianie odpowiedzi przez AI — kupuje się w aplikacji na Androida.',
+                style: const TextStyle(color: AppColors.textMuted, fontSize: 13, height: 1.45),
+              ),
+            ],
+          ),
+        ),
+      ];
+    }
     return [
       SizedBox(
         width: double.infinity,
@@ -230,7 +250,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
         children: [
           Container(
             padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [AppColors.green, Color(0xFF1F8F5F)],
                 begin: Alignment.topLeft,
@@ -271,13 +291,13 @@ class _PremiumScreenState extends State<PremiumScreen> {
                     columnWidths: const {0: FlexColumnWidth(2), 1: FlexColumnWidth(1.1), 2: FlexColumnWidth(1.3)},
                     children: [
                       TableRow(
-                        decoration: const BoxDecoration(
-                          border: Border(bottom: BorderSide(color: AppColors.darkBorder)),
+                        decoration: BoxDecoration(
+                          border: Border(bottom: BorderSide(color: context.appBorder)),
                         ),
-                        children: const [
+                        children: [
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-                            child: Text('FUNKCJA', style: TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 12)),
+                            child: Text('FUNKCJA', style: TextStyle(color: context.appGreenText, fontWeight: FontWeight.bold, fontSize: 12)),
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 12),
@@ -291,8 +311,8 @@ class _PremiumScreenState extends State<PremiumScreen> {
                       ),
                       for (final row in _rows)
                         TableRow(
-                          decoration: const BoxDecoration(
-                            border: Border(bottom: BorderSide(color: AppColors.darkBorder)),
+                          decoration: BoxDecoration(
+                            border: Border(bottom: BorderSide(color: context.appBorder)),
                           ),
                           children: [
                             Padding(
@@ -319,7 +339,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                 GestureDetector(
                   onTap: () => setState(() => _yearly = false),
                   child: AppCard(
-                    borderColor: !_yearly ? AppColors.orange : AppColors.darkBorder,
+                    borderColor: !_yearly ? AppColors.orange : context.appBorder,
                     child: Row(
                       children: [
                         Icon(!_yearly ? Icons.radio_button_checked : Icons.radio_button_off, color: AppColors.orange),
@@ -334,7 +354,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                           ),
                         ),
                         Text(billing.priceFor(monthlySubscriptionId),
-                            style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 16)),
+                            style: TextStyle(color: context.appGreenText, fontWeight: FontWeight.bold, fontSize: 16)),
                       ],
                     ),
                   ),
@@ -343,7 +363,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                 GestureDetector(
                   onTap: () => setState(() => _yearly = true),
                   child: AppCard(
-                    borderColor: _yearly ? AppColors.orange : AppColors.darkBorder,
+                    borderColor: _yearly ? AppColors.orange : context.appBorder,
                     child: Row(
                       children: [
                         Icon(_yearly ? Icons.radio_button_checked : Icons.radio_button_off, color: AppColors.orange),
@@ -369,7 +389,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                           ),
                         ),
                         Text(billing.priceFor(yearlySubscriptionId),
-                            style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 16)),
+                            style: TextStyle(color: context.appGreenText, fontWeight: FontWeight.bold, fontSize: 16)),
                       ],
                     ),
                   ),

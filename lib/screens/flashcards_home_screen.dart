@@ -18,7 +18,7 @@ class FlashcardsHomeScreen extends StatelessWidget {
     final name = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkCard,
+        backgroundColor: context.appCard,
         title: const Text('Nowy folder fiszek'),
         content: TextField(
           controller: controller,
@@ -128,7 +128,7 @@ class _FolderTile extends StatelessWidget {
     final name = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkCard,
+        backgroundColor: context.appCard,
         title: const Text('Zmień nazwę folderu'),
         content: TextField(controller: controller, autofocus: true),
         actions: [
@@ -146,7 +146,7 @@ class _FolderTile extends StatelessWidget {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.darkCard,
+        backgroundColor: context.appCard,
         title: const Text('Usunąć folder?'),
         content: Text('Folder "${folder.name}" i wszystkie jego fiszki zostaną usunięte.'),
         actions: [
@@ -198,7 +198,7 @@ class _FolderTile extends StatelessWidget {
           ),
           PopupMenuButton<String>(
             icon: const Icon(Icons.more_vert_rounded, color: AppColors.textMuted),
-            color: AppColors.darkCardAlt,
+            color: context.appCardAlt,
             onSelected: (value) {
               if (value == 'rename') _rename(context);
               if (value == 'delete') _delete(context);

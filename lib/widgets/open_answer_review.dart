@@ -21,8 +21,8 @@ class OpenAnswerReview extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('ODPOWIEDŹ WZORCOWA',
-            style: TextStyle(color: AppColors.green, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
+        Text('ODPOWIEDŹ WZORCOWA',
+            style: TextStyle(color: context.appGreenText, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
         const SizedBox(height: 6),
         Text(question.modelAnswer, style: const TextStyle(fontSize: 14, height: 1.45)),
         const SizedBox(height: 14),
@@ -42,7 +42,7 @@ class OpenAnswerReview extends StatelessWidget {
           ),
         const SizedBox(height: 4),
         Text('Wynik: ${openPoints(question, checked)} / ${question.maxPoints} pkt',
-            style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 15)),
+            style: TextStyle(color: context.appGreenText, fontWeight: FontWeight.bold, fontSize: 15)),
       ],
     );
   }

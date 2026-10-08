@@ -118,7 +118,7 @@ class _QuestionCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text('Pytanie $number', style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 12)),
+          Text('Pytanie $number', style: TextStyle(color: context.appGreenText, fontWeight: FontWeight.bold, fontSize: 12)),
           const SizedBox(height: 6),
           Text(question.prompt, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600, height: 1.35)),
           const SizedBox(height: 12),

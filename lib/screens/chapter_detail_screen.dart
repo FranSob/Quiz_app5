@@ -145,7 +145,7 @@ class _MiniButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final disabled = onTap == null;
     return Material(
-      color: disabled ? AppColors.darkCardAlt.withValues(alpha: 0.4) : AppColors.darkCardAlt,
+      color: disabled ? context.appCardAlt.withValues(alpha: 0.4) : context.appCardAlt,
       borderRadius: BorderRadius.circular(10),
       child: InkWell(
         borderRadius: BorderRadius.circular(10),

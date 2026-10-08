@@ -196,7 +196,7 @@ class _OpenQuestionScreenState extends State<OpenQuestionScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('${q.maxPoints} pkt',
-                    style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 12)),
+                    style: TextStyle(color: context.appGreenText, fontWeight: FontWeight.bold, fontSize: 12)),
                 const SizedBox(height: 6),
                 Text(q.prompt, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600, height: 1.4)),
               ],

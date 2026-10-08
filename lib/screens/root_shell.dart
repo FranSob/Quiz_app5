@@ -88,7 +88,7 @@ class _NavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = selected ? (activeColor ?? AppColors.green) : AppColors.textMuted;
+    final color = selected ? (activeColor ?? context.appGreenText) : AppColors.textMuted;
     return Expanded(
       child: InkWell(
         onTap: onTap,

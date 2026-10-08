@@ -89,7 +89,7 @@ class _OpenQuestionsScreenState extends State<OpenQuestionsScreen> {
                     const SizedBox(width: 8),
                     if (state.openBest.containsKey(q.id))
                       Text('${state.openBest[q.id]} / ${q.maxPoints}',
-                          style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold))
+                          style: TextStyle(color: context.appGreenText, fontWeight: FontWeight.bold))
                     else
                       const Icon(Icons.chevron_right_rounded, color: AppColors.textMuted),
                   ],

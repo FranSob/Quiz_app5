@@ -31,12 +31,12 @@ class ReadinessScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         children: locked
             ? const [PremiumLockedCard(feature: PremiumFeature.readiness, description: readinessDescription)]
-            : _content(state),
+            : _content(context, state),
       ),
     );
   }
 
-  List<Widget> _content(AppState state) {
+  List<Widget> _content(BuildContext context, AppState state) {
     final report = state.readinessReport;
     final history = (state.readinessHistory.entries.toList()..sort((a, b) => a.key.compareTo(b.key)));
     final recent = history.length > 30 ? history.sublist(history.length - 30) : history;
@@ -77,7 +77,7 @@ class ReadinessScreen extends StatelessWidget {
                     style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
               ),
               Text('${lastExam.points}/${lastExam.maxPoints} pkt · ${lastExam.percent.round()}%',
-                  style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 13)),
+                  style: TextStyle(color: context.appGreenText, fontWeight: FontWeight.bold, fontSize: 13)),
             ],
           ),
         ),
@@ -190,7 +190,7 @@ class _PercentBar extends StatelessWidget {
               Expanded(child: Text(label, style: const TextStyle(fontSize: 13))),
               const SizedBox(width: 8),
               Text('${percent.round()}%',
-                  style: const TextStyle(color: AppColors.green, fontWeight: FontWeight.bold, fontSize: 13)),
+                  style: TextStyle(color: context.appGreenText, fontWeight: FontWeight.bold, fontSize: 13)),
             ],
           ),
           const SizedBox(height: 4),
@@ -199,7 +199,7 @@ class _PercentBar extends StatelessWidget {
             child: LinearProgressIndicator(
               value: (percent / 100).clamp(0, 1),
               minHeight: 6,
-              backgroundColor: AppColors.darkBorder,
+              backgroundColor: context.appTrack,
               color: AppColors.green,
             ),
           ),
